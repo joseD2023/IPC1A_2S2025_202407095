@@ -1,11 +1,9 @@
 package IPC1_Actividades_202407095;
-import java.security.spec.RSAOtherPrimeInfo;
 import java.util.Random;
 import java.util.Scanner;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
-public class GestorPersonajes {
+public class GestorPersonajes1 {
 
     // AQUI LAS LIBRERIAS A USAR PARA EL MANEJO DE TALES //
 
@@ -25,7 +23,6 @@ public class GestorPersonajes {
     static int contadorId =0; // crear Identificador
     static int posicionesPersonajes=0; //Nos servira para ubicar a los personajes
     static int contadorHistorial=0;
-    static int puntosdevida=0;
 
     /*VAMOS A CREAR NUESTRO METODOS PARA LA REALIZACION DE LA PRACTICA*/
 
@@ -45,20 +42,46 @@ public class GestorPersonajes {
             armas[posicionesPersonajes] = arma;
             niveles[posicionesPersonajes] = rand.nextInt(100);
 
-            for(int j=0; j< habilidades[posicionesPersonajes].length;j++){
-                System.out.println("Ingrese habilidad " + (j+1) + ":");
-                String nueva_habilidad = sc.nextLine();
-                habilidades[posicionesPersonajes][j] = nueva_habilidad;
+                //Vamos a hacer una modificacion para que no repita las habilidades
+
+                for(int j=0; j< habilidades[posicionesPersonajes].length;j++){
+                    String nueva_habilidad;
+
+                    //vamos hacer un do while para primero comprobar si esta ocupada una posicion anterior si no pues sigue el for
+                    do {
+                        System.out.println("Ingrese habilidad " + (j+1) + ":");
+                        nueva_habilidad = sc.nextLine().trim();
+
+                        if(habilidadRepetida(nueva_habilidad,j,posicionesPersonajes)){
+                            System.out.println("Esta habilidad ya esta repetida");
+
+                        }
+
+                    }while(habilidadRepetida(nueva_habilidad,j,posicionesPersonajes));
+
+                    habilidades[posicionesPersonajes][j] = nueva_habilidad;
+
+                }
+
+                posicionesPersonajes++; //incremento en las posiciones del vector Personajes
+
+            }else{
+                System.out.println("LO SENTIMOS PERSONAJE YA REGISTRADO !!");
             }
 
-            posicionesPersonajes++; //incremento en las posiciones del vector Personajes
-
-        }else{
-            System.out.println("LO SENTIMOS PERSONAJE YA REGISTRADO !!");
+            contadorId++;
         }
 
-        contadorId++;
-    }
+
+     /*-----------------------------------------------------------------------------------------------------------------*/
+     public static boolean habilidadRepetida(String nhabilidad, int indice_recorrido, int pos){
+         for(int i=0; i<=indice_recorrido;i++){ //como en el primer espacio no hay nada no lo igualamos
+             if(habilidades[pos][i] != null && habilidades[pos][i].equalsIgnoreCase(nhabilidad)){
+                 return  true; // aqui retorna que si esta repetira la habilidad
+             }
+         }
+         return false;
+     }
 
     /*-------------------------------------------------------------------------------------------------------*/
     //VAMOS A AGREGAR EL SEGUNDO METODO PARA S

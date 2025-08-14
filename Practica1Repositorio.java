@@ -37,28 +37,28 @@ public class Practica1Repositorio {
                         sc.nextLine();
                         System.out.println("[INGRESE UN ARMA: ]");
                         String arm = sc.nextLine();
-                        GestorPersonajes.AgregarPesonajes(name, arm);
+                        GestorPersonajes1.AgregarPesonajes(name, arm);
                         break;
                     case 2:
                         System.out.println("[INGRESE UN NOMBRE: ]");
                         String name3 = sc.nextLine();
-                        GestorPersonajes.ModificarPersonajes(name3);
+                        GestorPersonajes1.ModificarPersonajes(name3);
 
                         break;
                     case 3:
                         sc.nextLine();
                         System.out.println("[INGRESE UN NOMBRE]");
                         String name4 = sc.nextLine();
-                        GestorPersonajes.eliminarPersonajes(name4);
+                        GestorPersonajes1.eliminarPersonajes(name4);
 
                         break;
                     case 4:
                         System.out.println("[INGRESE UN NOMBRE]");
                         String name2 = sc.nextLine();
-                        GestorPersonajes.verDatosDeUnPersonaje(name2);
+                        GestorPersonajes1.verDatosDeUnPersonaje(name2);
                         break;
                     case 5:
-                        GestorPersonajes.verListadoPersonajes();
+                        GestorPersonajes1.verListadoPersonajes();
                         break;
 
                     case 6:
@@ -67,13 +67,13 @@ public class Practica1Repositorio {
                         String p1 = sc.nextLine();
                         System.out.println("[INGRESE UN NOMBRE PARA P1]");
                         String p2 = sc.nextLine();
-                        GestorPersonajes.peleaPersoanejes(p1,p2);
+                        GestorPersonajes1.peleaPersoanejes(p1,p2);
                         break;
                     case 7:
-                        GestorPersonajes.historialPeleas();
+                        GestorPersonajes1.historialPeleas();
                         break;
                     case 8:
-                        GestorPersonajes.creditos();
+                        GestorPersonajes1.creditos();
                         break;
                     default:
                         System.out.println("OPCION INVALIDA !!");

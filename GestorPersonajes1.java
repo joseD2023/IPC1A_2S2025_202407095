@@ -27,6 +27,14 @@ public class GestorPersonajes1 {
     /*VAMOS A CREAR NUESTRO METODOS PARA LA REALIZACION DE LA PRACTICA*/
 
     public static void AgregarPesonajes(String nombre_personaje, String arma){
+        //validar si tiene espacios en blanco o no
+        if(nombre_personaje == null || nombre_personaje.trim().isEmpty() || arma == null || arma.trim().isEmpty())
+        {
+            System.out.println("ERROR: DEJO UN ESPACIO EN BLANCO EN ARMA O NOMBRE");
+            return; // salir del metodo sin hacer nada
+
+        }
+
         boolean personaje_encontrado = false; // Condicion para conocer si encontramos un personaje
         for(int i=0; i<personajesNombre.length;i++){
             if(nombre_personaje.equalsIgnoreCase(personajesNombre[i]) && personajesNombre[i] != null){
@@ -66,7 +74,7 @@ public class GestorPersonajes1 {
                 posicionesPersonajes++; //incremento en las posiciones del vector Personajes
 
             }else{
-                System.out.println("LO SENTIMOS PERSONAJE YA REGISTRADO !!");
+                System.out.println("LO SENTIMOS PERSONAJE YA REGISTRADO o DEJO UN ESPACION EN BLANCO !!");
             }
 
             contadorId++;

@@ -1,0 +1,129 @@
+package IPC1_Actividades_202407095.Proyecto1;
+import java.util.Scanner;
+public class Proyecto1 {
+    static Scanner sc = new Scanner(System.in);
+    public static void main(String[] args){
+        MenuGestionProductos();
+
+    }
+
+    public static void MenuGestionProductos(){
+        while(true){
+            System.out.println("+--- BIENVENIDOS SISTEMA DE INVENTARIO DE ROPA ---+");
+            System.out.println("1. Agregar Productos ");
+            System.out.println("2. Buscar Productos  ");
+            System.out.println("3. Eliminar Productos ");
+            System.out.println("4. Registrar Ventas ");
+            System.out.println("5. Bitacora ");
+            System.out.println("6. Generacion de Reportes ");
+            System.out.println("7. Ver Datos Estudiante   ");
+            System.out.println("8. Salir Programa. ");
+            System.out.println("+---------------------------------------------------------+");
+            System.out.println("Ingrese Una Opcion: ");
+
+            int opc = sc.nextInt();
+
+            if(opc != 9){
+                switch (opc){
+                    case 1:
+                        sc.nextLine(); // limpiamos la entrada de nextline
+                        System.out.println("+--- Agregar Productos ---+");
+                        System.out.println("Ingrese el Nombre del Producto: ");
+                        String nameproducto = sc.nextLine().trim();
+                        validacionEntrada(nameproducto); //validamos la entrada que sea String
+
+
+                        System.out.println("Ingrese la categoria del Producto: ");
+                        String categoria = sc.nextLine().trim();
+                        validacionEntrada(categoria); //volvemos a validar la entrada de consola
+
+                        //vamos agregar
+                        String precio_producto;
+                        do{
+                            System.out.println("Ingrese el precio del Producto: ");
+                            precio_producto = sc.nextLine().trim();
+
+                            if(!precio_producto.matches("^[0-9]+(\\.[0-9]+)?$")){ // si es diferente a un numero va a tirar el mensaje de erro que debe ingresar un texto
+                                System.out.println("El precio en Numeral (No Texto) o Ingrese Un numero Positivo");
+                                /*Como esta definido de 0 a 9 eso significa que solo numeros positivos acepta*/
+                            }
+                        }while(!precio_producto.matches("^[0-9]+(\\.[0-9]+)?$") ); // si esto es diferente a un numero osea si el usuario coloca un texto va a repetirse varias veces.
+
+                        //ahora hacemos la conversion
+
+                        double precio = Double.parseDouble(precio_producto); //hacemos la conversion para que nos funcione los calculos
+
+                        //ahora cantidad de stock
+                        String cantidad_stock;
+                        do{
+                            System.out.println("Ingrese la Cantidad de Stock (Debe ser positivo y Enteros): ");
+                            cantidad_stock = sc.nextLine().trim();
+                            if(!cantidad_stock.matches("^-?[0-9]+$")){ // si es diferente a un numero entero y si es texto va a tirar un erro
+                                System.out.println("Ingrese Un numero Positivo o Entero!!");
+
+                            }
+                        }while(!cantidad_stock.matches("^-?[0-9]+$")); // se va a repetir si es texto ya que es diferente a un numero entero positivo
+
+                        //ahora hacemos la conversion
+
+                        int can = Integer.parseInt(cantidad_stock);
+
+                        //CODIDGO DEL PRODUCTO
+
+                        String cod = "CAM001";
+
+                        Gestionproductos.agregarProductos(nameproducto,categoria,precio,can,cod);
+
+
+
+
+
+
+
+
+
+
+
+
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                    case 6:
+                        break;
+                    case 7:
+                        break;
+                    case 8:
+                        break;
+                    default:
+                        break;
+                }
+
+            }else{
+                System.out.println("Saliendo del Programa....");
+            }
+
+
+        }
+    }
+
+    //VAMOS A VALIDAR LA ENTRADA DE DATO COMO TEXTO
+
+    public static void validacionEntrada(String e){
+
+        while(e.matches(".*\\d.*")){
+            System.out.println("Ingrese texto (sin Numeral): ");
+            e = sc.nextLine(); // aqui decimos que debe de repetirse hasta que no sea con numeral
+        }
+    }
+
+    /*-------------------------------------------------------------------------------------------------*/
+
+    //GENERACION DE CODIGO PRODUCTO
+
+}

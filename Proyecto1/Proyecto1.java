@@ -27,7 +27,19 @@ public class Proyecto1 {
                 switch (opc){
                     case 1:
                         sc.nextLine(); // limpiamos la entrada de nextline
-                        System.out.println("+--- Agregar Productos ---+");
+
+
+                        //CODIDGO DEL PRODUCTO
+                        String cod;
+
+                        do{
+                            System.out.println("Ingrese codigo producto: ");
+                            cod = sc.nextLine().trim();
+                            if(Gestionproductos.codigosexistentes(cod)){
+                                System.out.println("Este Codigo Ya Existe!! ");
+                            }
+                        }while(Gestionproductos.codigosexistentes(cod));
+
                         System.out.println("Ingrese el Nombre del Producto: ");
                         String nameproducto = sc.nextLine().trim();
                         validacionEntrada(nameproducto); //validamos la entrada que sea String
@@ -68,9 +80,8 @@ public class Proyecto1 {
 
                         int can = Integer.parseInt(cantidad_stock);
 
-                        //CODIDGO DEL PRODUCTO
 
-                        String cod = "CAM001";
+
 
                         Gestionproductos.agregarProductos(nameproducto,categoria,precio,can,cod);
 

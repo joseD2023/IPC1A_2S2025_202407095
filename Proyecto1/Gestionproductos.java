@@ -27,8 +27,53 @@ public class Gestionproductos {
 
     /*-------------------------------------------------------------------------------------------*/
 
-    public static void buscarProducto(){
+    public static void buscarProductoCodigo(String b){
+        boolean msj3 = false;
+       for(int i=0; i<inventario[posicion_productos].length;i++){
+           if(b.equalsIgnoreCase(inventario[i][0])){ // como solo quiero que verifique los codigos no toda la fila entonces fijamos la columna
+               //supongamos que encuentra en que fila se encuentra el codigo necesitamos mostrar toda la fila entonces tomamos la posicon d ela fila y luego la recorremos.
+               for (int j=0; j < inventario[i].length;j++){
+                   System.out.println(inventario[i][j]);
+                   msj3 = true;
+               }
+           }
+       }
+       if(!msj3){
+           System.out.println("El Codigo del Producto No esta en el Inventario!!");
+       }
 
+    }
+
+    public static void buscarProductonombre(String n){
+        boolean msj = false;
+        for(int i=0; i<inventario[posicion_productos].length;i++){
+            if(n.equalsIgnoreCase(inventario[i][1])){
+                for(int j=0; j<inventario[i].length; j++){
+                    System.out.println(inventario[i][j]);
+                    msj = true; // esto quiere decir que si encontro el producto
+                }
+            }
+        }
+        if(!msj){
+            System.out.println("El nombre del producto no esta en el inventario!!");
+        }
+
+    }
+
+    public static void buscarProductosCatalogo(String c){
+        boolean msj2 = false;
+        for(int i=0; i<inventario[posicion_productos].length;i++){
+            if(c.equalsIgnoreCase(inventario[i][2])){
+                for(int j=0; j<inventario[i].length; j++){
+                    System.out.println(inventario[i][j]);
+                    msj2 = true;
+                }
+            }
+        }
+
+        if(!msj2){
+            System.out.println("El codigo del producto no esta en el inventario!!");
+        }
     }
 
     /*-------------------------------------------------------------------------------------------*/

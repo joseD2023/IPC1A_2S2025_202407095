@@ -77,27 +77,52 @@ public class Proyecto1 {
                         }while(!cantidad_stock.matches("^-?[0-9]+$")); // se va a repetir si es texto ya que es diferente a un numero entero positivo
 
                         //ahora hacemos la conversion
-
                         int can = Integer.parseInt(cantidad_stock);
-
-
-
-
                         Gestionproductos.agregarProductos(nameproducto,categoria,precio,can,cod);
-
-
-
-
-
-
-
-
-
-
-
-
                         break;
                     case 2:
+                        sc.nextLine();
+                        System.out.println("+--- BUSCAR PRODUCTO --+");
+                        System.out.println("FORMA DE BUSCAR EL PRODUCTO (nombre/categoria/codigo");
+                        String buscar_producto = sc.nextLine().trim();
+                        switch (buscar_producto){
+                            case "nombre":
+                                //BUSCAMOS POR NOMBRE
+                                sc.nextLine();
+                                System.out.println("+--- Ingrese el Nombre del Producto ---+");
+                                String name = sc.nextLine();
+                                Gestionproductos.buscarProductonombre(name);
+                                break;
+                            case "categoria":
+                                //BUSCAMOS POR CATEGORIA
+                                sc.nextLine();
+                                System.out.println("+--- Ingrese el Nombre de la categoria ---+");
+                                String cate = sc.nextLine().trim();
+                                Gestionproductos.buscarProductosCatalogo(cate);
+                                break;
+                            case "codigo":
+                                //BUSCAMOS POR CODIGO
+                                sc.nextLine();
+                                System.out.println("+--- Ingrese el codigo del producto  ---+");
+                                String codi = sc.nextLine().trim();
+                                Gestionproductos.buscarProductoCodigo(codi);
+                                break;
+                            default:
+                                System.out.println("Formato de Busqueda Invalido!! ");
+                                break;
+                        }
+
+
+
+
+
+
+
+
+
+
+
+
                         break;
                     case 3:
                         break;

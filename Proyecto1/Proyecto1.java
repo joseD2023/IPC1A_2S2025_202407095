@@ -111,20 +111,12 @@ public class Proyecto1 {
                                 System.out.println("Formato de Busqueda Invalido!! ");
                                 break;
                         }
-
-
-
-
-
-
-
-
-
-
-
-
                         break;
                     case 3:
+                        sc.nextLine();
+                        System.out.println("+--- Ingrese el codigo Para eliminar Producto:   ---+");
+                        String codigoEli = sc.nextLine().trim();
+                        Gestionproductos.eliminarProducto(codigoEli);
                         break;
                     case 4:
                         break;
@@ -133,6 +125,7 @@ public class Proyecto1 {
                     case 6:
                         break;
                     case 7:
+                        Gestionproductos.verDatosEstudiante();
                         break;
                     case 8:
                         break;

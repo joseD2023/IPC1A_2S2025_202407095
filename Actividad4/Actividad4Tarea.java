@@ -25,26 +25,31 @@ public class Actividad4Tarea {
                    System.out.println("Suma de Valores");
                    pedirnumero();
                    sumar();
+                   sc.nextLine();
                    break;
                case "dos":
                    System.out.println("Resta de Valores");
                    pedirnumero();
                    restar();
+                   sc.nextLine();
                    break;
                case "tres":
                    System.out.println("Multiplicaciones de Valores");
                    pedirnumero();
                    multiplicacion();
+                   sc.nextLine();
                    break;
                case "cuatro":
                    System.out.println("Divisiones de Valores");
                    pedirnumero();
                    division();
+                   sc.nextLine();
                    break;
                case "cinco":
                    System.out.println("Potencia de Valores");
                    pedirnumero();
                    potencia();
+                   sc.nextLine();
                    break;
                case "seis":
                    System.out.println("Calculo de Una raiz Cuadrada");

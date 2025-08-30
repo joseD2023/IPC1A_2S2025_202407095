@@ -119,16 +119,26 @@ public class Proyecto1 {
                         Gestionproductos.eliminarProducto(codigoEli);
                         break;
                     case 4:
+                        sc.nextLine();
+                        System.out.println("Ingrese El codigo para La venta:");
+                        String codigoventa = sc.nextLine().trim();
+                        if(Gestionproductos.codigosexistentes(codigoventa)){
+                            Gestionproductos.registrarVenta(codigoventa);
+                        }else{
+                            System.out.println("El codigo No Existe en El Inventario!!");
+                        }
+
                         break;
                     case 5:
+                        System.out.println("+--- VISUALIZACION DE LA BITACORA ---+");
+                        Gestionproductos.verBitacora();
                         break;
                     case 6:
                         break;
                     case 7:
                         Gestionproductos.verDatosEstudiante();
                         break;
-                    case 8:
-                        break;
+
                     default:
                         break;
                 }

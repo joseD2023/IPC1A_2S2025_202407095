@@ -1,15 +1,21 @@
 package IPC1_Actividades_202407095.Proyecto1;
 import java.util.Scanner;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Gestionproductos {
     //VARIABLES A UTILIZAR CON LIBRERIAS
     static Scanner sc = new Scanner(System.in);
     static LocalDateTime tiempo = LocalDateTime.now();
+    static DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"); // día/mes/año hora:minuto:segundo
 
     //VAMOS A CREAR LAS MATRICES O VECTORES PARA GUARDAR LA INFORMACION
     static String[][] inventario = new String[100][5];
-    static int contadorid = 1;
+    static String [][] registrar_venta = new String[100][4]; //aqui vamos a registrar las ventas
+    static String [][] bitacora_accioens = new String [100][4];
+    // con 4 columnas codigo producto, cantidad vendida, Fecha y Hora de Transccion y total de venta.
+    static int posicion_registro =0;
+    static int poscion_bitacora = 0;
     static int posicion_productos =0;
 
 
@@ -23,6 +29,8 @@ public class Gestionproductos {
             System.out.println("Producto agregado Exitosamente!! ");
             posicion_productos++; // para que mueva de indice
         System.out.println("AGREGADO EXITOSAMENTE");
+
+        bitacora("Agregar Producto", true, "Jose");
     }
 
     /*-------------------------------------------------------------------------------------------*/
@@ -40,11 +48,13 @@ public class Gestionproductos {
                System.out.println("--------------------------------");
                msj3 = true;
            }
-           System.out.println("--------------------------------------------------------------------------");
 
        }
+           System.out.println("--------------------------------------------------------------------------");
+       bitacora("Buscar Producto por Codigo", true, "Jose");
        if(!msj3){
            System.out.println("El Codigo del Producto No esta en el Inventario!!");
+           bitacora("Buscar Producto por Codigo", false, "Jose");
        }
 
     }
@@ -52,7 +62,7 @@ public class Gestionproductos {
     public static void buscarProductonombre(String n){
         boolean msj = false;
         for(int i=0; i<inventario[posicion_productos].length;i++){
-            if(n.equalsIgnoreCase(inventario[i][1])){
+            if(n.equalsIgnoreCase(inventario[i][1])){ // me busca la fila que tiene datos y luego las manda a imprimir
                 System.out.println("--------------------------------");
                 System.out.println("Codigo Producto: " + inventario[i][0]);
                 System.out.println("Nombre Producto: " + inventario[i][1]);
@@ -63,10 +73,12 @@ public class Gestionproductos {
                 msj = true; // esto quiere decir que si encontro el producto
 
             }
-            System.out.println("--------------------------------------------------------------------------");
         }
+            System.out.println("--------------------------------------------------------------------------");
+        bitacora("Buscar Producto por Nombre", true, "Jose");
         if(!msj){
             System.out.println("El nombre del producto no esta en el inventario!!");
+            bitacora("Buscar Producto por Nombre", false, "Jose");
         }
 
     }
@@ -85,11 +97,13 @@ public class Gestionproductos {
                 System.out.println("--------------------------------");
                 msj2 = true;
             }
-            System.out.println("--------------------------------------------------------------------------");
         }
 
+            System.out.println("--------------------------------------------------------------------------");
+        bitacora("Buscar Producto por Catalogo", true, "Jose");
         if(!msj2){
             System.out.println("El codigo del producto no esta en el inventario!!");
+            bitacora("Buscar Producto por Catalogo", false, "Jose");
         }
     }
 
@@ -131,12 +145,21 @@ public class Gestionproductos {
 
 
                     System.out.println("Producto Eliminado Exitosamente!!");
+                    bitacora("Eliminar Producto", true, "Jose");
                     posicion_productos--; // aquí eliminamos un espacio para los productos.
+                    return;
+
                 }else{
                     System.out.println("Usted Cancelo La Eliminacion del Producto!!");
+                    bitacora("Cancelacion Eliminar Producto", false, "Jose");
+
                     break;
                 }
 
+            }else{
+                System.out.println("Producto Para Eliminar No Encontrado!!");
+                bitacora("Eliminar Producto (No Encontro Producto)", false, "Jose");
+                return;
             }
         }
 
@@ -145,29 +168,72 @@ public class Gestionproductos {
     /*-------------------------------------------------------------------------------------------*/
 
     public static void registrarVenta(String codigoventa){
-        if(codigosexistentes(codigoventa)){ //con esta funcion puedo ver si existe el codigo
-            int pos = codigoposicion(codigoventa); //obtenemos la posicion de nuestro fila
-            int stock = Integer.parseInt(inventario[pos][4]);
-            System.out.println("Cantidad que quiere vender");
-            int cantidad_vender = sc.nextInt();
-            if(cantidad_vender <= stock){
-                System.out.println("si se puede vender");
-            }else{
-                System.out.println("Cantidad de Vender es mas de lo que se tiene :3");
-            }
 
+        int pos = codigoposicion(codigoventa); //obtenemos la posicion de nuestro fila
+        int stock = Integer.parseInt(inventario[pos][4]);//posicion del codigo lo convertimos a entero
+        System.out.println("El Numero de Productos Disponibles es: " + " "+stock); //verificamos si me de el valor de esa posicion
+        if(stock != -1){
+            // necesitamos trabajar para restar las ventas (vamos a tener una repeticion por si escribio mal la cantidad o cosas asi
+            int cantidad_vender;
+            boolean condicion = false;
 
+            do{
+                System.out.println("Cantidad que quiere vender");
+                cantidad_vender = sc.nextInt();
 
+                if(cantidad_vender > 0 && cantidad_vender > stock){
+                    System.out.println("Ingrese una cantidad válida (1 a " + stock + ")");
+                }else{
+                    condicion = true;
+                }
+
+            }while(!condicion);
+
+            //aqui vamos a trabajar con la resta de ventas
+            int venta_reducida = stock - cantidad_vender; // aqui eliminamos los productos vendidos
+            inventario[pos][4] = Integer.toString(venta_reducida); // y aqui agregamos el producto reducido pero convertido a texto
+            //como nuestra matriz es string no podemos ingresar enteros entonces lo convertimos a string con integer.tostring
+            System.out.println("Venta Realizada Exitosamente!!");
+            bitacora("Venta Realizada", true, "Jose");
+
+            //vamos a convertir la fecha en string
+            String textofecha = LocalDateTime.now().format(formato); // usamos el formato de arriba para el texto
+
+            registrar_venta[posicion_registro][0] = codigoventa; //codigo del producto
+            registrar_venta[posicion_registro][1] = Integer.toString(cantidad_vender); // cantidad vendida
+            registrar_venta[posicion_registro][2] = textofecha; // fecha y hora de transccion
+            registrar_venta[posicion_registro][3] = Integer.toString(venta_reducida); // total de venta
+
+            posicion_registro++;
         }else{
-            System.out.println("No se Encontro El codigo en el Inventario!!");
+            bitacora("La Venta No se Realizo", false, "Jose");
+            System.out.println("+------------------------------+");
         }
-
     }
 
     /*-------------------------------------------------------------------------------------------*/
 
-    public static void bitacora(){
+    public static void bitacora(String accion, boolean correcta, String usuario){
+        String textofecha = LocalDateTime.now().format(formato);
+        bitacora_accioens[poscion_bitacora][0] = textofecha;
+        bitacora_accioens[poscion_bitacora][1] = accion;
+        bitacora_accioens[poscion_bitacora][2] = String.valueOf(correcta);
+        bitacora_accioens[poscion_bitacora][3] = usuario;
+        poscion_bitacora++;
+    }
 
+    /*-------------------------------------------------------------------------------------------*/
+
+    public static void verBitacora(){
+        for(int i=0; i<poscion_bitacora; i++){ // aqui es necesario solo recorrer las filas que ya estan agregadas no las que estan vacias
+            // si colocamos bitacora_acciones[posicion_bitacora] lo que estas acceddiendo es a filas vacias.
+            System.out.println("--------------------------------");
+            System.out.println("Fecha y Hora De Accion: " + bitacora_accioens[i][0]);
+            System.out.println("Tipo de Accion: " + bitacora_accioens[i][1]);
+            System.out.println("Accion Correcta o Errónea: " + bitacora_accioens[i][2]);
+            System.out.println("Persona que Efectuo la Accion: " + bitacora_accioens[i][3]);
+            System.out.println("--------------------------------");
+        }
     }
 
     /*-------------------------------------------------------------------------------------------*/
@@ -195,6 +261,7 @@ public class Gestionproductos {
         System.out.println("║                                                ║");
         System.out.println("╚════════════════════════════════════════════════╝");
         System.out.println("\n");
+        bitacora("Ver Datos Estudiantes", true, "Jose");
 
     }
 

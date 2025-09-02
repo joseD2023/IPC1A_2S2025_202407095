@@ -266,6 +266,23 @@ public class Gestionproductos {
     }
 
     /*-------------------------------------------------------------------------------------------*/
+
+    //AGREGAR EL STOCK DEL PDF
+
+    public static void pdf(){
+        String[][] inventario_productos = new String[posicion_productos][5];
+        for(int i=0; i<posicion_productos; i++){ // recorremos la matriz hasta el limite de donde hay productos
+            for(int j=0; j<inventario[i].length; j++){ // ahora recorremos lo que hay en columnas para obtener los datos
+                inventario_productos[i][j] = inventario[i][j]; // le decimos que nos de la informacion a nuestra nueva matriz temporal para generar nuestro pdf
+            }
+        }
+
+        GeneradorPDF.generarReporteStock(inventario_productos);
+
+        //evitar los null de la matriz solo hasta donde llega producto
+    }
+
+
     /*METODO ALTERNOS POR SI NECESARIO CREAR UN METODO ADICIONAL AQUI LO VAMOS A COLOCAR*/
 
     //VERIFICACION DE DATOS REPETIDOS

@@ -138,6 +138,10 @@ public class Proyecto1 {
                     case 7:
                         Gestionproductos.verDatosEstudiante();
                         break;
+                    case 8:
+                        System.out.println("Inventario Creado");
+                        Gestionproductos.pdf();
+                        break;
 
                     default:
                         break;
@@ -145,6 +149,7 @@ public class Proyecto1 {
 
             }else{
                 System.out.println("Saliendo del Programa....");
+                break;
             }
 
 

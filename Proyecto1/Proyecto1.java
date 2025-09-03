@@ -142,6 +142,9 @@ public class Proyecto1 {
                         System.out.println("Inventario Creado");
                         Gestionproductos.pdf();
                         break;
+                    case 10:
+                        Gestionproductos.pdfVentas();
+                        System.out.println("Registro venta Creado");
 
                     default:
                         break;

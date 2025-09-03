@@ -270,16 +270,29 @@ public class Gestionproductos {
     //AGREGAR EL STOCK DEL PDF
 
     public static void pdf(){
+        String[] encabezados = {"codigo", "nombre", "Catalogo", "Precio", "Stock"};
         String[][] inventario_productos = new String[posicion_productos][5];
         for(int i=0; i<posicion_productos; i++){ // recorremos la matriz hasta el limite de donde hay productos
             for(int j=0; j<inventario[i].length; j++){ // ahora recorremos lo que hay en columnas para obtener los datos
                 inventario_productos[i][j] = inventario[i][j]; // le decimos que nos de la informacion a nuestra nueva matriz temporal para generar nuestro pdf
             }
         }
-
-        GeneradorPDF.generarReporteStock(inventario_productos);
-
+        GeneradorPDF.generarReporteStock(inventario_productos, encabezados);
         //evitar los null de la matriz solo hasta donde llega producto
+    }
+
+    //vamos a generar el pdf para el Registro de ventas
+
+    public static void pdfVentas(){
+        String horario = String.valueOf(tiempo);
+        String[] encabezados1 = {"Codigo Producto","Productos Vendidos", "Fecha", "Venta Total"};
+        String[][] ventas_registrada = new String[posicion_registro][4];
+        for(int i=0; i<posicion_registro; i++){
+            for(int j=0; j<registrar_venta[i].length; j++){
+                ventas_registrada[i][j] = registrar_venta[i][j];
+            }
+        }
+        GeneradorPDF.generarReportesVentas(ventas_registrada, encabezados1);
     }
 
 

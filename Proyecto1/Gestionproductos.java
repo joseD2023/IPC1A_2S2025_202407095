@@ -1,7 +1,12 @@
 package IPC1_Actividades_202407095.Proyecto1;
+import java.io.Writer;
 import java.util.Scanner;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+//para TEXT
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.IOException;
 
 public class Gestionproductos {
     //VARIABLES A UTILIZAR CON LIBRERIAS
@@ -193,6 +198,14 @@ public class Gestionproductos {
             int venta_reducida = stock - cantidad_vender; // aqui eliminamos los productos vendidos
             inventario[pos][4] = Integer.toString(venta_reducida); // y aqui agregamos el producto reducido pero convertido a texto
             //como nuestra matriz es string no podemos ingresar enteros entonces lo convertimos a string con integer.tostring
+
+            //Precio Unitario
+
+            double precio_unitario = Double.parseDouble(inventario[pos][3]);
+            double total_venta = cantidad_vender * precio_unitario;
+
+
+
             System.out.println("Venta Realizada Exitosamente!!");
             bitacora("Venta Realizada", true, "Jose");
 
@@ -202,7 +215,9 @@ public class Gestionproductos {
             registrar_venta[posicion_registro][0] = codigoventa; //codigo del producto
             registrar_venta[posicion_registro][1] = Integer.toString(cantidad_vender); // cantidad vendida
             registrar_venta[posicion_registro][2] = textofecha; // fecha y hora de transccion
-            registrar_venta[posicion_registro][3] = Integer.toString(venta_reducida); // total de venta
+            registrar_venta[posicion_registro][3] = Double.toString(total_venta) + "Q"; // total de venta
+
+
 
             posicion_registro++;
         }else{
@@ -234,12 +249,6 @@ public class Gestionproductos {
             System.out.println("Persona que Efectuo la Accion: " + bitacora_accioens[i][3]);
             System.out.println("--------------------------------");
         }
-    }
-
-    /*-------------------------------------------------------------------------------------------*/
-
-    public static void generacionReportes(){
-
     }
 
     /*-------------------------------------------------------------------------------------------*/
@@ -285,15 +294,49 @@ public class Gestionproductos {
 
     public static void pdfVentas(){
         String horario = String.valueOf(tiempo);
-        String[] encabezados1 = {"Codigo Producto","Productos Vendidos", "Fecha", "Venta Total"};
+        String[] encabezados1 = {"Codigo Producto","Cantidad Vendida", "Fecha", "Venta Total"};
         String[][] ventas_registrada = new String[posicion_registro][4];
         for(int i=0; i<posicion_registro; i++){
             for(int j=0; j<registrar_venta[i].length; j++){
                 ventas_registrada[i][j] = registrar_venta[i][j];
             }
         }
+
         GeneradorPDF.generarReportesVentas(ventas_registrada, encabezados1);
     }
+
+    // Registrar Ventas
+    public static void registrarTodasVentasTxt() {
+        String textofecha = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MM_yyyy_HH_mm_ss"));
+
+        String rutaArchivo = textofecha + "ventas.txt";
+
+
+        try{
+
+            FileWriter escribir = new FileWriter("C:\\Users\\Admin\\IdeaProjects\\IPC12S\\src\\main\\java\\IPC1_Actividades_202407095\\Proyecto1\\"+ rutaArchivo, true);
+            PrintWriter escribir_txt = new PrintWriter(escribir);
+
+            String encabezados = "Codigo" + "|" + "Cantidad Vendida" + "|" + "Fecha" + "|"+ "Venta Total";
+            escribir_txt.println(encabezados);
+
+            for (int i = 0; i < posicion_registro; i++) {
+                String linea = registrar_venta[i][0] + "|" + " " +
+                        registrar_venta[i][1] + "|" + " " +
+                        registrar_venta[i][3] + "|" + " " +// total
+                        registrar_venta[i][2]; // fecha
+                escribir_txt.println(linea);
+            }
+
+            escribir_txt.close();
+
+            System.out.println("Todas las ventas registradas en TXT correctamente!");
+
+        } catch (IOException e) {
+            System.out.println("Error al guardar las ventas en el archivo: " + e.getMessage());
+        }
+    }
+
 
 
     /*METODO ALTERNOS POR SI NECESARIO CREAR UN METODO ADICIONAL AQUI LO VAMOS A COLOCAR*/

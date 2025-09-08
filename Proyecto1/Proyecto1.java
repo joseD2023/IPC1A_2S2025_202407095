@@ -55,11 +55,11 @@ public class Proyecto1 {
                             System.out.println("Ingrese el precio del Producto: ");
                             precio_producto = sc.nextLine().trim();
 
-                            if(!precio_producto.matches("^[0-9]+(\\.[0-9]+)?$")){ // si es diferente a un numero va a tirar el mensaje de erro que debe ingresar un texto
+                            if(!precio_producto.matches("^[0-9]+(\\.[0-9]+)?$") || Integer.parseInt(precio_producto) <= 0){ // si es diferente a un numero va a tirar el mensaje de erro que debe ingresar un texto
                                 System.out.println("El precio en Numeral (No Texto) o Ingrese Un numero Positivo");
                                 /*Como esta definido de 0 a 9 eso significa que solo numeros positivos acepta*/
                             }
-                        }while(!precio_producto.matches("^[0-9]+(\\.[0-9]+)?$") ); // si esto es diferente a un numero osea si el usuario coloca un texto va a repetirse varias veces.
+                        }while(!precio_producto.matches("^[0-9]+(\\.[0-9]+)?$") || Integer.parseInt(precio_producto) <= 0 ); // si esto es diferente a un numero osea si el usuario coloca un texto va a repetirse varias veces.
 
                         //ahora hacemos la conversion
 
@@ -70,11 +70,11 @@ public class Proyecto1 {
                         do{
                             System.out.println("Ingrese la Cantidad de Stock (Debe ser positivo y Enteros): ");
                             cantidad_stock = sc.nextLine().trim();
-                            if(!cantidad_stock.matches("^-?[0-9]+$")){ // si es diferente a un numero entero y si es texto va a tirar un erro
-                                System.out.println("Ingrese Un numero Positivo o Entero!!");
+                            if(!cantidad_stock.matches("^?[0-9]+$") || Integer.parseInt(cantidad_stock) <= 0){ // si es diferente a un numero entero y si es texto va a tirar un erro
+                                System.out.println("Ingrese Un numero Positivo o Entero o Mayor a 0!!");
 
                             }
-                        }while(!cantidad_stock.matches("^-?[0-9]+$")); // se va a repetir si es texto ya que es diferente a un numero entero positivo
+                        }while(!cantidad_stock.matches("^?[0-9]+$") || Integer.parseInt(cantidad_stock) <= 0); // se va a repetir si es texto ya que es diferente a un numero entero positivo
 
                         //ahora hacemos la conversion
                         int can = Integer.parseInt(cantidad_stock);
@@ -144,6 +144,8 @@ public class Proyecto1 {
                         break;
                     case 10:
                         Gestionproductos.pdfVentas();
+                        Gestionproductos.registrarTodasVentasTxt();
+
                         System.out.println("Registro venta Creado");
 
                     default:

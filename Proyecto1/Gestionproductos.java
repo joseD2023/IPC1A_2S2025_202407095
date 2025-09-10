@@ -254,21 +254,19 @@ public class Gestionproductos {
     /*-------------------------------------------------------------------------------------------*/
 
     public static void verDatosEstudiante(){
-        System.out.println("\n");
-        System.out.println("╔════════════════════════════════════════════════╗");
-        System.out.println("║             *** CRÉDITOS DEL PROGRAMA ***      ║");
-        System.out.println("╠════════════════════════════════════════════════╣");
-        System.out.println("║                                                ║");
-        System.out.println("║                                                ║");
-        System.out.println("║           Nombre: José De la Rosa              ║");
-        System.out.println("║           Carné: 202407095                     ║");
-        System.out.println("║           Curso: IPC1 A - Laboratorio          ║");
-        System.out.println("║           Universidad: USAC                    ║");
-        System.out.println("║                                                ║");
-        System.out.println("║                                                ║");
-        System.out.println("║  ¡Gracias por usar este programa!              ║");
-        System.out.println("║                                                ║");
-        System.out.println("╚════════════════════════════════════════════════╝");
+        System.out.println("╔════════════════════════════════════════════════════════════════════════════════════╗");
+        System.out.println("║                       *** CRÉDITOS DEL PROGRAMA ***                                ║");
+        System.out.println("╠════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║                                                                                    ║");
+        System.out.println("║           Nombre: José De la Rosa                                                  ║");
+        System.out.println("║           Carné: 202407095                                                         ║");
+        System.out.println("║           Curso: IPC1 A - Laboratorio                                              ║");
+        System.out.println("║           Universidad: USAC                                                        ║");
+        System.out.println("║           Repositorio: https://github.com/joseD2023/IPC1_Actividades_202407095     ║");
+        System.out.println("║                                                                                    ║");
+        System.out.println("║                          ¡Gracias por usar este programa!                          ║");
+        System.out.println("║                                                                                    ║");
+        System.out.println("╚════════════════════════════════════════════════════════════════════════════════════╝");
         System.out.println("\n");
         bitacora("Ver Datos Estudiantes", true, "Jose");
 

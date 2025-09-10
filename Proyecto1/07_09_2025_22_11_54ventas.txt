@@ -1,2 +1,0 @@
-Codigo|Cantidad Vendida|Fecha|Venta Total
-cam00| 4| 400.0Q| 07/09/2025 22:11:52

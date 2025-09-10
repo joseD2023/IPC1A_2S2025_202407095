@@ -17,7 +17,10 @@ public class Proyecto1 {
             System.out.println("5. Bitacora ");
             System.out.println("6. Generacion de Reportes ");
             System.out.println("7. Ver Datos Estudiante   ");
-            System.out.println("8. Salir Programa. ");
+            System.out.println("8. PDF Inventario Creado ");
+            System.out.println("9. Salir Programa ");
+            System.out.println("10. PDF Registro de Venta ");
+
             System.out.println("+---------------------------------------------------------+");
             System.out.println("Ingrese Una Opcion: ");
 
@@ -55,11 +58,11 @@ public class Proyecto1 {
                             System.out.println("Ingrese el precio del Producto: ");
                             precio_producto = sc.nextLine().trim();
 
-                            if(!precio_producto.matches("^[0-9]+(\\.[0-9]+)?$") || Integer.parseInt(precio_producto) <= 0){ // si es diferente a un numero va a tirar el mensaje de erro que debe ingresar un texto
+                            if(!precio_producto.matches("^[0-9]+(\\.[0-9]+)?$") || Double.parseDouble(precio_producto) <= 0){ // si es diferente a un numero va a tirar el mensaje de erro que debe ingresar un texto
                                 System.out.println("El precio en Numeral (No Texto) o Ingrese Un numero Positivo");
                                 /*Como esta definido de 0 a 9 eso significa que solo numeros positivos acepta*/
                             }
-                        }while(!precio_producto.matches("^[0-9]+(\\.[0-9]+)?$") || Integer.parseInt(precio_producto) <= 0 ); // si esto es diferente a un numero osea si el usuario coloca un texto va a repetirse varias veces.
+                        }while(!precio_producto.matches("^[0-9]+(\\.[0-9]+)?$") || Double.parseDouble(precio_producto) <= 0 ); // si esto es diferente a un numero osea si el usuario coloca un texto va a repetirse varias veces.
 
                         //ahora hacemos la conversion
 

@@ -19,11 +19,40 @@ public class BatallaController {
         }
     }
     
-    //visualizamos nuestro personaje 
+    //verificacion si existe un pokemon en la base de datos 
     
-    public static void visualizarPokemon(){
+    public static boolean pokemonValido(String name_pokemon){
+        
+        for(int i=0; i< indice_pokemon; i++){ // ponemos solo los indices agregados no nos importa lo demas por lo null
+            if(name_pokemon.trim().equalsIgnoreCase(pokemon[i].getNombre_pokemon().trim())){
+                return true;
+            }
+        }
+        
+        return false;
+        
+    }
+    
+    //visualizamos nuestro personaje 
+    public static Pokemones visualizarPokemonNombre(String buscar_nombre){ // el tipo de retorno es un objeto osea Pokemones es un objeto
+        for(int i=0; i<indice_pokemon; i++){
+            if(buscar_nombre.equalsIgnoreCase(pokemon[i].getNombre_pokemon())){
+                return pokemon[i];  // si encuentra al pokemon retorna el objeto        
+            }
+        }  
+        
+        return null;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
         
     }
     
     
-}
+

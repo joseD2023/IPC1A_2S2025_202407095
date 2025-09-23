@@ -14,6 +14,7 @@ import modelo.Pokemones;
  * @author Admin
  */
 public class AgregarPersonajes extends javax.swing.JFrame {
+    static int id_pokemon = 1; 
 
     /**
      * Creates new form AgregarPersonajes
@@ -22,6 +23,10 @@ public class AgregarPersonajes extends javax.swing.JFrame {
         initComponents();
         
     }
+    
+    //vamos a crear un funciona para convalidadr las entradas y las condicones de la practica dos 
+    
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,6 +55,12 @@ public class AgregarPersonajes extends javax.swing.JFrame {
         entrada_agilidad = new javax.swing.JTextField();
         entrada_defensa = new javax.swing.JTextField();
         boton_agregar = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -129,6 +140,18 @@ public class AgregarPersonajes extends javax.swing.JFrame {
             }
         });
 
+        jLabel9.setText("Nombre Original");
+
+        jLabel10.setText("HP (100 - 500)");
+
+        jLabel11.setText("Nivel Ataque (100 - 500)");
+
+        jLabel12.setText("Velocidad  (1 - 10)");
+
+        jLabel15.setText("Defensa (1 - 50)");
+
+        jLabel13.setText("Agilidad  (1 - 10)");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -168,8 +191,21 @@ public class AgregarPersonajes extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(entrada_punto_vida, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel9))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(boton_inicio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -184,7 +220,8 @@ public class AgregarPersonajes extends javax.swing.JFrame {
                 .addGap(55, 55, 55)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(entrada_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(entrada_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
@@ -196,23 +233,29 @@ public class AgregarPersonajes extends javax.swing.JFrame {
                         .addGap(18, 18, 18)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(entrada_punto_vida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(entrada_punto_vida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(entrada_nivel_ataque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(entrada_nivel_ataque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel11)))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(entrada_velocidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(entrada_velocidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(entrada_agilidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(entrada_agilidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(entrada_defensa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(entrada_defensa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(boton_inicio)
@@ -279,33 +322,54 @@ public class AgregarPersonajes extends javax.swing.JFrame {
        //aqui vamos a mandar toda la informacio a nuestro registro de pokemon 
        //aqui vamos a crear nuestra instancia de cada uno para agregar a los pokemones 
        
-       String nombre_pokemon = entrada_nombre.getText();
-       String arma_pokemon = entrada_arma.getText();
-       String punto_vida_pokemon = entrada_punto_vida.getText();
-       String nivel_ataque_pokemon = entrada_nivel_ataque.getText();
-       String velocidad_pokemon = entrada_velocidad.getText();
-       String agilidad_pokemon = entrada_agilidad.getText(); 
-       String defensa_pokemon = entrada_defensa.getText();
+       String nombre_pokemon = entrada_nombre.getText().trim();
+       String arma_pokemon = entrada_arma.getText().trim();
+       String punto_vida_pokemon = entrada_punto_vida.getText().trim();
+       String nivel_ataque_pokemon = entrada_nivel_ataque.getText().trim();
+       String velocidad_pokemon = entrada_velocidad.getText().trim();
+       String agilidad_pokemon = entrada_agilidad.getText().trim(); 
+       String defensa_pokemon = entrada_defensa.getText().trim();
        
        
        //vamos a validar que no tenga una entrada vacia 
-       
        if(nombre_pokemon.isEmpty() || arma_pokemon.isEmpty() || punto_vida_pokemon.isEmpty() || nivel_ataque_pokemon.isEmpty() || velocidad_pokemon.isEmpty() || agilidad_pokemon.isEmpty() || defensa_pokemon.isEmpty()){
            JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.");
             return;
        }
        
-      Pokemones pokemon_nuevo = new Pokemones(nombre_pokemon, arma_pokemon, arma_pokemon, nivel_ataque_pokemon, velocidad_pokemon, agilidad_pokemon);
+       
+       if(BatallaController.pokemonValido(nombre_pokemon)){ // si el pokemon me devuelve un true como booleano entonces me tira un mensaje de error
+            JOptionPane.showMessageDialog(null, "Nombre Ingresado ya se encuentra registrado!! ");
+            return;
+       }
+       
+       int punto_vida = Integer.parseInt(punto_vida_pokemon.trim());
+       int nivel_ataque = Integer.parseInt(nivel_ataque_pokemon.trim());
+       int velocidad = Integer.parseInt(velocidad_pokemon.trim());
+       int agilidad = Integer.parseInt(agilidad_pokemon.trim());
+       int defensa = Integer.parseInt(defensa_pokemon.trim());
+       
+       //if(((punto_vida>= 100 && punto_vida<=500)&&(nivel_ataque>=10 && nivel_ataque<=100)&&(velocidad>=1 && velocidad<=10)&&(agilidad>=1 && agilidad<=10)&&(defensa>=1 && defensa<= 50))){
+           JOptionPane.showMessageDialog(null, "Campos Validos ");
+       //}else{
+           //JOptionPane.showMessageDialog(null, "Limites del Pokemon Sobre pasado Verifique sus datos!! ");
+           // return;
+           
+       //}
+           
+   
+      Pokemones pokemon_nuevo = new Pokemones(nombre_pokemon, arma_pokemon, punto_vida, nivel_ataque, velocidad, agilidad,defensa, id_pokemon);
       BatallaController.registrarPokemon(pokemon_nuevo); // aqui llammaos a la clase y usamos nuestro metodo de registrar
+      id_pokemon++;
       
       //borrar todo y colocalo en blanco 
-      entrada_agilidad.setText(" ");
-      entrada_arma.setText(" ");
-      entrada_defensa.setText(" ");
-      entrada_nivel_ataque.setText(" ");
-      entrada_nombre.setText(" ");
-      entrada_punto_vida.setText(" ");
-      entrada_velocidad.setText(" ");
+      entrada_agilidad.setText("");
+      entrada_arma.setText("");
+      entrada_defensa.setText("");
+      entrada_nivel_ataque.setText("");
+      entrada_nombre.setText("");
+      entrada_punto_vida.setText("");
+      entrada_velocidad.setText("");
       
       
       
@@ -374,6 +438,11 @@ public class AgregarPersonajes extends javax.swing.JFrame {
     private javax.swing.JTextField entrada_punto_vida;
     private javax.swing.JTextField entrada_velocidad;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -381,6 +450,7 @@ public class AgregarPersonajes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

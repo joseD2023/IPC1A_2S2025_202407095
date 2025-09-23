@@ -6,18 +6,40 @@ public class Pokemones { // creamos nuestra definicion de Pokemons
     
     private String nombre_pokemon; 
     private String arma; 
-    private String hp;
-    private String nivel_ataque;
-    private String velocidad_ataque;
-    private String agilidad; 
+    private int hp;
+    private int nivel_ataque;
+    private int  velocidad_ataque;
+    private int agilidad; 
+    private int defensa;
+    private int id;
     
-     public Pokemones(String nombre_pokemon, String arma, String hp, String nivel_ataque, String velocidad_ataque, String agilidad){
+    
+     public Pokemones(String nombre_pokemon, String arma, int hp, int nivel_ataque, int velocidad_ataque, int agilidad, int defensa, int id){
         this.nombre_pokemon = nombre_pokemon;
         this.arma = arma;
         this.hp = hp;
         this.nivel_ataque = nivel_ataque;
         this.velocidad_ataque = velocidad_ataque;
         this.agilidad = agilidad;
+        this.defensa = defensa;
+        this.id = id;
+        
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getDefensa() {
+        return defensa;
+    }
+
+    public void setDefensa(int defensa) {
+        this.defensa = defensa;
     }
 
     public String getNombre_pokemon() {
@@ -36,41 +58,39 @@ public class Pokemones { // creamos nuestra definicion de Pokemons
         this.arma = arma;
     }
 
-    public String getHp() {
+    public int getHp() {
         return hp;
     }
 
-    public void setHp(String hp) {
+    public void setHp(int hp) {
         this.hp = hp;
     }
 
-    public String getNivel_ataque() {
+    public int getNivel_ataque() {
         return nivel_ataque;
     }
 
-    public void setNivel_ataque(String nivel_ataque) {
+    public void setNivel_ataque(int nivel_ataque) {
         this.nivel_ataque = nivel_ataque;
     }
 
-    public String getVelocidad_ataque() {
+    public int getVelocidad_ataque() {
         return velocidad_ataque;
     }
 
-    public void setVelocidad_ataque(String velocidad_ataque) {
+    public void setVelocidad_ataque(int velocidad_ataque) {
         this.velocidad_ataque = velocidad_ataque;
     }
 
-    public String getAgilidad() {
+    public int getAgilidad() {
         return agilidad;
     }
 
-    public void setAgilidad(String agilidad) {
+    public void setAgilidad(int agilidad) {
         this.agilidad = agilidad;
     }
-    
-    
+
    
-    
         
     
 }

@@ -4,17 +4,31 @@
  */
 package vista;
 
+import controlador.BatallaController;
+import javax.swing.table.DefaultTableModel;
+import modelo.Pokemones;
+
 /**
  *
  * @author Admin
  */
 public class ModificarPersonajes extends javax.swing.JFrame {
+    
+    DefaultTableModel diseño = new DefaultTableModel(); // instancia para el modelo de nuestra tabla 
+    
+   
 
-    /**
-     * Creates new form ModificarPersonajes
-     */
+   
     public ModificarPersonajes() {
         initComponents();
+         String[] cabeceras = {"ID","Nombre","Arma","HP","Nivel Ataque","Velocidad","Agilidad","Defensa"};
+         diseño.setColumnIdentifiers(cabeceras);
+         
+         jTable1.setModel(diseño);
+        
+        
+        
+        
     }
 
     /**
@@ -26,9 +40,27 @@ public class ModificarPersonajes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        entrada_id = new javax.swing.JTextField();
+        boton_mostrar_datos = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        entrada_arma = new javax.swing.JTextField();
+        entrada_hp = new javax.swing.JTextField();
+        entrada_velocidad = new javax.swing.JTextField();
+        entrada_agilidad = new javax.swing.JTextField();
+        entrada_defensa = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+
+        jLabel3.setText("Arma Personajes:");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,6 +76,44 @@ public class ModificarPersonajes extends javax.swing.JFrame {
             }
         });
 
+        boton_mostrar_datos.setText("Mostrar datos Actuales");
+        boton_mostrar_datos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_mostrar_datosActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Ingrese ID/Nombre");
+
+        jLabel5.setText("Arma Personaje");
+
+        jLabel6.setText("Punto de Vida (HP)");
+
+        jLabel7.setText("Velocidad ");
+
+        jLabel8.setText("Agilidad ");
+
+        jLabel9.setText("Defensa");
+
+        entrada_hp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                entrada_hpActionPerformed(evt);
+            }
+        });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -51,19 +121,73 @@ public class ModificarPersonajes extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jButton1))
+                        .addGap(13, 13, 13)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9))
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(entrada_agilidad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                            .addComponent(entrada_velocidad, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(entrada_hp, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(entrada_arma, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(entrada_id, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(entrada_defensa)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(186, 186, 186)
-                        .addComponent(jLabel1)))
-                .addContainerGap(257, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(boton_mostrar_datos)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(188, 188, 188)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jButton1)))
+                .addContainerGap(490, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addGap(35, 35, 35)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 419, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(entrada_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(entrada_arma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(entrada_hp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(entrada_velocidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(entrada_agilidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(entrada_defensa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(50, 50, 50)
+                        .addComponent(boton_mostrar_datos))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(14, 14, 14))
         );
@@ -72,7 +196,7 @@ public class ModificarPersonajes extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -88,6 +212,37 @@ public class ModificarPersonajes extends javax.swing.JFrame {
        regresar.setVisible(true);
        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void boton_mostrar_datosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_mostrar_datosActionPerformed
+       //vamos a mostrar los datos obtenidos 
+       String name = entrada_id.getText();
+       
+       Pokemones p = BatallaController.visualizarPokemonNombre(name);
+       // cajita vacía
+       // ahora la cajita guarda el objeto que devolvió el método
+       
+       Object[] filas = {p.getId(), p.getNombre_pokemon(),p.getArma(),p.getHp(),p.getNivel_ataque(),p.getVelocidad_ataque(), p.getAgilidad(), p.getDefensa()};
+       
+       diseño.addRow(filas);
+
+    
+       
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_boton_mostrar_datosActionPerformed
+
+    private void entrada_hpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrada_hpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_entrada_hpActionPerformed
 
     /**
      * @param args the command line arguments
@@ -125,8 +280,24 @@ public class ModificarPersonajes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton boton_mostrar_datos;
+    private javax.swing.JTextField entrada_agilidad;
+    private javax.swing.JTextField entrada_arma;
+    private javax.swing.JTextField entrada_defensa;
+    private javax.swing.JTextField entrada_hp;
+    private javax.swing.JTextField entrada_id;
+    private javax.swing.JTextField entrada_velocidad;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,11 +4,18 @@
  */
 package vista;
 
+import controlador.BatallaController;
+import javax.swing.JOptionPane;
+
+import modelo.Pokemones;
+
 /**
  *
  * @author Admin
  */
 public class EliminarPersonajes extends javax.swing.JFrame {
+    
+    
 
     /**
      * Creates new form EliminarPersonajes
@@ -26,8 +33,14 @@ public class EliminarPersonajes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        entrada_eliminar = new javax.swing.JTextField();
+        boton_eliminar = new javax.swing.JButton();
+
+        jLabel2.setText("Ingrese ID/Nombre");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -41,27 +54,54 @@ public class EliminarPersonajes extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setText("Ingrese ID/Nombre");
+
+        boton_eliminar.setText("Eliminar");
+        boton_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_eliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel3)
+                        .addGap(55, 55, 55)
+                        .addComponent(entrada_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(157, 157, 157)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(166, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(243, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(195, 195, 195))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(boton_eliminar)
+                .addGap(59, 59, 59))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 411, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18))
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(entrada_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 209, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(boton_eliminar)
+                        .addGap(30, 30, 30))))
         );
 
         pack();
@@ -73,6 +113,55 @@ public class EliminarPersonajes extends javax.swing.JFrame {
        regresar.setVisible(true);
        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void boton_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_eliminarActionPerformed
+       //VAMOS A VERFICAR PRIMEOR SI EL POKEMON EXISTE SI O NO EN NUESTRA BASE DE DATOS
+       
+       String name_id = entrada_eliminar.getText().trim();
+       
+       //verificamos si el nombre o el id existe dentro de nuestro sistemas 
+       
+       if(BatallaController.pokemonValido(name_id)== false && BatallaController.pokemonValidoId(name_id)== false){
+           //si no exise el id tampoc va a existir el nombre
+           JOptionPane.showMessageDialog(null, "No se encontro pokemones Agregados");
+            return;
+       }
+       
+       if(name_id.isEmpty()){
+           JOptionPane.showMessageDialog(null, "Entrada de Dato Vacio!! ");
+           return; 
+       }
+       
+       
+       
+        if(name_id.matches("\\d+")){
+            BatallaController.pokemonEliminarId(name_id);
+            JOptionPane.showMessageDialog(null, "Pokemon Eliminado Exitosamente ");
+            return;
+        
+            
+        }else{
+            //Si viene por el nombre 
+            BatallaController.pokemonEliminarNombre(name_id);
+            JOptionPane.showMessageDialog(null, "Pokemon Eliminado Exitosamente ");
+            return;
+        }
+        
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+    }//GEN-LAST:event_boton_eliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -110,7 +199,11 @@ public class EliminarPersonajes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton boton_eliminar;
+    private javax.swing.JTextField entrada_eliminar;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,7 @@
 package vista;
 
 import controlador.BatallaController;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Pokemones;
 
@@ -13,6 +14,8 @@ import modelo.Pokemones;
  * @author Admin
  */
 public class ModificarPersonajes extends javax.swing.JFrame {
+    
+    static  Pokemones p = null; // creamos nuestro objeto tipo pokemon
     
     DefaultTableModel diseño = new DefaultTableModel(); // instancia para el modelo de nuestra tabla 
     
@@ -59,6 +62,21 @@ public class ModificarPersonajes extends javax.swing.JFrame {
         entrada_defensa = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        entrada_nivel_ataque = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        boton_modificar = new javax.swing.JButton();
+        boton_arma = new javax.swing.JButton();
+        boton_hp = new javax.swing.JButton();
+        boton_ataque = new javax.swing.JButton();
+        boton_velocidad = new javax.swing.JButton();
+        boton_agilidad = new javax.swing.JButton();
+        boton_defensa = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
 
         jLabel3.setText("Arma Personajes:");
 
@@ -73,6 +91,12 @@ public class ModificarPersonajes extends javax.swing.JFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        entrada_id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                entrada_idActionPerformed(evt);
             }
         });
 
@@ -101,6 +125,12 @@ public class ModificarPersonajes extends javax.swing.JFrame {
             }
         });
 
+        entrada_velocidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                entrada_velocidadActionPerformed(evt);
+            }
+        });
+
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -114,81 +144,211 @@ public class ModificarPersonajes extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jLabel10.setText("HP (100 - 500)");
+
+        jLabel11.setText("Nivel Ataque (10 - 100)");
+
+        jLabel12.setText("Velocidad  (1 - 10)");
+
+        jLabel4.setText("Nivel de Ataque");
+
+        entrada_nivel_ataque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                entrada_nivel_ataqueActionPerformed(evt);
+            }
+        });
+
+        jLabel13.setText("Agilidad  (1 - 10)");
+
+        jLabel15.setText("Defensa (1 - 50)");
+
+        boton_modificar.setText("Modificar");
+        boton_modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_modificarActionPerformed(evt);
+            }
+        });
+
+        boton_arma.setText("Arma");
+        boton_arma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_armaActionPerformed(evt);
+            }
+        });
+
+        boton_hp.setText("Hp");
+        boton_hp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_hpActionPerformed(evt);
+            }
+        });
+
+        boton_ataque.setText("Attack");
+        boton_ataque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_ataqueActionPerformed(evt);
+            }
+        });
+
+        boton_velocidad.setText("Rapidez");
+        boton_velocidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_velocidadActionPerformed(evt);
+            }
+        });
+
+        boton_agilidad.setText("Agilidad");
+        boton_agilidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_agilidadActionPerformed(evt);
+            }
+        });
+
+        boton_defensa.setText("Defensa");
+        boton_defensa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_defensaActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setText("Modificar");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(boton_mostrar_datos)
+                .addGap(94, 94, 94))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
                             .addComponent(jLabel7)
                             .addComponent(jLabel8)
-                            .addComponent(jLabel9))
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(entrada_agilidad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                            .addComponent(entrada_velocidad, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(entrada_hp, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(entrada_arma, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(entrada_id, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(entrada_defensa)))
+                            .addComponent(jLabel9)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(boton_mostrar_datos)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel6))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel4)))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(entrada_nivel_ataque, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(entrada_agilidad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                            .addComponent(entrada_velocidad, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(entrada_defensa))
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel11))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(boton_modificar)
+                        .addGap(260, 260, 260))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(entrada_id, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(268, 268, 268)
+                                .addComponent(jLabel14))
+                            .addComponent(entrada_arma, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(boton_agilidad, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(entrada_hp, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(29, 29, 29)
+                                    .addComponent(jLabel10)
+                                    .addGap(139, 139, 139)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(boton_ataque, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(boton_hp, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(boton_arma, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(boton_velocidad, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(boton_defensa, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(188, 188, 188)
+                        .addGap(235, 235, 235)
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jButton1)))
-                .addContainerGap(490, Short.MAX_VALUE))
+                        .addGap(72, 72, 72)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(19, 19, 19)
                 .addComponent(jLabel1)
+                .addGap(2, 2, 2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(entrada_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(entrada_arma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boton_arma))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(entrada_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(entrada_arma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(entrada_hp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(entrada_velocidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(entrada_agilidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(entrada_defensa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(50, 50, 50)
-                        .addComponent(boton_mostrar_datos))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(entrada_hp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(boton_hp))
+                .addGap(15, 15, 15)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(entrada_nivel_ataque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11)
+                    .addComponent(boton_ataque))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(entrada_velocidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12)
+                    .addComponent(boton_velocidad))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(entrada_agilidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13)
+                    .addComponent(boton_agilidad))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(entrada_defensa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15)
+                    .addComponent(boton_modificar)
+                    .addComponent(boton_defensa))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(boton_mostrar_datos))
                 .addGap(14, 14, 14))
         );
 
@@ -216,14 +376,51 @@ public class ModificarPersonajes extends javax.swing.JFrame {
     private void boton_mostrar_datosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_mostrar_datosActionPerformed
        //vamos a mostrar los datos obtenidos 
        String name = entrada_id.getText();
+       String arma = entrada_arma.getText();
+       String punto_vida = entrada_hp.getText();
+       String nivel_ata = entrada_nivel_ataque.getText();
+       String velocidad = entrada_velocidad.getText();
+       String agilidad = entrada_agilidad.getText();
+       String defensa = entrada_defensa.getText();
        
-       Pokemones p = BatallaController.visualizarPokemonNombre(name);
-       // cajita vacía
-       // ahora la cajita guarda el objeto que devolvió el método
+      
+      
+       if(name.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Ingrese el Nombre/ID Pokemon!!");
+            return; 
+       }
        
-       Object[] filas = {p.getId(), p.getNombre_pokemon(),p.getArma(),p.getHp(),p.getNivel_ataque(),p.getVelocidad_ataque(), p.getAgilidad(), p.getDefensa()};
+ 
        
+       if(BatallaController.pokemonValidoId(name) == false && BatallaController.pokemonValido(name) == false){
+           //si no exise el id tampoc va a existir el nombre
+           JOptionPane.showMessageDialog(null, "No se encontro pokemones Agregados");
+            return;
+       }
+        
+       if(name.matches("\\d+")){ // solo admite numeral 
+           //si entra aca que va depender de lo que ingrese el usuario
+            p = BatallaController.visualizarporID(name);
+            Object[] filas = {p.getId(), p.getNombre_pokemon(),p.getArma(),p.getHp(),p.getNivel_ataque(),p.getVelocidad_ataque(), p.getAgilidad(), p.getDefensa()};
        diseño.addRow(filas);
+      
+            
+             
+       }else{
+           p = BatallaController.visualizarPokemonNombre(name);
+           
+       // cajita vacía ahora la cajita guarda el objeto que devolvió el método
+       Object[] filas = {p.getId(), p.getNombre_pokemon(),p.getArma(),p.getHp(),p.getNivel_ataque(),p.getVelocidad_ataque(), p.getAgilidad(), p.getDefensa()};
+       diseño.addRow(filas);
+     
+           
+       }
+       
+       
+       
+      
+      
+       
 
     
        
@@ -243,6 +440,239 @@ public class ModificarPersonajes extends javax.swing.JFrame {
     private void entrada_hpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrada_hpActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_entrada_hpActionPerformed
+
+    private void entrada_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrada_idActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_entrada_idActionPerformed
+
+    private void entrada_nivel_ataqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrada_nivel_ataqueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_entrada_nivel_ataqueActionPerformed
+
+    private void boton_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_modificarActionPerformed
+        // vamos a modificar los datos y validarlos 
+        
+        String armas = entrada_arma.getText();
+        String punto_vidas = entrada_hp.getText();
+        String nivel_atas = entrada_nivel_ataque.getText();
+        String velocidads = entrada_velocidad.getText();
+        String agilidads = entrada_agilidad.getText();
+        String defensas = entrada_defensa.getText();
+        
+        if(armas.isEmpty() || punto_vidas.isEmpty() || nivel_atas.isEmpty() || velocidads.isEmpty() || agilidads.isEmpty() || defensas.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Datos Incompletos !!");
+        }else{
+            try{
+                int vidas = Integer.parseInt(punto_vidas);
+                int atas = Integer.parseInt(nivel_atas);
+                int velocidad = Integer.parseInt(velocidads);
+                int agili = Integer.parseInt(agilidads);
+                int defen = Integer.parseInt(defensas);
+                
+                if((vidas >= 100 && vidas <= 500) && (atas>= 10 && atas<= 100) && (velocidad >= 1 && velocidad<=10) && (agili>= 1 && agili<=10) && (defen>=1 && defen<= 50)){
+                    p.setArma(armas);
+                    p.setHp(vidas);
+                    p.setVelocidad_ataque(atas);
+                    p.setVelocidad_ataque(velocidad);
+                    p.setAgilidad(agili);
+                    p.setDefensa(defen);
+                    
+                    JOptionPane.showMessageDialog(null, "Modificaciones Agregadas Existosamente!!");
+                    
+                    
+                }else{
+                   JOptionPane.showMessageDialog(null, "Verificar si los Datos cumplen el rango"); 
+                    
+                }
+                
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Ingrese valores validos");
+                
+                
+            }
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_boton_modificarActionPerformed
+
+    private void entrada_velocidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrada_velocidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_entrada_velocidadActionPerformed
+
+    private void boton_hpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_hpActionPerformed
+        //Cambiamos hp 
+        
+        String hp_vida = entrada_hp.getText();
+        
+        
+        if(hp_vida.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Espacio en Blanco");
+        }else{
+            try{
+                int vida_nueva = Integer.parseInt(hp_vida);
+                
+                //validamos el rango 
+                
+                if(vida_nueva>= 100 && vida_nueva<= 500){
+                    p.setHp(vida_nueva);
+                    JOptionPane.showMessageDialog(null, "HP modificado exitosamente");
+                }else{
+                    JOptionPane.showMessageDialog(null, "Datos Fuera de Rango");
+                    
+                }
+                
+                
+            } catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Ingrese un numero Valido");
+                
+            }
+        }
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_boton_hpActionPerformed
+
+    private void boton_armaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_armaActionPerformed
+        //vamos a modificar el arma 
+        String arma_nueva = entrada_arma.getText();
+        
+        
+        
+        if(arma_nueva.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Espacio en Blanco");
+        }else{
+            //como tenemos los stters podemos modificar los personajes sus atributos 
+            p.setArma(arma_nueva); //aqui modificamos el arma nueva 
+        JOptionPane.showMessageDialog(null, "Campo de arma Exitosamente!!");
+        }
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_boton_armaActionPerformed
+
+    private void boton_ataqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_ataqueActionPerformed
+        // VAMOS MODIFICAR EL ATAQUE DE NUESTRO POKEMON
+        
+        String ataque_pokemon = entrada_nivel_ataque.getText();
+        if(ataque_pokemon.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Espacio en Blanco");
+        }else{
+            try{
+                int ataque = Integer.parseInt(ataque_pokemon);
+                if(ataque>= 10 && ataque <= 100){
+                    p.setNivel_ataque(ataque);
+                    JOptionPane.showMessageDialog(null, "Ataque modificado Exitosamente!!");
+                }else{
+                    JOptionPane.showMessageDialog(null, "Datos Fuera de Rango");
+                }
+                
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Ingrese un Numero valido");
+                
+            }
+        }
+    }//GEN-LAST:event_boton_ataqueActionPerformed
+
+    private void boton_velocidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_velocidadActionPerformed
+        // Vamos a modificar la velocidad de ataque 
+        
+        String velocidad_ataque = entrada_velocidad.getText();
+        if(velocidad_ataque.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Espacio en Blanco!!");
+        }else{
+            try{
+                int velocidad = Integer.parseInt(velocidad_ataque);
+                if(velocidad>= 1 && velocidad<= 10){
+                    p.setVelocidad_ataque(velocidad);
+                    JOptionPane.showMessageDialog(null, "Velocidad modificado Exitosamente!!");
+                    
+                }else{
+                    JOptionPane.showMessageDialog(null, "Datos fuera de Rango");
+                }
+                
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Ingrese un Numero valido");
+            }
+        }
+    }//GEN-LAST:event_boton_velocidadActionPerformed
+
+    private void boton_agilidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_agilidadActionPerformed
+        // Vamos a modificar la agilidad 
+        
+        String agi = entrada_agilidad.getText();
+        if(agi.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Espacio en Blanco");
+        }else{
+            try{
+                int agilidad_pokemon = Integer.parseInt(agi);
+                if(agilidad_pokemon>=1 && agilidad_pokemon<= 10){
+                    p.setAgilidad(agilidad_pokemon);
+                    JOptionPane.showMessageDialog(null, "Agilidad modificado Exitosamente!!");
+                    
+                    
+                    
+                }else{
+                    JOptionPane.showMessageDialog(null, "Datos fuera de Rango");
+                }
+                
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Ingrese un numero Valido");
+                
+            }
+        }
+        
+        
+    }//GEN-LAST:event_boton_agilidadActionPerformed
+
+    private void boton_defensaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_defensaActionPerformed
+        // VAMOS A MODIFICAR LA DEFENSA
+        
+        String defensa_pokemon = entrada_defensa.getText();
+        if(defensa_pokemon.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Espacio en Blanco");
+        }else{
+            try{
+                int defensa = Integer.parseInt(defensa_pokemon);
+                if(defensa>=1 && defensa <= 50){
+                    p.setDefensa(defensa);
+                    JOptionPane.showMessageDialog(null, "Defensa modificado Exitosamente!!");
+                }else{
+                    JOptionPane.showMessageDialog(null, "Datos fuera de Rango");
+                    
+                }
+                    
+                
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Ingrese numero Valido");
+                
+            }
+        }
+    }//GEN-LAST:event_boton_defensaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -280,17 +710,32 @@ public class ModificarPersonajes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton boton_agilidad;
+    private javax.swing.JButton boton_arma;
+    private javax.swing.JButton boton_ataque;
+    private javax.swing.JButton boton_defensa;
+    private javax.swing.JButton boton_hp;
+    private javax.swing.JButton boton_modificar;
     private javax.swing.JButton boton_mostrar_datos;
+    private javax.swing.JButton boton_velocidad;
     private javax.swing.JTextField entrada_agilidad;
     private javax.swing.JTextField entrada_arma;
     private javax.swing.JTextField entrada_defensa;
     private javax.swing.JTextField entrada_hp;
     private javax.swing.JTextField entrada_id;
+    private javax.swing.JTextField entrada_nivel_ataque;
     private javax.swing.JTextField entrada_velocidad;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

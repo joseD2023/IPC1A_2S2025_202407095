@@ -4,15 +4,24 @@
  */
 package vista;
 
+import controlador.BatallaController;
+import controlador.Hilopokemon;
+import java.awt.TextArea;
+import java.awt.font.TextAttribute;
+import javax.swing.JOptionPane;
+import modelo.Pokemones;
+
 /**
  *
  * @author Admin
  */
 public class SimularBatalla extends javax.swing.JFrame {
+    
+    static Pokemones p = null; // creamos un objeto de pokemones pero ahora no tiene nada 
+    static String dato1;
+    static String dato2;
 
-    /**
-     * Creates new form SimularBatalla
-     */
+    
     public SimularBatalla() {
         initComponents();
     }
@@ -28,6 +37,16 @@ public class SimularBatalla extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         boton_regresar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        entrada_pokemon1 = new javax.swing.JTextField();
+        entrada_pokemon2 = new javax.swing.JTextField();
+        boton_pokemon1 = new javax.swing.JButton();
+        boton_pokemon2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        texto_hilo = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -38,20 +57,93 @@ public class SimularBatalla extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setText("Simulador de Batallas Pokemones USAC ");
+
+        jLabel2.setText("ID Primer Pokemón");
+
+        jLabel3.setText("ID Segundo Pokemón");
+
+        boton_pokemon1.setText("Escoger Pokemon");
+        boton_pokemon1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_pokemon1ActionPerformed(evt);
+            }
+        });
+
+        boton_pokemon2.setText("Escoger Pokemon");
+        boton_pokemon2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_pokemon2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Iniciar Batalla");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        texto_hilo.setColumns(20);
+        texto_hilo.setRows(5);
+        jScrollPane1.setViewportView(texto_hilo);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(182, 182, 182))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(boton_regresar)
-                .addContainerGap(759, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(35, 35, 35))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 771, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(entrada_pokemon2, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                            .addComponent(entrada_pokemon1))
+                        .addGap(46, 46, 46)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(boton_pokemon1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(boton_pokemon2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(476, Short.MAX_VALUE)
-                .addComponent(boton_regresar)
+                .addGap(17, 17, 17)
+                .addComponent(jLabel1)
+                .addGap(35, 35, 35)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(entrada_pokemon1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(boton_pokemon1))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(entrada_pokemon2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(boton_pokemon2)))
+                    .addComponent(jLabel3))
+                .addGap(40, 40, 40)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(boton_regresar)
+                    .addComponent(jButton3))
                 .addGap(14, 14, 14))
         );
 
@@ -75,6 +167,137 @@ public class SimularBatalla extends javax.swing.JFrame {
         regresar.setVisible(true);
         dispose();
     }//GEN-LAST:event_boton_regresarActionPerformed
+
+    private void boton_pokemon1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_pokemon1ActionPerformed
+        // Vamos a verificar si el pokemon es valido 
+        
+        String id = entrada_pokemon1.getText();
+        
+        if(BatallaController.pokemonValidoId(id) == false && BatallaController.pokemonValido(id)== false){
+            JOptionPane.showMessageDialog(null, "No se encontro pokemones Agregados");
+            return; 
+        }
+        
+        if(id.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Espacio en Blanco");
+            return; 
+            
+        }
+        
+        if(id.equalsIgnoreCase(entrada_pokemon2.getText())){
+            JOptionPane.showMessageDialog(null, "No puede Escoger el mismo Pokemon");
+            return; 
+            
+        }
+        
+        dato1 = id; /// variable para irnos al boton batalla 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_boton_pokemon1ActionPerformed
+
+    private void boton_pokemon2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_pokemon2ActionPerformed
+        String id2 = entrada_pokemon2.getText();
+        
+        if(BatallaController.pokemonValidoId(id2) == false && BatallaController.pokemonValido(id2)== false){
+            JOptionPane.showMessageDialog(null, "No se encontro pokemones Agregados");
+            return; 
+        }
+        
+        if(id2.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Espacio en Blanco");
+            return; 
+            
+        }
+        
+         if(id2.equalsIgnoreCase(entrada_pokemon1.getText())){
+            JOptionPane.showMessageDialog(null, "No puede Escoger el mismo Pokemon");
+            return; 
+            
+        }
+        
+         
+        dato2 = id2; // mantenemos ese dato de manera global 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_boton_pokemon2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        String id2 = entrada_pokemon2.getText();
+        String id = entrada_pokemon1.getText();
+        
+        if(id2.isEmpty() && id.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Espacios en blanco invalido");
+        }
+        
+        if(BatallaController.pokemonValidoId(id) && BatallaController.pokemonValidoId(id2)){
+            Pokemones mi_pokemon = BatallaController.visualizarporID(id); // obtenemos el primer pokemon por ID
+        Pokemones pokemon_oponente = BatallaController.visualizarporID(id2); // obtenemos el segundo pokemon por ID
+         Thread hilo_pokemon1 = new Thread(new Hilopokemon(mi_pokemon, pokemon_oponente, texto_hilo)); //aqui creamos los hilos para cada pokemon
+        Thread hilo_pokemon2 = new Thread(new Hilopokemon(pokemon_oponente, mi_pokemon, texto_hilo)); // aqui hago lo contrario para que use el mismo hilo
+                
+        hilo_pokemon1.start();
+        hilo_pokemon2.start();
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "Pokemon No existentes");
+        }
+        
+        
+       
+   
+        
+   
+        
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -112,7 +335,17 @@ public class SimularBatalla extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton boton_pokemon1;
+    private javax.swing.JButton boton_pokemon2;
     private javax.swing.JButton boton_regresar;
+    private javax.swing.JTextField entrada_pokemon1;
+    private javax.swing.JTextField entrada_pokemon2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea texto_hilo;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,17 +4,41 @@
  */
 package vista;
 
+import controlador.BatallaController;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelo.Pokemones;
+import static vista.ModificarPersonajes.p;
+
 /**
  *
  * @author Admin
  */
 public class BuscarPersonajeNombres extends javax.swing.JFrame {
+    
+    DefaultTableModel diseño = new DefaultTableModel();
+    DefaultTableModel diseño2 = new DefaultTableModel();
 
-    /**
-     * Creates new form BuscarPersonajeNombres
-     */
+ 
     public BuscarPersonajeNombres() {
         initComponents();
+        String[] encabezado_atributos = {"Atributo", "Valor"};
+        String[] encabezado_historial = {"Batalla #", "Ganadas", "perdidas"};
+       
+        
+        
+        diseño.setColumnIdentifiers(encabezado_atributos);
+        diseño2.setColumnIdentifiers(encabezado_historial);
+        
+        table_atributos.setModel(diseño);
+        table_batalla.setModel(diseño2);
+        
+        
+        
+        
+                
+        
+        
     }
 
     /**
@@ -29,6 +53,14 @@ public class BuscarPersonajeNombres extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         boton_anterior = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        entrada_nombre = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        table_atributos = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        table_batalla = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -42,26 +74,102 @@ public class BuscarPersonajeNombres extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Buscar Personajes");
 
+        jLabel2.setText("Nombre Personaje");
+
+        entrada_nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                entrada_nombreActionPerformed(evt);
+            }
+        });
+
+        table_atributos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(table_atributos);
+
+        table_batalla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(table_batalla);
+
+        jButton1.setText("Atributos");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Historial");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(boton_anterior)
-                .addGap(309, 375, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(222, 222, 222)
                 .addComponent(jLabel1)
-                .addGap(27, 27, 27))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(entrada_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(boton_anterior)
+                                .addGap(125, 125, 125)
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton2))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(36, 36, 36))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(24, 24, 24)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 412, Short.MAX_VALUE)
-                .addComponent(boton_anterior)
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(entrada_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(boton_anterior)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addGap(41, 41, 41))
         );
 
@@ -71,7 +179,7 @@ public class BuscarPersonajeNombres extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 212, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,6 +195,122 @@ public class BuscarPersonajeNombres extends javax.swing.JFrame {
        regresar.setVisible(true);
        dispose();
     }//GEN-LAST:event_boton_anteriorActionPerformed
+
+    private void entrada_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrada_nombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_entrada_nombreActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        //aqui tenemos que buscar los atributos del personaje elegido 
+        
+        String nombre_pokemon = entrada_nombre.getText();
+        
+        if(nombre_pokemon.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Espacio en blanco");
+            return;
+            
+        }
+        
+        //vamos a valida si existe el pokemon en nuestro vector 
+        
+        if(BatallaController.pokemonValido(nombre_pokemon) == false){
+            JOptionPane.showMessageDialog(null, "Pokemon aun no Registrado!!");
+            return;
+            
+        }else{
+            
+            //ahora vamos acceder a los pokemon que queremos 
+            
+            Pokemones pokemon_mostrar = BatallaController.visualizarPokemonNombre(nombre_pokemon); 
+            
+            diseño.addRow(new Object[]{"Nombre", pokemon_mostrar.getNombre_pokemon()});
+            diseño.addRow(new Object[]{"Arma", pokemon_mostrar.getArma()});
+            diseño.addRow(new Object[]{"HP", pokemon_mostrar.getHp()});
+            diseño.addRow(new Object[]{"Ataque", pokemon_mostrar.getNivel_ataque()});
+            diseño.addRow(new Object[]{"Velocidad", pokemon_mostrar.getVelocidad_ataque()});
+            diseño.addRow(new Object[]{"Agilidad", pokemon_mostrar.getAgilidad()});
+            diseño.addRow(new Object[]{"Defensa", pokemon_mostrar.getDefensa()});
+            
+            
+          
+            
+            
+            
+            
+        }
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // HISTORIAL  DE ATRIBUTOS 
+        
+         //aqui tenemos que buscar los atributos del personaje elegido 
+        
+        String nombre_pokemon = entrada_nombre.getText();
+        
+        if(nombre_pokemon.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Espacio en blanco");
+            return;
+            
+        }
+        
+        //vamos a valida si existe el pokemon en nuestro vector 
+        
+        if(BatallaController.pokemonValido(nombre_pokemon) == false){
+            JOptionPane.showMessageDialog(null, "Pokemon aun no Registrado!!");
+            return;
+            
+        }else{
+            Pokemones pokemon_mostrar = BatallaController.visualizarPokemonNombre(nombre_pokemon); 
+            
+            diseño2.addRow(new Object[]{pokemon_mostrar.getTotal_batallas(), pokemon_mostrar.getPerdidas(), pokemon_mostrar.getGanadas()});
+            
+          
+        }
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -125,7 +349,15 @@ public class BuscarPersonajeNombres extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton boton_anterior;
+    private javax.swing.JTextField entrada_nombre;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable table_atributos;
+    private javax.swing.JTable table_batalla;
     // End of variables declaration//GEN-END:variables
 }

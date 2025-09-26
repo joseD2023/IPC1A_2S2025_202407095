@@ -47,6 +47,7 @@ public class SimularBatalla extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         texto_hilo = new javax.swing.JTextArea();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,6 +90,13 @@ public class SimularBatalla extends javax.swing.JFrame {
         texto_hilo.setRows(5);
         jScrollPane1.setViewportView(texto_hilo);
 
+        jButton1.setText("Bitacora");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -106,7 +114,9 @@ public class SimularBatalla extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 771, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 771, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(48, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -118,8 +128,10 @@ public class SimularBatalla extends javax.swing.JFrame {
                         .addGap(46, 46, 46)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(boton_pokemon1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(boton_pokemon2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(48, Short.MAX_VALUE))
+                            .addComponent(boton_pokemon2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(89, 89, 89))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,7 +148,8 @@ public class SimularBatalla extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(entrada_pokemon2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(boton_pokemon2)))
+                            .addComponent(boton_pokemon2)
+                            .addComponent(jButton1)))
                     .addComponent(jLabel3))
                 .addGap(40, 40, 40)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -271,6 +284,20 @@ public class SimularBatalla extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Espacios en blanco invalido");
         }
         
+        if(id2.equalsIgnoreCase(entrada_pokemon1.getText())){
+            JOptionPane.showMessageDialog(null, "No puede Escoger el mismo Pokemon");
+            return; 
+            
+        }
+        
+        
+        if(BatallaController.pokemonValidoId(id) == false && BatallaController.pokemonValidoId(id2) == false){
+            JOptionPane.showMessageDialog(null, "Ningun pokemon esta registrado!!");
+            return;
+        }
+        
+        
+        
         if(BatallaController.pokemonValidoId(id) && BatallaController.pokemonValidoId(id2)){
             Pokemones mi_pokemon = BatallaController.visualizarporID(id); // obtenemos el primer pokemon por ID
         Pokemones pokemon_oponente = BatallaController.visualizarporID(id2); // obtenemos el segundo pokemon por ID
@@ -298,6 +325,12 @@ public class SimularBatalla extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Bitacora_temporal bita = new Bitacora_temporal();
+        bita.setVisible(true);
+       
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -340,6 +373,7 @@ public class SimularBatalla extends javax.swing.JFrame {
     private javax.swing.JButton boton_regresar;
     private javax.swing.JTextField entrada_pokemon1;
     private javax.swing.JTextField entrada_pokemon2;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

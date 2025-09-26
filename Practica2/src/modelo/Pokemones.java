@@ -13,6 +13,13 @@ public class Pokemones { // creamos nuestra definicion de Pokemons
     private int defensa;
     private int id;
     
+    //estos atributos nos van a servir para identificar las batallas y cuantas gano y cuantas perdio 
+    
+    private int total_batallas = 0;
+    private int ganadas = 0;
+    private int perdidas = 0;
+
+    
     
      public Pokemones(String nombre_pokemon, String arma, int hp, int nivel_ataque, int velocidad_ataque, int agilidad, int defensa, int id){
         this.nombre_pokemon = nombre_pokemon;
@@ -25,6 +32,54 @@ public class Pokemones { // creamos nuestra definicion de Pokemons
         this.id = id;
         
     }
+     
+     //metodo cantidad de batallas ganada 
+     
+     public void registrarBatalla(boolean  gano){
+         total_batallas++;  // batallas que ha hecho
+         if(gano){
+             ganadas++; //conteo de cuantas gano 
+             
+         }else{
+             perdidas++; // conteo de cuantas perdio 
+         }
+     }
+     
+     
+     // encontrar el nombre del oponente
+
+    public int getTotal_batallas() {
+        return total_batallas;
+    }
+
+    public void setTotal_batallas(int total_batallas) {
+        this.total_batallas = total_batallas;
+    }
+
+    public int getGanadas() {
+        return ganadas;
+    }
+
+    public void setGanadas(int ganadas) {
+        this.ganadas = ganadas;
+    }
+
+    public int getPerdidas() {
+        return perdidas;
+    }
+
+    public void setPerdidas(int perdidas) {
+        this.perdidas = perdidas;
+    }
+     
+     
+     
+     
+     
+     
+     
+     
+     
 
     public int getId() {
         return id;

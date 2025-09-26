@@ -4,61 +4,29 @@
  */
 package controlador;
 
+import javax.swing.JOptionPane;
+import modelo.Historial;
+
+/*NOS VA A SERVIR PARA CONTROLAR LOS HISTORIALES DE CADA BATALLA DE CADA POKEMON*/
 
 public class BatallasHistorial {
     
-    private int numero_batalla = 0;
-    private String fecha;
-    private String pokemon1;
-    private String pokemon2;
-    private String ganador;
-
-    public BatallasHistorial(String fecha, String pokemon1, String pokemon2, String ganador) {
-        this.fecha = fecha;
-        this.pokemon1 = pokemon1;
-        this.pokemon2 = pokemon2;
-        this.ganador = ganador;
+    public static Historial[] historial_batallas = new Historial[100]; // guaradamos nuestro historial 
+    public static int indice_batalla = 0;
+    
+    public static void agregarBatallaHistorial(Historial batalla){
+        
+        if(indice_batalla<historial_batallas.length){
+            historial_batallas[indice_batalla] = batalla;
+            indice_batalla++;
+            JOptionPane.showMessageDialog(null, "Batalla agreada exitosamente");
+        }
+        
+        
+        
+        
     }
-
-    public int getNumero_batalla() {
-        return numero_batalla;
-    }
-
-    public void setNumero_batalla(int numero_batalla) {
-        this.numero_batalla = numero_batalla;
-    }
-
-    public String getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
-
-    public String getPokemon1() {
-        return pokemon1;
-    }
-
-    public void setPokemon1(String pokemon1) {
-        this.pokemon1 = pokemon1;
-    }
-
-    public String getPokemon2() {
-        return pokemon2;
-    }
-
-    public void setPokemon2(String pokemon2) {
-        this.pokemon2 = pokemon2;
-    }
-
-    public String getGanador() {
-        return ganador;
-    }
-
-    public void setGanador(String ganador) {
-        this.ganador = ganador;
-    }
+    
     
     
     

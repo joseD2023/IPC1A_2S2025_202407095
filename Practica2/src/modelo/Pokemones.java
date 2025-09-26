@@ -2,7 +2,10 @@
 package modelo;
 
 
-public class Pokemones { // creamos nuestra definicion de Pokemons
+public class Pokemones { 
+
+    public static Iterable<Pokemones> pokemon;
+// creamos nuestra definicion de Pokemons
     
     private String nombre_pokemon; 
     private String arma; 

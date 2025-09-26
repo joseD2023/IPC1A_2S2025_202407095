@@ -51,6 +51,8 @@ public class SimularBatalla extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
+
         boton_regresar.setText("Anterior");
         boton_regresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,10 +61,13 @@ public class SimularBatalla extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Simulador de Batallas Pokemones USAC ");
 
+        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
         jLabel2.setText("ID Primer Pokemón");
 
+        jLabel3.setForeground(new java.awt.Color(204, 204, 204));
         jLabel3.setText("ID Segundo Pokemón");
 
         boton_pokemon1.setText("Escoger Pokemon");

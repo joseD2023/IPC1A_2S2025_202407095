@@ -64,10 +64,12 @@ public class AgregarPersonajes extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setAutoscrolls(true);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("AGREGAR PERSONAJES ");
 
         boton_inicio.setText("Anterior");
@@ -83,18 +85,25 @@ public class AgregarPersonajes extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
         jLabel2.setText("Nombre Personaje: ");
 
+        jLabel3.setForeground(new java.awt.Color(204, 204, 204));
         jLabel3.setText("Arma Personajes:");
 
+        jLabel4.setForeground(new java.awt.Color(204, 204, 204));
         jLabel4.setText("Punto de Vida (HP):");
 
+        jLabel5.setForeground(new java.awt.Color(204, 204, 204));
         jLabel5.setText("Nivel de Ataque: ");
 
+        jLabel6.setForeground(new java.awt.Color(204, 204, 204));
         jLabel6.setText("Velocidad: ");
 
+        jLabel7.setForeground(new java.awt.Color(204, 204, 204));
         jLabel7.setText("Agilidad: ");
 
+        jLabel8.setForeground(new java.awt.Color(204, 204, 204));
         jLabel8.setText("Defensa: ");
 
         entrada_punto_vida.addActionListener(new java.awt.event.ActionListener() {
@@ -140,16 +149,22 @@ public class AgregarPersonajes extends javax.swing.JFrame {
             }
         });
 
+        jLabel9.setForeground(new java.awt.Color(204, 204, 204));
         jLabel9.setText("Nombre Original");
 
+        jLabel10.setForeground(new java.awt.Color(204, 204, 204));
         jLabel10.setText("HP (100 - 500)");
 
+        jLabel11.setForeground(new java.awt.Color(204, 204, 204));
         jLabel11.setText("Nivel Ataque (10 - 100)");
 
+        jLabel12.setForeground(new java.awt.Color(204, 204, 204));
         jLabel12.setText("Velocidad  (1 - 10)");
 
+        jLabel15.setForeground(new java.awt.Color(204, 204, 204));
         jLabel15.setText("Defensa (1 - 50)");
 
+        jLabel13.setForeground(new java.awt.Color(204, 204, 204));
         jLabel13.setText("Agilidad  (1 - 10)");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

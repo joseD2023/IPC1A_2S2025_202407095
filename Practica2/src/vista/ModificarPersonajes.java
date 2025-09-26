@@ -82,9 +82,11 @@ public class ModificarPersonajes extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Modificar Personajes");
 
         jButton1.setText("Anterior");
@@ -107,16 +109,22 @@ public class ModificarPersonajes extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
         jLabel2.setText("Ingrese ID/Nombre");
 
+        jLabel5.setForeground(new java.awt.Color(204, 204, 204));
         jLabel5.setText("Arma Personaje");
 
+        jLabel6.setForeground(new java.awt.Color(204, 204, 204));
         jLabel6.setText("Punto de Vida (HP)");
 
+        jLabel7.setForeground(new java.awt.Color(204, 204, 204));
         jLabel7.setText("Velocidad ");
 
+        jLabel8.setForeground(new java.awt.Color(204, 204, 204));
         jLabel8.setText("Agilidad ");
 
+        jLabel9.setForeground(new java.awt.Color(204, 204, 204));
         jLabel9.setText("Defensa");
 
         entrada_hp.addActionListener(new java.awt.event.ActionListener() {
@@ -144,12 +152,16 @@ public class ModificarPersonajes extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jLabel10.setForeground(new java.awt.Color(204, 204, 204));
         jLabel10.setText("HP (100 - 500)");
 
+        jLabel11.setForeground(new java.awt.Color(204, 204, 204));
         jLabel11.setText("Nivel Ataque (10 - 100)");
 
+        jLabel12.setForeground(new java.awt.Color(204, 204, 204));
         jLabel12.setText("Velocidad  (1 - 10)");
 
+        jLabel4.setForeground(new java.awt.Color(204, 204, 204));
         jLabel4.setText("Nivel de Ataque");
 
         entrada_nivel_ataque.addActionListener(new java.awt.event.ActionListener() {
@@ -158,8 +170,10 @@ public class ModificarPersonajes extends javax.swing.JFrame {
             }
         });
 
+        jLabel13.setForeground(new java.awt.Color(204, 204, 204));
         jLabel13.setText("Agilidad  (1 - 10)");
 
+        jLabel15.setForeground(new java.awt.Color(204, 204, 204));
         jLabel15.setText("Defensa (1 - 50)");
 
         boton_modificar.setText("Modificar");
@@ -211,6 +225,7 @@ public class ModificarPersonajes extends javax.swing.JFrame {
             }
         });
 
+        jLabel14.setForeground(new java.awt.Color(204, 204, 204));
         jLabel14.setText("Modificar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -253,17 +268,11 @@ public class ModificarPersonajes extends javax.swing.JFrame {
                             .addComponent(entrada_defensa))
                         .addGap(29, 29, 29)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel15)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel11))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(boton_modificar)
                         .addGap(260, 260, 260))
                     .addGroup(jPanel1Layout.createSequentialGroup()

@@ -43,6 +43,7 @@ public class EliminarPersonajes extends javax.swing.JFrame {
         jLabel2.setText("Ingrese ID/Nombre");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 102, 102));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Eliminar Personajes");
@@ -94,7 +95,7 @@ public class EliminarPersonajes extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(entrada_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 209, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton1)
@@ -132,9 +133,16 @@ public class EliminarPersonajes extends javax.swing.JFrame {
            return; 
        }
        
-       
-       
-        if(name_id.matches("\\d+")){
+        // Confirmación antes de eliminar
+            int confirm = JOptionPane.showConfirmDialog(
+            null, 
+            "¿Estás seguro que deseas eliminar este Pokémon?", 
+            "Message", 
+            JOptionPane.YES_NO_OPTION);
+            
+            
+            if(confirm == JOptionPane.YES_OPTION){
+                if(name_id.matches("\\d+")){
             BatallaController.pokemonEliminarId(name_id);
             JOptionPane.showMessageDialog(null, "Pokemon Eliminado Exitosamente ");
             return;
@@ -146,6 +154,15 @@ public class EliminarPersonajes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Pokemon Eliminado Exitosamente ");
             return;
         }
+                
+           
+            }else{
+                JOptionPane.showMessageDialog(null, "Eliminacion cancelada");
+            }
+       
+       
+       
+        
         
        
        

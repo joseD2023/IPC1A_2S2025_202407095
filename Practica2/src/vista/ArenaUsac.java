@@ -41,14 +41,15 @@ public class ArenaUsac extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        jPanel1.setForeground(new java.awt.Color(51, 51, 255));
+        jPanel1.setForeground(new java.awt.Color(51, 51, 51));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 0, 255));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("      ARENA USAC IPC12025");
 
+        agregar_personajes.setBackground(new java.awt.Color(204, 204, 204));
         agregar_personajes.setText("Agregar Personajes");
         agregar_personajes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -56,6 +57,7 @@ public class ArenaUsac extends javax.swing.JFrame {
             }
         });
 
+        modificar_personajes.setBackground(new java.awt.Color(204, 204, 204));
         modificar_personajes.setText("Modificar Personajes");
         modificar_personajes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,6 +65,7 @@ public class ArenaUsac extends javax.swing.JFrame {
             }
         });
 
+        eliminar_personajes.setBackground(new java.awt.Color(204, 204, 204));
         eliminar_personajes.setText("Eliminar Personajes");
         eliminar_personajes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,6 +73,7 @@ public class ArenaUsac extends javax.swing.JFrame {
             }
         });
 
+        visualizar_personajes.setBackground(new java.awt.Color(204, 204, 204));
         visualizar_personajes.setText("Visualizar Personajes");
         visualizar_personajes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,6 +81,7 @@ public class ArenaUsac extends javax.swing.JFrame {
             }
         });
 
+        historial_batallas.setBackground(new java.awt.Color(204, 204, 204));
         historial_batallas.setText("Historial Batallas");
         historial_batallas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,6 +89,7 @@ public class ArenaUsac extends javax.swing.JFrame {
             }
         });
 
+        buscar_personaje.setBackground(new java.awt.Color(204, 204, 204));
         buscar_personaje.setText("Buscar Personaje");
         buscar_personaje.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,6 +97,7 @@ public class ArenaUsac extends javax.swing.JFrame {
             }
         });
 
+        guardar_cargar_estado_sistema.setBackground(new java.awt.Color(204, 204, 204));
         guardar_cargar_estado_sistema.setText("Estado del Sistema");
         guardar_cargar_estado_sistema.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,6 +105,7 @@ public class ArenaUsac extends javax.swing.JFrame {
             }
         });
 
+        jButton8.setBackground(new java.awt.Color(204, 204, 204));
         jButton8.setText("Ver Datos Estudiante");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,6 +115,7 @@ public class ArenaUsac extends javax.swing.JFrame {
 
         jButton9.setText("Salir");
 
+        jButton1.setBackground(new java.awt.Color(204, 204, 204));
         jButton1.setText("Simular Batalla");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

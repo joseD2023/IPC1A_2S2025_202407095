@@ -360,20 +360,17 @@ public class AgregarPersonajes extends javax.swing.JFrame {
        
        
        
+      
+    
+       //vamos hacer un try catch para validar solo numeros en los espacios 
        
+       try{
+            
        int punto_vida = Integer.parseInt(punto_vida_pokemon.trim());
        int nivel_ataque = Integer.parseInt(nivel_ataque_pokemon.trim());
        int velocidad = Integer.parseInt(velocidad_pokemon.trim());
        int agilidad = Integer.parseInt(agilidad_pokemon.trim());
        int defensa = Integer.parseInt(defensa_pokemon.trim());
-       
-       //if(((punto_vida>= 100 && punto_vida<=500)&&(nivel_ataque>=10 && nivel_ataque<=100)&&(velocidad>=1 && velocidad<=10)&&(agilidad>=1 && agilidad<=10)&&(defensa>=1 && defensa<= 50))){
-           //JOptionPane.showMessageDialog(null, "Campos Validos ");
-       //}else{
-           //JOptionPane.showMessageDialog(null, "Limites del Pokemon Sobre pasado Verifique sus datos!! ");
-           // return;
-           
-       //}
        
        if(BatallaController.validarDatos(punto_vida, nivel_ataque, velocidad, agilidad, defensa)){
             Pokemones pokemon_nuevo = new Pokemones(nombre_pokemon, arma_pokemon, punto_vida, nivel_ataque, velocidad, agilidad,defensa, id_pokemon);
@@ -384,6 +381,13 @@ public class AgregarPersonajes extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null, "Datos No cumplen con los rangos");
            return;
        }
+           
+       }catch(NumberFormatException e){
+           JOptionPane.showMessageDialog(null, e);
+           
+       }
+       
+       
            
    
      

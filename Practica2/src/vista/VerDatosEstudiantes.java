@@ -117,13 +117,13 @@ public class VerDatosEstudiantes extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        String creditos = "  *** CRÉDITOS DEL PROGRAMA *** " + "\n";
-        String autor = "Nombre: José De la Rosa "+ "\n";
-        String carnet = "Carné: 202407095  "+ "\n";
-        String curso = "Curso: IPC1 A - Laboratorio "+ "\n";
-        String u = "Universidad: USAC "+ "\n";
-        String repo = "Repositorio: https://github.com/joseD2023/IPC1_Actividades_202407095 "+ "\n";
-        String des = "¡Gracias por usar este programa! ";
+        String creditos = "-------------------- CRÉDITOS DEL PROGRAMA ---------------------" + "\n";
+        String autor = "-Nombre: José De la Rosa "+ "\n";
+        String carnet = "-Carné: 202407095  "+ "\n";
+        String curso = "-Curso: IPC1 A - Laboratorio "+ "\n";
+        String u = "-Universidad: USAC "+ "\n";
+        String repo = "-Repositorio: https://github.com/joseD2023/IPC1_Actividades_202407095 "+ "\n";
+        String des = "-¡Gracias por usar este programa, pero el Curso sale en Vacas :3 ";
         
         Area_estudiante.append(creditos);
         Area_estudiante.append(autor);

@@ -60,8 +60,8 @@ import java.time.format.DateTimeFormatter;
 
                     oponPokemon.setHp(Math.max(nueva_vida_pokemon, 0)); //evitamos vidas negativas 
 
-                    String mensaje =miPokemon.getNombre_pokemon() + " Ataco a " + oponPokemon.getNombre_pokemon()
-                            + " y ahora tiene un nivel de vida de " + oponPokemon.getHp() + "\n";;
+                    String mensaje = miPokemon.getNombre_pokemon() + " Ataco a " + " " + oponPokemon.getNombre_pokemon()
+                            + " y ahora tiene un nivel de vida de " + " "+ oponPokemon.getHp() + "\n";;
 
 
                     SwingUtilities.invokeLater(()-> {
@@ -71,8 +71,8 @@ import java.time.format.DateTimeFormatter;
 
                 }else{
                     //si no le pego mi pokemon entonces el otro pokemon me at
-                    String mensaje2 = miPokemon.getNombre_pokemon() + " ataco pero " + oponPokemon.getNombre_pokemon()
-                            + " esquivó. Aún tiene vida de " + oponPokemon.getHp() + "\n";
+                    String mensaje2 = miPokemon.getNombre_pokemon() + " ataco pero " + " "+ oponPokemon.getNombre_pokemon()
+                            + " esquivó. Aún tiene vida de " + " "+oponPokemon.getHp() + "\n";
 
 
                     SwingUtilities.invokeLater(() -> {
@@ -118,7 +118,7 @@ import java.time.format.DateTimeFormatter;
                      return;
                                      
                 }else if(oponPokemon.getHp() <=0){
-                    String mensaje3 = oponPokemon.getNombre_pokemon() + "Fue derratado por " + miPokemon.getNombre_pokemon()+ "\n";
+                    String mensaje3 = oponPokemon.getNombre_pokemon() + " "+ "Fue derratado por " + " "+ miPokemon.getNombre_pokemon()+ "\n";
                     SwingUtilities.invokeLater(() -> {
                     textArea.append(mensaje3);
                     });
@@ -153,7 +153,7 @@ import java.time.format.DateTimeFormatter;
                     return;
                     
                 }else if(miPokemon.getHp() <= 0){
-                     String mensaje4 = miPokemon.getNombre_pokemon() + "Fue  derratado por " + oponPokemon.getNombre_pokemon()+ "\n";
+                     String mensaje4 = miPokemon.getNombre_pokemon() + " "+ "Fue  derratado por " + " "+ oponPokemon.getNombre_pokemon()+ "\n";
                      SwingUtilities.invokeLater(() -> {
                     textArea.append(mensaje4);
                     });

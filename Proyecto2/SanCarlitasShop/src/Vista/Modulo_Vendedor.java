@@ -140,9 +140,19 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
 
         jButton5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jButton5.setText("Actualizar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jButton6.setText("Eliminar");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -227,6 +237,22 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
         new Crear_cliente(this).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // Necesito irme a la vetnana actualizar 
+        
+        pestaña_actual = TabbedPane.getSelectedIndex();
+        new Actualizar_cliente(this).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // ir a la ventana eliminar 
+        
+        pestaña_actual = TabbedPane.getSelectedIndex();
+        new Eliminar_cliente(this).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments

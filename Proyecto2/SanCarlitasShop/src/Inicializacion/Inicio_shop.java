@@ -5,6 +5,7 @@
 package Inicializacion;
 
 import Vista.Modulo_Administrador;
+import Vista.Modulo_autenticacion;
 
 /**
  *
@@ -13,10 +14,8 @@ import Vista.Modulo_Administrador;
 public class Inicio_shop {
     
     public static void main(String[] args){
-        //necesitamos ver las ventanas vamos a inicializarlas 
-        
-        Modulo_Administrador ver_ventana = new Modulo_Administrador();
-        ver_ventana.setVisible(true);
+      
+        new Modulo_autenticacion().setVisible(true);
         
         
     }

@@ -1,0 +1,2 @@
+Codigo|Cantidad Vendida|Fecha|Venta Total
+cam00| 10| 2000.0Q| 20/09/2025 13:38:14

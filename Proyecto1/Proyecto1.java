@@ -20,11 +20,25 @@ public class Proyecto1 {
             System.out.println("8. PDF Inventario Creado ");
             System.out.println("9. Salir Programa ");
             System.out.println("10. PDF Registro de Venta ");
+            System.out.println("11. Agregar Usuario ");
 
             System.out.println("+---------------------------------------------------------+");
             System.out.println("Ingrese Una Opcion: ");
 
-            int opc = sc.nextInt();
+            boolean entradavalida = false;
+            int opc =0;
+
+            while (!entradavalida) {
+                try {
+                    opc = sc.nextInt();
+                    entradavalida = true;
+                } catch (Exception e) {
+                    System.out.println("Error: la opción solo permite números.");
+                    sc.nextLine();
+                }
+            }
+
+
 
             if(opc != 9){
                 switch (opc){
@@ -150,6 +164,22 @@ public class Proyecto1 {
                         Gestionproductos.registrarTodasVentasTxt();
 
                         System.out.println("Registro venta Creado");
+                        break;
+                    case 11:
+                        sc.nextLine();
+                        System.out.println("Crear Usuario A traves de POO");
+                        System.out.println("Ingrese ID usuario: ");
+                        String id_nuevo = sc.nextLine();
+                        System.out.println("Ingrese Nombre usuario: ");
+                        String nuevo_nombre = sc.nextLine();
+                        Usuario nuevo_usuario = new Usuario(id_nuevo, nuevo_nombre);
+
+                        System.out.println("Usuario Nuevo");
+                        System.out.println("ID USUARIO ");
+                        System.out.println(nuevo_usuario.getId());
+                        System.out.println("NOMBRE USUARIO");
+                        System.out.println(nuevo_usuario.getNombre());
+
 
                     default:
                         break;

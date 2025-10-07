@@ -312,7 +312,7 @@ public class Gestionproductos {
 
         try{
 
-            FileWriter escribir = new FileWriter("C:\\Users\\Admin\\IdeaProjects\\IPC12S\\src\\main\\java\\IPC1_Actividades_202407095\\Proyecto1\\"+ rutaArchivo, true);
+                FileWriter escribir = new FileWriter("C:\\Users\\Admin\\IdeaProjects\\IPC12S\\src\\main\\java\\IPC1_Actividades_202407095\\Proyecto1\\"+ rutaArchivo, true);
             PrintWriter escribir_txt = new PrintWriter(escribir);
 
             String encabezados = "Codigo" + "|" + "Cantidad Vendida" + "|" + "Fecha" + "|"+ "Venta Total";

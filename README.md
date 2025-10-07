@@ -1,6 +1,6 @@
 # Laboratorio de IPC1 A
-Repositorio de actividades que realizo en el laboratorio de IPC1
-|Carnet   |Nombre      |Sección|
+Repositorio de Proyectos/Practicas que realizo en el laboratorio de IPC1
+|Carnet   |Nombre      |SecciÃ³n|
 |------   |------      |-------|
-|202407095|José Víctor |A|
-ECHO est  activado.
+|202407095|JosÃ© VÃ­ctor |A|
+ECHO estÂ  activado.

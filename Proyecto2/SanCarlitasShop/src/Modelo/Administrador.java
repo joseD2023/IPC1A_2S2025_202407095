@@ -9,21 +9,11 @@ package Modelo;
  * @author Admin
  */
 public class Administrador extends Usuario{ 
-
-    public static String ge;
+    
 // hacemos la herencia de usuario
-    
+    //constructor vacia ya que ya esta predefinido o harcodeados los nombres 
     public Administrador(){
-        this.codigo = "admi";
-        this.Contra = "ipc1";
-        this.nombre = "Menu Principal";
-    }
-
-  
-
-    
-    
-    
-    
+        super("admi", "Nombre del Admi", "ipc1");
+    } 
     
 }

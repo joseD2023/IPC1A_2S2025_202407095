@@ -10,6 +10,22 @@ package Modelo;
  */
 public class Vendedor extends Usuario{ // Heredan ciertos atributos 
     //definir los atributos de los vendedores 
+    //como vamos a crear vendedores entonces necesitamos tener un constructor para que estos se puedan crear 
     private String genero;
+    
+    //constructor 
+    
+    public Vendedor(String codigo, String nombre, String genero, String contra){ // aqui ya inicializamos nuestro contructos 
+        super(codigo, nombre, contra);
+        this.genero = genero;  
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
     
 }

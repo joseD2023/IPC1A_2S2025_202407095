@@ -11,10 +11,10 @@ public class Usuario {
     protected String Contra; 
     protected String nombre; 
 
-    public Usuario() {
-        this.codigo = "";
-        this.Contra = "";
-        this.nombre = "";
+    public Usuario(String codigo, String nombre, String contra) {
+        this.codigo = codigo;
+        this.Contra = contra;
+        this.nombre = nombre;
     }
 
     public String getCodigo() {

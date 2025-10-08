@@ -4,15 +4,22 @@
  */
 package Vista;
 
+import Controlador.Controlador_Vendedor;
+import Modelo.Vendedor;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Admin
  */
 public class Crear_vendedor extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Crear_vendedor
-     */
+    //inicializar el controlador 
+    
+    Controlador_Vendedor vendedor = new Controlador_Vendedor();
+
+
+    
     public Crear_vendedor() {
         initComponents();
     }
@@ -32,11 +39,11 @@ public class Crear_vendedor extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        entrada_codigo = new javax.swing.JTextField();
+        entrada_nombre = new javax.swing.JTextField();
+        entrada_contraseña = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        obtencion_genero = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -60,8 +67,13 @@ public class Crear_vendedor extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jButton1.setText("Crear");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino" }));
+        obtencion_genero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino" }));
 
         jButton2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jButton2.setText("Regresar");
@@ -86,10 +98,10 @@ public class Crear_vendedor extends javax.swing.JFrame {
                             .addComponent(jLabel5))
                         .addGap(38, 38, 38)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2)
-                            .addComponent(jComboBox1, 0, 190, Short.MAX_VALUE)
-                            .addComponent(jTextField4)))
+                            .addComponent(entrada_codigo)
+                            .addComponent(entrada_nombre)
+                            .addComponent(obtencion_genero, 0, 190, Short.MAX_VALUE)
+                            .addComponent(entrada_contraseña)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(178, 178, 178)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -112,19 +124,19 @@ public class Crear_vendedor extends javax.swing.JFrame {
                 .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(entrada_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(entrada_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(obtencion_genero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(entrada_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -152,6 +164,45 @@ public class Crear_vendedor extends javax.swing.JFrame {
         new Modulo_Administrador().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // Vamos a crear al vendedor necesitamos crear neustro constructor 
+        //necesitamos los datos para obtener la informacion 
+        
+        String codigo = entrada_codigo.getText(); 
+        String nombre = entrada_nombre.getText();
+        String seleccion_genero = obtencion_genero.getSelectedItem().toString();
+        String contraseña = entrada_contraseña.getText();
+        
+        //vamos a valida que no sea null las entradas al momento de crear estos datos 
+        
+        if(codigo.isEmpty() || nombre.isEmpty() || contraseña.isEmpty()){
+            JOptionPane.showMessageDialog(null, "No se Admitin Entrada Vacias");
+            return;
+        }
+        
+        if(vendedor.validarContrasenaExistente(contraseña)){
+            JOptionPane.showMessageDialog(null, "Contraseña Reptida !!");
+            return;
+            
+        }
+        
+        if(vendedor.validarVendedorExistente(codigo)){
+            JOptionPane.showMessageDialog(null, "Vendedor Existente !!");
+            return;
+            
+        }else{
+             Vendedor nuevo_vendedor = new Vendedor(codigo, nombre, seleccion_genero, contraseña);
+             vendedor.crearVendedores(nuevo_vendedor);
+             JOptionPane.showMessageDialog(null, "Vendedor Creado Exitosamente");
+            
+        }
+        
+        
+        
+       
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -189,17 +240,17 @@ public class Crear_vendedor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField entrada_codigo;
+    private javax.swing.JTextField entrada_contraseña;
+    private javax.swing.JTextField entrada_nombre;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JComboBox<String> obtencion_genero;
     // End of variables declaration//GEN-END:variables
 }

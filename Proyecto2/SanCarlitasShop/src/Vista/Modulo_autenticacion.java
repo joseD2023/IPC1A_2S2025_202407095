@@ -15,7 +15,7 @@ public class Modulo_autenticacion extends javax.swing.JFrame {
     
     //vamos acceder a nuestro controlador 
     
-    static Controlador.Controlador_Usuarios controlador = new Controlador_Usuarios();
+    static Controlador.Controlador_Usuarios controlador_usuario = new Controlador_Usuarios();
 
    
     public Modulo_autenticacion() {
@@ -132,17 +132,32 @@ public class Modulo_autenticacion extends javax.swing.JFrame {
         }
         
         
-        if(controlador.verificarLogin(codigo, contraseña)){
-            new Modulo_Administrador().setVisible(true);
-            dispose();  
+        switch (controlador_usuario.verificarLogin(codigo, contraseña)) {
+            case 2:
+                //entramos a la ventana del administrador
+                new Modulo_Administrador().setVisible(true);
+                dispose();
+                break;
+            case 1:
+                //entramos a la vetana cliente
+                new Modulo_Cliente().setVisible(true);
+                dispose();
+                break;
+            case 3:
+                // entramos a la ventana Vendedor
+
+                new Modulo_Vendedor().setVisible(true);
+                dispose();
+                break;
+            default:
+                break;
         }
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

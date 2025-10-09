@@ -94,7 +94,7 @@
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Group type="102" alignment="1" attributes="0">
-                                          <Component id="boton_crear" min="-2" pref="101" max="-2" attributes="0"/>
+                                          <Component id="boton_crear_vendedor" min="-2" pref="101" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="boton_cargar" min="-2" pref="99" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
@@ -126,7 +126,7 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="boton_crear" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="boton_crear_vendedor" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="boton_cargar" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
@@ -148,13 +148,16 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Cargar"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boton_cargarActionPerformed"/>
+                  </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="boton_crear">
+                <Component class="javax.swing.JButton" name="boton_crear_vendedor">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Crear"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boton_crearActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boton_crear_vendedorActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButton3">

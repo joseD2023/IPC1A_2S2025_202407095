@@ -12,8 +12,8 @@ public class Controlador_Vendedor {
     
     //aqui vamos a crear los vendedores y sus funcionalidades como metodos y acciones en cada cosa que haga
     
-    public Vendedor[] crear_vendedor = new Vendedor[100]; //garantizamos que los vendedores no sean accedido facilmente 
-    public int indice_vendedor=0; 
+    public static Vendedor[] crear_vendedor = new Vendedor[100]; //garantizamos que los vendedores no sean accedido facilmente 
+    public static  int indice_vendedor=0; 
     
     //Metodos para crear clientes 
     
@@ -26,6 +26,20 @@ public class Controlador_Vendedor {
             JOptionPane.showMessageDialog(null, "Limite de Vendedores llegado a su limite");
         }
          
+    }
+    
+    //PARA ACCEDER AL OBJETO 
+    
+    public static Vendedor objetoVendedor(String codigo){
+        for(int i=0; i<indice_vendedor; i++){
+            if(codigo.equals(crear_vendedor[i].getCodigo())){
+                return crear_vendedor[i];
+                
+            }
+        }
+        
+        return null;
+        
     }
     
     //validacion de un vendedor existente 

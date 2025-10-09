@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import Modelo.Vendedor;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -55,7 +56,7 @@ public class Modulo_Administrador extends javax.swing.JFrame {
         TabbedPane = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         boton_cargar = new javax.swing.JButton();
-        boton_crear = new javax.swing.JButton();
+        boton_crear_vendedor = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -80,11 +81,16 @@ public class Modulo_Administrador extends javax.swing.JFrame {
         TabbedPane.setName(""); // NOI18N
 
         boton_cargar.setText("Cargar");
-
-        boton_crear.setText("Crear");
-        boton_crear.addActionListener(new java.awt.event.ActionListener() {
+        boton_cargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boton_crearActionPerformed(evt);
+                boton_cargarActionPerformed(evt);
+            }
+        });
+
+        boton_crear_vendedor.setText("Crear");
+        boton_crear_vendedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_crear_vendedorActionPerformed(evt);
             }
         });
 
@@ -134,7 +140,7 @@ public class Modulo_Administrador extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(boton_crear, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(boton_crear_vendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(boton_cargar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(24, 24, 24))
@@ -157,7 +163,7 @@ public class Modulo_Administrador extends javax.swing.JFrame {
                         .addGap(0, 34, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(boton_crear)
+                            .addComponent(boton_crear_vendedor)
                             .addComponent(boton_cargar))
                         .addGap(36, 36, 36)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -286,14 +292,14 @@ public class Modulo_Administrador extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void boton_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_crearActionPerformed
+    private void boton_crear_vendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_crear_vendedorActionPerformed
         //CREAR VENDEDORES
         
         //aqui vamos a crear a los vendendores 
         Crear_vendedor v = new Crear_vendedor();
         v.setVisible(true);
         dispose();
-    }//GEN-LAST:event_boton_crearActionPerformed
+    }//GEN-LAST:event_boton_crear_vendedorActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // Ir ventana Vendedor
@@ -342,6 +348,10 @@ public class Modulo_Administrador extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void boton_cargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_cargarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boton_cargarActionPerformed
+
    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -380,8 +390,8 @@ public class Modulo_Administrador extends javax.swing.JFrame {
     private javax.swing.JButton boton_actualizar;
     private javax.swing.JButton boton_cargar;
     private javax.swing.JButton boton_cargar_csv;
-    private javax.swing.JButton boton_crear;
     private javax.swing.JButton boton_crear_productos;
+    private javax.swing.JButton boton_crear_vendedor;
     private javax.swing.JButton boton_eliminar_producto;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;

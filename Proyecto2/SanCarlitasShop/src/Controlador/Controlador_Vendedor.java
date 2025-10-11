@@ -44,7 +44,7 @@ public class Controlador_Vendedor {
     
     //validacion de un vendedor existente 
     
-    public boolean  validarVendedorExistente(String codigo){
+    public static boolean  validarVendedorExistente(String codigo){
         
         for(int i=0; i<indice_vendedor; i++){
             if(codigo.equals(crear_vendedor[i].getCodigo())){
@@ -78,6 +78,30 @@ public class Controlador_Vendedor {
         return false; 
         
     }
+   
+   //Eliminar al vendedor Cuidado, debemos correr todo los vendedores que estan posterior al que eliminamos para no tener errores de null 
+   
+   public static void eliminarVendedor(String codi){
+       
+       for(int i=0; i<indice_vendedor; i++){
+           if(codi.equals(crear_vendedor[i].getCodigo())){
+               crear_vendedor[i] = null; // eliminacion del usuario
+               
+               //ahora vamos a correr todos lo elementos 
+               
+               for(int j=i; j<indice_vendedor-1; j++){
+                   crear_vendedor[j] = crear_vendedor[j+1];
+               }
+               
+               //ahora limpiamos la ultima posicion 
+               
+               crear_vendedor[indice_vendedor-1] = null; 
+               indice_vendedor--; 
+               break; 
+           }
+       }
+       
+   }
     
     
     

@@ -12,12 +12,14 @@ public class Vendedor extends Usuario{ // Heredan ciertos atributos
     //definir los atributos de los vendedores 
     //como vamos a crear vendedores entonces necesitamos tener un constructor para que estos se puedan crear 
     private String genero;
+    private int numero_venta;
     
     //constructor 
     
     public Vendedor(String codigo, String nombre, String genero, String contra){ // aqui ya inicializamos nuestro contructos 
         super(codigo, nombre, contra);
         this.genero = genero;  
+        this.numero_venta =0;
     }
 
     public String getGenero() {
@@ -26,6 +28,14 @@ public class Vendedor extends Usuario{ // Heredan ciertos atributos
 
     public void setGenero(String genero) {
         this.genero = genero;
+    }
+
+    public int getNumero_venta() {
+        return numero_venta;
+    }
+
+    public void setNumero_venta(int numero_venta) {
+        this.numero_venta = numero_venta;
     }
     
 }

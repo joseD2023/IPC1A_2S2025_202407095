@@ -26,6 +26,18 @@ public class Controlador_Clientes {
         }  
     }
     
+    //Acceder a los objetos a traves de una funcion 
+    
+    public static Cliente objetoCliente(String codigo){
+        for(int i=0; i<indice_clientes; i++){
+            if(codigo.equals(crear_clientes[i].getCodigo())){
+                return crear_clientes[i];
+            }
+        }
+        return null;
+        
+    }
+    
     //validar clientes en Existencia por Codigo y Contraseña 
     
     public static boolean validarClientesExistentes(String codigo){
@@ -56,6 +68,29 @@ public class Controlador_Clientes {
             }
         }
         return false; 
+        
+    }
+    
+    
+    //metodo para eliminar un cliente dentro del sistema 
+    
+    public static void eliminarCliente(String codi){
+        for(int i=0; i<indice_clientes; i++){
+            if(codi.equals(crear_clientes[i].getCodigo())){
+                //lo encontramos lo eliminamos 
+                crear_clientes[i] = null; 
+
+                //ahora movemos a correr todos los elementos 
+                
+                for(int j=i; j<indice_clientes-1; j++){
+                    crear_clientes[j] = crear_clientes[j+1];
+                }
+                
+                crear_clientes[indice_clientes-1] = null; 
+                indice_clientes--; 
+                
+            }
+        }
         
     }
     

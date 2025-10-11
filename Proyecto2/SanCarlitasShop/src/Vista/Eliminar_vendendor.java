@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Admin
@@ -29,8 +31,8 @@ public class Eliminar_vendendor extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        entrada_codigo = new javax.swing.JTextField();
+        boton_eliminar_vendedor = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -42,8 +44,19 @@ public class Eliminar_vendendor extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel2.setText("Codigo");
 
-        jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton1.setText("Eliminar");
+        entrada_codigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                entrada_codigoActionPerformed(evt);
+            }
+        });
+
+        boton_eliminar_vendedor.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        boton_eliminar_vendedor.setText("Eliminar");
+        boton_eliminar_vendedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_eliminar_vendedorActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButton2.setText("Regresar");
@@ -65,10 +78,10 @@ public class Eliminar_vendendor extends javax.swing.JFrame {
                         .addGap(30, 30, 30)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField1)))
+                            .addComponent(entrada_codigo)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(138, 138, 138)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(boton_eliminar_vendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(139, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -83,9 +96,9 @@ public class Eliminar_vendendor extends javax.swing.JFrame {
                 .addGap(59, 59, 59)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(entrada_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48)
-                .addComponent(jButton1)
+                .addComponent(boton_eliminar_vendedor)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addGap(15, 15, 15))
@@ -114,6 +127,36 @@ public class Eliminar_vendendor extends javax.swing.JFrame {
         this.dispose();
              
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void boton_eliminar_vendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_eliminar_vendedorActionPerformed
+        // vamos a elminar al vendedor 
+        
+        String codi = entrada_codigo.getText().trim();
+        
+        if(codi.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Aun no ha Ingresado el Codigo");
+            return; 
+        }
+        
+        
+        if(Controlador.Controlador_Vendedor.validarVendedorExistente(codi)){
+            //si existe el codigo entonces si podremos eleminar dicho vendedor 
+            
+            Controlador.Controlador_Vendedor.eliminarVendedor(codi);
+            JOptionPane.showMessageDialog(null, "Vendedor Eliminado Exitosamente");
+            
+        }else{
+            //si no se encuentra es que el vendedor ya fue eliminado 
+            
+            JOptionPane.showMessageDialog(null, "Vendedor no Existe");
+        }
+        
+        
+    }//GEN-LAST:event_boton_eliminar_vendedorActionPerformed
+
+    private void entrada_codigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrada_codigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_entrada_codigoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,11 +194,11 @@ public class Eliminar_vendendor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton boton_eliminar_vendedor;
+    private javax.swing.JTextField entrada_codigo;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

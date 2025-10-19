@@ -10,10 +10,14 @@ public class Producto_Alimentos extends Productos{
     
     private Date fecha_caducidad;
 
-    public Producto_Alimentos(Date fecha_caducidad, String codigo_producto, String nombre_producto, String categoria_producto, double precio_producto) {
-        super(codigo_producto, nombre_producto, "Alimento", precio_producto);
-        this.fecha_caducidad = fecha_caducidad;
+    public Producto_Alimentos(String codigo_producto, String nombre_producto, String categoria_producto, String atributo_unico, double precio_producto, int stock_productos) {
+        super(codigo_producto, nombre_producto, categoria_producto, atributo_unico, precio_producto, stock_productos);
     }
+
+   
+    
+
+   
 
     public Date getFecha_caducidad() {
         return fecha_caducidad;

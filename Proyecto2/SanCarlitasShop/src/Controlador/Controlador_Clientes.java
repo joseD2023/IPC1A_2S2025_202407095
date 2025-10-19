@@ -88,6 +88,8 @@ public class Controlador_Clientes {
                 
                 crear_clientes[indice_clientes-1] = null; 
                 indice_clientes--; 
+                break; 
+                
                 
             }
         }

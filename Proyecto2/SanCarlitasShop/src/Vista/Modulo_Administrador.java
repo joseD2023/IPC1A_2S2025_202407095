@@ -4,8 +4,10 @@
  */
 package Vista;
 
+import Modelo.Productos;
 import Modelo.Vendedor;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -29,13 +31,71 @@ public class Modulo_Administrador extends javax.swing.JFrame {
         
         tabla_admi.setColumnIdentifiers(Encabezados);
         tabla_pro.setColumnIdentifiers(encabezados_producto); // ordenamos nuestro encabezados 
-        jTable1.setModel(tabla_admi);
+        tabbed_vendedores.setModel(tabla_admi);
         tabla_producto.setModel(tabla_pro);
         
         
         TabbedPane.setTabLayoutPolicy(TabbedPane.SCROLL_TAB_LAYOUT);
 
+        limpiar(tabla_pro);
+        limpiar(tabla_admi);
+        visualizarTablaProducto();
+        visualizarTablaVendedores();
+
     }
+    
+    
+ 
+    
+  
+    
+    public void limpiar(DefaultTableModel modelo){
+        int filas = modelo.getRowCount(); 
+        for(int i= filas-1; i>=0; i--){
+            modelo.removeRow(i);
+        }
+    }
+    
+    
+    
+    
+    public void visualizarTablaProducto(){
+       limpiar(tabla_pro);
+       if(Controlador.Controlador_Productos.crear_producto != null && Controlador.Controlador_Productos.crear_producto.length > 0){
+           for(Productos p: Controlador.Controlador_Productos.crear_producto){
+               if(p!=null){
+                   Object[] fila = {p.getCodigo_producto(), p.getNombre_producto(), p.getCategoria_producto()};
+                   tabla_pro.addRow(fila);
+                   
+               }
+           }
+       }
+          
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public void visualizarTablaVendedores(){
+        limpiar(tabla_admi);
+         for(int i=0; i< Controlador.Controlador_Vendedor.indice_vendedor;i++){
+            Vendedor mostrar = Controlador.Controlador_Vendedor.crear_vendedor[i]; 
+            if(mostrar != null){
+                Object [] filas = {mostrar.getCodigo(), mostrar.getNombre(), mostrar.getGenero(), mostrar.getNumero_venta()};
+                tabla_admi.addRow(filas);
+            }
+        }
+    }
+    
+    
+    
+    
     
     public void mostrarConPestanaActual() {
       TabbedPane.setSelectedIndex(pestaña_actual); // selecciona la pestaña guardada
@@ -60,9 +120,8 @@ public class Modulo_Administrador extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabbed_vendedores = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         boton_crear_productos = new javax.swing.JButton();
         boton_actualizar = new javax.swing.JButton();
@@ -70,6 +129,7 @@ public class Modulo_Administrador extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tabla_producto = new javax.swing.JTable();
         boton_cargar_csv = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -109,7 +169,7 @@ public class Modulo_Administrador extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabbed_vendedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -117,22 +177,15 @@ public class Modulo_Administrador extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Codigo", "Nombre", "Genero", "Cantidad Ventas"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabbed_vendedores);
 
         jButton1.setText("Cerrar Sesion");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Vendedores Activos");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
             }
         });
 
@@ -156,9 +209,7 @@ public class Modulo_Administrador extends javax.swing.JFrame {
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(222, 222, 222)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(222, 791, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -180,9 +231,7 @@ public class Modulo_Administrador extends javax.swing.JFrame {
                         .addContainerGap(14, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(3, 3, 3)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jButton1)
                 .addContainerGap())
         );
 
@@ -217,26 +266,33 @@ public class Modulo_Administrador extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Codigo", "Nombre", "Categoria", "Acciones"
             }
         ));
         jScrollPane2.setViewportView(tabla_producto);
 
         boton_cargar_csv.setText("Cargar");
 
+        jButton2.setText("Ver Detalles");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(boton_actualizar, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                    .addComponent(boton_crear_productos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(boton_eliminar_producto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(boton_cargar_csv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(boton_actualizar, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                            .addComponent(boton_crear_productos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(boton_eliminar_producto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(boton_cargar_csv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(298, 298, 298)
+                        .addComponent(jButton2)))
                 .addContainerGap(95, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -255,7 +311,9 @@ public class Modulo_Administrador extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         TabbedPane.addTab("                                Productos                                 ", jPanel3);
@@ -311,10 +369,10 @@ public class Modulo_Administrador extends javax.swing.JFrame {
     private void boton_crear_vendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_crear_vendedorActionPerformed
         //CREAR VENDEDORES
         
+        pestaña_actual = TabbedPane.getSelectedIndex();
         //aqui vamos a crear a los vendendores 
-        Crear_vendedor v = new Crear_vendedor();
-        v.setVisible(true);
-        dispose();
+        new  Crear_vendedor(this).setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_boton_crear_vendedorActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -347,6 +405,7 @@ public class Modulo_Administrador extends javax.swing.JFrame {
         new Crear_producto(this).setVisible(true);
         this.setVisible(false); // ocultamos nuestra ventan principal 
         
+        
       
     }//GEN-LAST:event_boton_crear_productosActionPerformed
 
@@ -367,18 +426,6 @@ public class Modulo_Administrador extends javax.swing.JFrame {
     private void boton_cargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_cargarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_boton_cargarActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // mostrar vendendor 
-        
-        for(int i=0; i< Controlador.Controlador_Vendedor.indice_vendedor;i++){
-            Vendedor mostrar = Controlador.Controlador_Vendedor.crear_vendedor[i]; 
-            if(mostrar != null){
-                Object [] filas = {mostrar.getCodigo(), mostrar.getNombre(), mostrar.getGenero(), mostrar.getNumero_venta()};
-                tabla_admi.addRow(filas);
-            }
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
 
    
     public static void main(String args[]) {
@@ -431,7 +478,7 @@ public class Modulo_Administrador extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabbed_vendedores;
     private javax.swing.JTable tabla_producto;
     // End of variables declaration//GEN-END:variables
 }

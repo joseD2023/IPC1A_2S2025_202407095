@@ -4,6 +4,9 @@
  */
 package Vista;
 
+import Modelo.Productos;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Admin
@@ -29,11 +32,11 @@ public class Actualizar_producto extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        entrada_codigo = new javax.swing.JTextField();
+        entrada_nombre = new javax.swing.JTextField();
+        entrada_atributo = new javax.swing.JTextField();
+        boton_actualizar = new javax.swing.JButton();
+        boton_buscar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -51,11 +54,27 @@ public class Actualizar_producto extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setText("Atributo Unico");
 
-        jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton1.setText("Actualizar");
+        entrada_codigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                entrada_codigoActionPerformed(evt);
+            }
+        });
 
-        jButton2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton2.setText("Buscar");
+        boton_actualizar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        boton_actualizar.setText("Actualizar");
+        boton_actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_actualizarActionPerformed(evt);
+            }
+        });
+
+        boton_buscar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        boton_buscar.setText("Buscar");
+        boton_buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_buscarActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Regresar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -81,16 +100,16 @@ public class Actualizar_producto extends javax.swing.JFrame {
                                 .addGap(44, 44, 44)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(entrada_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jButton2))
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(boton_buscar))
+                                    .addComponent(entrada_nombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(entrada_atributo, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(142, 142, 142)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(boton_actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(70, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -110,18 +129,18 @@ public class Actualizar_producto extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(entrada_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boton_buscar))
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(entrada_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(entrada_atributo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
-                .addComponent(jButton1)
+                .addComponent(boton_actualizar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addGap(16, 16, 16))
@@ -147,24 +166,91 @@ public class Actualizar_producto extends javax.swing.JFrame {
         // vamos a regresar al inicio
         
         regresar.mostrarConPestanaActual();
+        regresar.visualizarTablaProducto(); // forzamos al programa a que me actualice la tabla antes de llegar 
         this.dispose();
         
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void boton_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_buscarActionPerformed
+        // Buscar el producto si existe 
+        
+        String codigo = entrada_codigo.getText(); 
+        
+        if(codigo.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Aun no ha Ingresado el Codigo!!");
+            return;
+            
+        }
+        
+        
+        if(Controlador.Controlador_Productos.validacionCodigo(codigo)){
+            // si es cierto va a tirar un mensaje e que si existe el producto 
+            JOptionPane.showMessageDialog(null, "Producto Existente !!");
+            return;
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "No Hay productos con ese Codigo");
+            return;
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_boton_buscarActionPerformed
+
+    private void entrada_codigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrada_codigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_entrada_codigoActionPerformed
+
+    private void boton_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_actualizarActionPerformed
+        // Ahora vamos actualizar los datos 
+        String codigo = entrada_codigo.getText().trim();
+        String nombre = entrada_nombre.getText().trim();
+        String atributo = entrada_atributo.getText().trim(); 
+        
+        if(codigo.isEmpty() || nombre.isEmpty() || atributo.isEmpty()){
+            JOptionPane.showMessageDialog(null, "No deje Campos Vacios");
+            return; 
+        }
+        
+        
+        if(Controlador.Controlador_Productos.validacionCodigo(codigo)){
+            //si existe podemos modificar 
+            
+            Productos modifcar_producto = Controlador.Controlador_Productos.objetoProductos(codigo);
+            modifcar_producto.setCodigo_producto(codigo);
+            modifcar_producto.setNombre_producto(nombre);
+            modifcar_producto.setAtributo_unico(atributo);
+            JOptionPane.showMessageDialog(null, "Producto Modificado Existosamente");
+            
+        }else {
+            JOptionPane.showMessageDialog(null, "Producto No existente");
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_boton_actualizarActionPerformed
+
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton boton_actualizar;
+    private javax.swing.JButton boton_buscar;
+    private javax.swing.JTextField entrada_atributo;
+    private javax.swing.JTextField entrada_codigo;
+    private javax.swing.JTextField entrada_nombre;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }

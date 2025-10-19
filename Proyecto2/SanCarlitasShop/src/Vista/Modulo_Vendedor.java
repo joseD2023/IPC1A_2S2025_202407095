@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import Modelo.Cliente;
+import Modelo.Productos;
 import Modelo.Vendedor;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,8 +18,14 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
     static int pestaña_actual;
 
     
+    
+    
+    
+    
+    
+    
     public Modulo_Vendedor() {
-        initComponents();
+        initComponents(); // inicializar todo 
         String[] encabezados = {"Codigo", "Nombre", "Categoria", "Stock", "Acciones"};
         String[] clientes_encabezados = {"Codigo", "Nombre", "Genero", "Fecha de Cumpleaños"};
         diseño_clientes.setColumnIdentifiers(clientes_encabezados);
@@ -25,13 +33,82 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
         
         diseño.setColumnIdentifiers(encabezados);
         jTable1.setModel(diseño);
+        
+        limpiar(diseño);
+        limpiar(diseño_clientes);
+        visualizarTablaProducto();
+        visualizacionClientes();
+        
     }
+    
+    public void limpiar(DefaultTableModel modelo){
+        int filas = modelo.getRowCount(); 
+        for(int i= filas-1; i>=0; i--){
+            modelo.removeRow(i);
+        }
+    }
+    
+    
+    
+     public void visualizarTablaProducto(){
+       limpiar(diseño);
+       if(Controlador.Controlador_Productos.crear_producto != null && Controlador.Controlador_Productos.crear_producto.length > 0){
+           for(Productos p: Controlador.Controlador_Productos.crear_producto){
+               if(p!=null){
+                   Object[] fila = {p.getCodigo_producto(), p.getNombre_producto(), p.getCategoria_producto(), p.getStock_productos()};
+                   diseño.addRow(fila);
+                   
+               }
+           }
+       }
+          
+    }
+     
+      // mostrar Diseño cliente a neustra tabla 
+     
+     public void visualizacionClientes(){
+         limpiar(diseño_clientes);
+         if(Controlador.Controlador_Clientes.crear_clientes != null && Controlador.Controlador_Clientes.crear_clientes.length>0){
+             for(Cliente c : Controlador.Controlador_Clientes.crear_clientes){
+                 if(c != null){
+                     Object[] filas = {c.getCodigo(), c.getNombre(), c.getGenero(), c.getCumple()};
+                     diseño_clientes.addRow(filas);
+                 }
+             }
+             
+         }
+         
+     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     //vamos a crear un metodo para que pueda mostrar pestañas 
     
     public void mostrarPestanaActual(){
-        TabbedPane.setSelectedIndex(pestaña_actual); // selecciona la pestaña guardada
+        Tabbed.setSelectedIndex(pestaña_actual); // selecciona la pestaña guardada
         this.setVisible(true); // muestra la ventana 
     }
 
@@ -40,7 +117,7 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        TabbedPane = new javax.swing.JTabbedPane();
+        Tabbed = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -55,12 +132,14 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Modulo Vendedor");
 
-        TabbedPane.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        TabbedPane.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
+        Tabbed.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Tabbed.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -124,7 +203,7 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(27, Short.MAX_VALUE))
+                        .addContainerGap(48, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addGap(63, 63, 63)
@@ -134,7 +213,7 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
                         .addContainerGap())))
         );
 
-        TabbedPane.addTab("                                Productos                                  ", jPanel1);
+        Tabbed.addTab("                                Productos                                  ", jPanel1);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -144,7 +223,7 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Codigo", "Nombre", "Genero", "Fecha Cumpleaños"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
@@ -207,23 +286,42 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
-        TabbedPane.addTab("                                   Clientes                                   ", jPanel2);
+        Tabbed.addTab("                                   Clientes                                   ", jPanel2);
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Codigo", "Fecha Generacion", "Codigo Cliente", "Nombre Cliente", "Total", "Opciones"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable3);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 882, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 842, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
-        TabbedPane.addTab("                                   Pedidos                                   ", jPanel3);
+        Tabbed.addTab("                                   Pedidos                                   ", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -231,14 +329,14 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(TabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 888, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Tabbed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(TabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addComponent(Tabbed, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
@@ -254,12 +352,7 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
 
     private void boton_crear_clientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_crear_clientesActionPerformed
         // aqui vamos a crear la logica para crear a los clientes 
-        
-        
-        
-        
-        
-        pestaña_actual = TabbedPane.getSelectedIndex(); 
+        pestaña_actual = Tabbed.getSelectedIndex(); 
         new Crear_cliente(this).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_boton_crear_clientesActionPerformed
@@ -267,7 +360,7 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // Necesito irme a la vetnana actualizar 
         
-        pestaña_actual = TabbedPane.getSelectedIndex();
+        pestaña_actual = Tabbed.getSelectedIndex();
         new Actualizar_cliente(this).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -275,7 +368,7 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // ir a la ventana eliminar 
         
-        pestaña_actual = TabbedPane.getSelectedIndex();
+        pestaña_actual = Tabbed.getSelectedIndex();
         new Eliminar_cliente(this).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -327,7 +420,7 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTabbedPane TabbedPane;
+    private javax.swing.JTabbedPane Tabbed;
     private javax.swing.JButton boton_crear_clientes;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -340,7 +433,9 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
     // End of variables declaration//GEN-END:variables
 }

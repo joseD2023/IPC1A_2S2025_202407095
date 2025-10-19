@@ -9,17 +9,38 @@ public class Productos {
     
     //aqui vamos a crear los atributos que se pueden heredar  
     
-    private String codigo_producto; 
-    private String nombre_producto; 
-    private String categoria_producto; 
-    private double precio_producto; 
+    protected String codigo_producto; 
+    protected String nombre_producto; 
+    protected  String categoria_producto; 
+    protected double precio_producto; 
+    protected  String atributo_unico;
+    protected  int stock_productos; 
+    
 
   
-    public Productos(String codigo_producto, String nombre_producto, String categoria_producto, double precio_producto) {
+    public Productos(String codigo_producto, String nombre_producto, String categoria_producto,String atributo_unico, double precio_producto, int stock_productos) {
         this.codigo_producto = codigo_producto;
         this.nombre_producto = nombre_producto;
         this.categoria_producto = categoria_producto;
         this.precio_producto = precio_producto;
+        this.atributo_unico = atributo_unico;
+        this.stock_productos = stock_productos;
+    }
+
+    public int getStock_productos() {
+        return stock_productos;
+    }
+
+    public void setStock_productos(int stock_productos) {
+        this.stock_productos = stock_productos;
+    }
+
+    public String getAtributo_unico() {
+        return atributo_unico;
+    }
+
+    public void setAtributo_unico(String atributo_unico) {
+        this.atributo_unico = atributo_unico;
     }
 
     public String getCodigo_producto() {

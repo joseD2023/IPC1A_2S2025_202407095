@@ -189,6 +189,7 @@ public class Actualizar_cliente extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // ahora vamos a regresar con el metodo regresar 
         regresar.mostrarPestanaActual();
+        regresar.visualizacionClientes();
         dispose();
         
         

@@ -15,8 +15,19 @@ public class Controlador_Vendedor {
     public static Vendedor[] crear_vendedor = new Vendedor[100]; //garantizamos que los vendedores no sean accedido facilmente 
     public static  int indice_vendedor=0; 
     
-    //Metodos para crear clientes 
+    public static boolean  crearVendedores(String codigo, String nombre, String genero, String contraseña){
+        if(indice_vendedor<crear_vendedor.length){
+            Vendedor nuevo_vendedor = new Vendedor(codigo, nombre, genero, contraseña); 
+            crear_vendedor[indice_vendedor] = nuevo_vendedor; 
+            return true; 
+        }else{
+            return false;
+        }
+        
+    }
+
     
+    //Metodos para crear clientes 
     public void crearVendedores(Vendedor vendedor_nuevo){ //debe guardar un objeto 
         if(indice_vendedor < crear_vendedor.length){
             //si el inidce es menor entonces podemos agregar vendedores nuevos 

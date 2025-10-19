@@ -131,7 +131,7 @@ public class Eliminar_cliente extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(null, "Aun no ha Ingresado el Codigo");
             return; 
         }
-        if(Controlador.Controlador_Vendedor.validarVendedorExistente(codigo)){
+        if(Controlador.Controlador_Clientes.validarClientesExistentes(codigo)){
             //si lo encontramos lo vamos a eliminar 
             Controlador.Controlador_Clientes.eliminarCliente(codigo);
             JOptionPane.showMessageDialog(null, "Cliente Eliminado Existosamente");

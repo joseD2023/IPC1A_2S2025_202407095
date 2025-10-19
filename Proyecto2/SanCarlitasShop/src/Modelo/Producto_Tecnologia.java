@@ -12,10 +12,13 @@ public class Producto_Tecnologia extends Productos{
     
     private int meses_garantia;
 
-    public Producto_Tecnologia(int meses_garantia, String codigo_producto, String nombre_producto, String categoria_producto, double precio_producto) {
-        super(codigo_producto, nombre_producto, "Tecnologia", precio_producto);
-        this.meses_garantia = meses_garantia;
+    public Producto_Tecnologia(String codigo_producto, String nombre_producto, String categoria_producto, String atributo_unico, double precio_producto, int stock_productos) {
+        super(codigo_producto, nombre_producto, categoria_producto, atributo_unico, precio_producto, stock_productos);
     }
+
+   
+
+ 
 
     public int getMeses_garantia() {
         return meses_garantia;

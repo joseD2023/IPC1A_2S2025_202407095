@@ -26,6 +26,14 @@ public class Productos {
         this.atributo_unico = atributo_unico;
         this.stock_productos = stock_productos;
     }
+    
+    public Productos(String codigo_producto, String nombre_producto, String categoria_producto,String atributo_unico){
+        this.codigo_producto = codigo_producto;
+        this.nombre_producto = nombre_producto;
+        this.categoria_producto = categoria_producto;
+        this.atributo_unico = atributo_unico;
+    }
+    
 
     public int getStock_productos() {
         return stock_productos;

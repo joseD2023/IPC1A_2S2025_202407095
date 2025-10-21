@@ -6,6 +6,10 @@ package Controlador;
 
 import Modelo.Vendedor;
 import javax.swing.JOptionPane;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
+import java.io.File;
+import java.io.FileReader;
 
 
 public class Controlador_Vendedor {
@@ -15,7 +19,20 @@ public class Controlador_Vendedor {
     public static Vendedor[] crear_vendedor = new Vendedor[100]; //garantizamos que los vendedores no sean accedido facilmente 
     public static  int indice_vendedor=0; 
     
-    public static boolean  crearVendedores(String codigo, String nombre, String genero, String contraseña){
+    
+     //Metodos para crear clientes 
+    public static void crearVendedores(Vendedor vendedor_nuevo){ //debe guardar un objeto 
+        if(indice_vendedor < crear_vendedor.length){
+            //si el inidce es menor entonces podemos agregar vendedores nuevos 
+            crear_vendedor[indice_vendedor] = vendedor_nuevo; 
+            indice_vendedor ++;   
+        }else{
+            JOptionPane.showMessageDialog(null, "Limite de Vendedores llegado a su limite");
+        }
+         
+    }
+    
+    public static boolean  crearVendedores1(String codigo, String nombre, String genero, String contraseña){
         if(indice_vendedor<crear_vendedor.length){
             Vendedor nuevo_vendedor = new Vendedor(codigo, nombre, genero, contraseña); 
             crear_vendedor[indice_vendedor] = nuevo_vendedor; 
@@ -27,17 +44,7 @@ public class Controlador_Vendedor {
     }
 
     
-    //Metodos para crear clientes 
-    public void crearVendedores(Vendedor vendedor_nuevo){ //debe guardar un objeto 
-        if(indice_vendedor < crear_vendedor.length){
-            //si el inidce es menor entonces podemos agregar vendedores nuevos 
-            crear_vendedor[indice_vendedor] = vendedor_nuevo; 
-            indice_vendedor ++;   
-        }else{
-            JOptionPane.showMessageDialog(null, "Limite de Vendedores llegado a su limite");
-        }
-         
-    }
+   
     
     //PARA ACCEDER AL OBJETO 
     
@@ -111,6 +118,43 @@ public class Controlador_Vendedor {
                break; 
            }
        }
+       
+   }
+   
+   public static void cargarCsv(File arcCsv){
+       
+       
+       //primero vamos acceder a nuestro directorio para buscar el archivo csv 
+       
+       try(CSVReader leer = new CSVReader(new FileReader(arcCsv))){
+           String[] variable_aux = null;
+           
+           while((variable_aux = leer.readNext()) != null){
+               
+               //VAMOS A VERFICAR EL CODIGO PARA CAMBIARLO 
+               
+               if(!validarVendedorExistente(variable_aux[0])){
+                //instanciar para acceder para crear el objeto traido desde un archivo csv 
+       
+               Vendedor vendedorCsv = new Vendedor(variable_aux[0], variable_aux[1], variable_aux[2], variable_aux[3], variable_aux[4]);
+               crearVendedores(vendedorCsv);
+               
+                   
+               }else{
+                   System.out.println("no se agrega por codigo repetido");
+               }
+              
+
+           }
+           
+           leer.close();
+           
+       }catch(Exception e){
+           throw new RuntimeException(e);
+           
+       }
+       
+       
        
    }
     

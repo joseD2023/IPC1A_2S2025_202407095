@@ -235,7 +235,6 @@ public class Actualizar_cliente extends javax.swing.JFrame {
         
         if(Controlador.Controlador_Clientes.validarClientesExistentes(codi)){
             Cliente client = Controlador.Controlador_Clientes.objetoCliente(codi);
-            client.setCodigo(codi);
             client.setNombre(nombre);
             client.setGenero(genero);
             client.setCumple(cumple);

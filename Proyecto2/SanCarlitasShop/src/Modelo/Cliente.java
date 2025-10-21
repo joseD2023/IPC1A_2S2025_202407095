@@ -16,13 +16,21 @@ public class Cliente extends Usuario{ // heredan atributos
     private String genero;
     private String cumple; 
     
+
+    
+    
+    
+    
+    
    
    
     public Cliente(String codigo, String nombre, String genero, String Cumpleaños, String contraseña){
-        super(codigo,contraseña, nombre);
+        super(codigo,nombre, contraseña);
         this.genero = genero;
         this.cumple = Cumpleaños;
     }
+    
+    
     
     
 

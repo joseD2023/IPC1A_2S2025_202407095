@@ -4,12 +4,24 @@
  */
 package Vista;
 
+import Controlador.Controlador_Productos;
+import Controlador.Controlador_Vendedor;
 import Modelo.Productos;
+import Modelo.Tablareader;
 import Modelo.Vendedor;
+import java.awt.BorderLayout;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import java.io.File; 
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -19,6 +31,7 @@ public class Modulo_Administrador extends javax.swing.JFrame {
     DefaultTableModel tabla_admi = new DefaultTableModel(); // TABLA PARA VER LOS Vendedores
     DefaultTableModel tabla_pro = new DefaultTableModel();
     static int pestaña_actual; // obtener pestañas actuales 
+  
    
 
     
@@ -26,6 +39,7 @@ public class Modulo_Administrador extends javax.swing.JFrame {
     
     public Modulo_Administrador() {      
         initComponents();
+        
         String[] Encabezados ={"Codigo", "Nombre", "Genero", "Cantidad de ventas Confirmadas"};
         String[] encabezados_producto = {"Codigo", "Nombre", "Categoria", "Acciones"};
         
@@ -36,12 +50,52 @@ public class Modulo_Administrador extends javax.swing.JFrame {
         
         
         TabbedPane.setTabLayoutPolicy(TabbedPane.SCROLL_TAB_LAYOUT);
+        
+        
 
         limpiar(tabla_pro);
         limpiar(tabla_admi);
         visualizarTablaProducto();
         visualizarTablaVendedores();
+        mostrarBotones();
+        
+        
+        
+       
 
+    }
+    
+    public void mostrarBotones(){
+         tabla_producto.addMouseListener(new java.awt.event.MouseAdapter() {
+        @Override
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            int columna = tabla_producto.columnAtPoint(evt.getPoint());
+            int fila = tabla_producto.rowAtPoint(evt.getPoint());
+            if(columna == 3) {
+                // tratar de crear una ventana 
+                
+                JDialog ventana = new JDialog(); 
+                ventana.setTitle("Detalles Productos");
+                ventana.setSize(400, 200);
+                ventana.setLocationRelativeTo(ventana);
+                ventana.setLayout(new BorderLayout());
+                /*----------------------------------------*/
+                
+                String codigo = tabla_producto.getValueAt(fila, 0).toString();
+                
+                //obtendremos la informacion
+                
+                String informacion_productos = Controlador_Productos.mostrarDetallesProducto(codigo); 
+                JLabel label1 = new JLabel(informacion_productos);
+                label1.setHorizontalAlignment(SwingConstants.CENTER); // Centrar texto
+                ventana.add(label1, BorderLayout.CENTER);
+                ventana.add(label1); 
+                ventana.setVisible(true);
+                
+               
+            }
+        }
+    });
     }
     
     
@@ -64,12 +118,16 @@ public class Modulo_Administrador extends javax.swing.JFrame {
        if(Controlador.Controlador_Productos.crear_producto != null && Controlador.Controlador_Productos.crear_producto.length > 0){
            for(Productos p: Controlador.Controlador_Productos.crear_producto){
                if(p!=null){
-                   Object[] fila = {p.getCodigo_producto(), p.getNombre_producto(), p.getCategoria_producto()};
+                   Object[] fila = {p.getCodigo_producto(), p.getNombre_producto(), p.getCategoria_producto(), "VER DETALLE"};
+                   
                    tabla_pro.addRow(fila);
                    
                }
            }
        }
+       
+       tabla_producto.getColumnModel().getColumn(3).setCellRenderer(new Tablareader());
+      
           
     }
     
@@ -272,6 +330,11 @@ public class Modulo_Administrador extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tabla_producto);
 
         boton_cargar_csv.setText("Cargar");
+        boton_cargar_csv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_cargar_csvActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Ver Detalles");
 
@@ -424,8 +487,62 @@ public class Modulo_Administrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void boton_cargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_cargarActionPerformed
-        // TODO add your handling code here:
+        // ahora vamos a cargar el csv para agregarlos a neustro metodo del controlador vendedor 
+        
+        JFileChooser selecionar = new JFileChooser(); 
+        
+        // filtro para querer solo un tipo de documento 
+        
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos Csv", "csv"); 
+        selecionar.setFileFilter(filtro);
+        
+        //Desactivar otros tipos de archivos 
+        selecionar.setAcceptAllFileFilterUsed(false);
+        
+        
+        int retornar_valor = selecionar.showOpenDialog(null); 
+        
+        
+        
+        if(retornar_valor == JFileChooser.APPROVE_OPTION){
+            File archivo = selecionar.getSelectedFile();  // seleccionamos el archivo 
+            
+            Controlador_Vendedor.cargarCsv(archivo);
+        }
+        
+        
+        visualizarTablaVendedores();
+        
+        
+        
+        
+        
+        
     }//GEN-LAST:event_boton_cargarActionPerformed
+
+    private void boton_cargar_csvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_cargar_csvActionPerformed
+        // cargar CSV al sistema pero de producto ahora 
+        
+        JFileChooser seleccionar = new JFileChooser();
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos CSV", "csv");
+        seleccionar.setFileFilter(filtro);
+        
+        //desactivar otros tipos de archivos 
+        
+        seleccionar.setAcceptAllFileFilterUsed(false);
+        
+        int retornar = seleccionar.showOpenDialog(null); 
+        
+        if(retornar== JFileChooser.APPROVE_OPTION){
+            File archivo = seleccionar.getSelectedFile(); 
+            Controlador.Controlador_Productos.cargarCsv(archivo);
+        }
+        
+        visualizarTablaProducto();
+        
+        
+        
+    }//GEN-LAST:event_boton_cargar_csvActionPerformed
 
    
     public static void main(String args[]) {

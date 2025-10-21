@@ -7,6 +7,10 @@ package Vista;
 import Modelo.Cliente;
 import Modelo.Productos;
 import Modelo.Vendedor;
+import java.io.File;
+import java.io.FilenameFilter;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 public class Modulo_Vendedor extends javax.swing.JFrame {
@@ -122,13 +126,13 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        boton_cargar_stock = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         boton_crear_clientes = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        boton_cargar_cliente = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -162,11 +166,11 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton2.setText("Cargar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        boton_cargar_stock.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        boton_cargar_stock.setText("Cargar");
+        boton_cargar_stock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                boton_cargar_stockActionPerformed(evt);
             }
         });
 
@@ -189,7 +193,7 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(boton_cargar_stock, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(48, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -207,7 +211,7 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addGap(63, 63, 63)
-                        .addComponent(jButton2)
+                        .addComponent(boton_cargar_stock)
                         .addGap(174, 174, 174)
                         .addComponent(jButton3)
                         .addContainerGap())))
@@ -236,8 +240,13 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton4.setText("Cargar");
+        boton_cargar_cliente.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        boton_cargar_cliente.setText("Cargar");
+        boton_cargar_cliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_cargar_clienteActionPerformed(evt);
+            }
+        });
 
         jButton5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jButton5.setText("Actualizar");
@@ -264,7 +273,7 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boton_cargar_cliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(boton_crear_clientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -278,7 +287,7 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
                         .addGap(48, 48, 48)
                         .addComponent(boton_crear_clientes)
                         .addGap(46, 46, 46)
-                        .addComponent(jButton4)
+                        .addComponent(boton_cargar_cliente)
                         .addGap(43, 43, 43)
                         .addComponent(jButton5)
                         .addGap(40, 40, 40)
@@ -373,9 +382,33 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void boton_cargar_stockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_cargar_stockActionPerformed
+      //cargar stock para ver los datos encontrados 
       
-    }//GEN-LAST:event_jButton2ActionPerformed
+      //vamos a cargar los precios ya que en los productos no vienen los precios 
+      
+        JFileChooser stock = new JFileChooser();
+        
+        // nuestro filtro de stock 
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos Csv", "csv");
+        stock.setFileFilter(filtro);
+        
+        //desactivar otros tipos de archihvos 
+        
+        stock.setAcceptAllFileFilterUsed(false);
+        
+        int retornar = stock.showOpenDialog(null); 
+        
+        if(retornar == JFileChooser.APPROVE_OPTION){
+            File archivo = stock.getSelectedFile(); 
+            Controlador.Controlador_Productos.cargarCsvStock(archivo);
+            
+        }
+        
+        visualizarTablaProducto();
+        
+      
+    }//GEN-LAST:event_boton_cargar_stockActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // vamos a cerrar sesion 
@@ -383,6 +416,30 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
         new Modulo_autenticacion().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void boton_cargar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_cargar_clienteActionPerformed
+        // vamos a cargar al cliente desde un Csv 
+        
+        JFileChooser selecionar_cliente = new JFileChooser();
+        
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos Csv", "csv");
+        selecionar_cliente.setFileFilter(filtro);
+        
+        //los archivos que no debe de verse 
+        
+        selecionar_cliente.setAcceptAllFileFilterUsed(false);
+        
+        int retornar = selecionar_cliente.showOpenDialog(null); 
+        
+        if(retornar== JFileChooser.APPROVE_OPTION){
+            File archivo = selecionar_cliente.getSelectedFile(); 
+            Controlador.Controlador_Clientes.cargarCsvClientes(archivo);
+            
+        }
+        
+        visualizacionClientes();
+        
+    }//GEN-LAST:event_boton_cargar_clienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -421,11 +478,11 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane Tabbed;
+    private javax.swing.JButton boton_cargar_cliente;
+    private javax.swing.JButton boton_cargar_stock;
     private javax.swing.JButton boton_crear_clientes;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JPanel jPanel1;

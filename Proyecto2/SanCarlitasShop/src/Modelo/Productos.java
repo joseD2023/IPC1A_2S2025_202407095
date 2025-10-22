@@ -34,6 +34,12 @@ public class Productos {
         this.atributo_unico = atributo_unico;
     }
     
+    //contructor para pedidos 
+    public Productos(String codigo_producto, String nombre_producto){
+        this.codigo_producto = codigo_producto;
+        this.nombre_producto = nombre_producto;
+    }
+    
 
     public int getStock_productos() {
         return stock_productos;

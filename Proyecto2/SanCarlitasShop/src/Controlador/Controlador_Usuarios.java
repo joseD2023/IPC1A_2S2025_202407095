@@ -25,7 +25,8 @@ public class Controlador_Usuarios {
     
     public int verificarLogin(String codigo, String contra){
         
-        if(cliente.ObtenerClienteCodigoContraseña(codigo, contra)){ // si es true me retorna que se consiguio al dueño del ese codigo y usuario 
+        if(Controlador_Clientes.ObtenerClienteCodigoContraseñas(codigo, contra)){ // si es true me retorna que se consiguio al dueño del ese codigo y usuario
+            Controlador_Productos.codigo_cliente(codigo); //con esto me dan el valor del codigo
             return 1;  
         }
         

@@ -4,7 +4,10 @@
  */
 package Vista;
 
+import Controlador.Controlador_Productos;
+import static Controlador.Controlador_pedidos.pedidos_clientes;
 import Modelo.Cliente;
+import Modelo.Pedidos;
 import Modelo.Productos;
 import Modelo.Vendedor;
 import java.io.File;
@@ -19,6 +22,7 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
     
     DefaultTableModel diseño = new DefaultTableModel(); // cremoas nuestro modelo 
     DefaultTableModel diseño_clientes = new DefaultTableModel();
+    DefaultTableModel diseño_pedidos = new DefaultTableModel(); 
     static int pestaña_actual;
 
     
@@ -30,8 +34,15 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
     
     public Modulo_Vendedor() {
         initComponents(); // inicializar todo 
+        
         String[] encabezados = {"Codigo", "Nombre", "Categoria", "Stock", "Acciones"};
         String[] clientes_encabezados = {"Codigo", "Nombre", "Genero", "Fecha de Cumpleaños"};
+        String[] pedidos_encabezados = {"Codigo Producto", "Fecha Generacion", "Codigo Cliente", "Nombre Cliente", "Total", "Opciones"};
+        
+        diseño_pedidos.setColumnIdentifiers(pedidos_encabezados);
+        Jtabla_pedido.setModel(diseño_pedidos);
+        
+        
         diseño_clientes.setColumnIdentifiers(clientes_encabezados);
         jTable2.setModel(diseño_clientes);
         
@@ -40,8 +51,10 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
         
         limpiar(diseño);
         limpiar(diseño_clientes);
+        limpiar(diseño_pedidos);
         visualizarTablaProducto();
         visualizacionClientes();
+        visualizarTablaPedidos();
         
     }
     
@@ -83,6 +96,24 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
          }
          
      }
+     
+     
+      public void visualizarTablaPedidos(){
+        
+        limpiar(diseño_pedidos); //limpiamos la tabla cada vez para no encontrar repetidos 
+        
+        if(pedidos_clientes != null && pedidos_clientes.length >0){
+            for(Pedidos p: pedidos_clientes){
+                if(p != null){
+                    Object[] fila = {p.getCodigo_producto(),p.getFecha_generacion(),p.getCodigo_cliente(),p.getNombre_cliente(),p.getTotal_pagar(), "Confirmar"};
+                    diseño_pedidos.addRow(fila);
+                    
+                }
+                
+            }
+            
+        }
+    }
     
     
     
@@ -137,7 +168,7 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        Jtabla_pedido = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Modulo Vendedor");
@@ -300,7 +331,7 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
 
         Tabbed.addTab("                                   Clientes                                   ", jPanel2);
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        Jtabla_pedido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -311,7 +342,7 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
                 "Codigo", "Fecha Generacion", "Codigo Cliente", "Nombre Cliente", "Total", "Opciones"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(Jtabla_pedido);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -477,6 +508,7 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable Jtabla_pedido;
     private javax.swing.JTabbedPane Tabbed;
     private javax.swing.JButton boton_cargar_cliente;
     private javax.swing.JButton boton_cargar_stock;
@@ -493,6 +525,5 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     // End of variables declaration//GEN-END:variables
 }

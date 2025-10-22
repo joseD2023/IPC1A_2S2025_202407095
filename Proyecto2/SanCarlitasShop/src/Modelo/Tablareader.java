@@ -14,7 +14,7 @@ public class Tablareader extends DefaultTableCellRenderer{
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        if(column == 3 || column == 4 | column == 5){
+        if(column == 3 || column == 4 || column == 5 || column==6){ //agreamos la columan en que necesitamos el boton
             JButton boton = new JButton(value.toString());
             return boton;
         }

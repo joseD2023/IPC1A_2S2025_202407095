@@ -27,13 +27,15 @@ public class Modulo_Cliente extends javax.swing.JFrame {
     DefaultTableModel tabla1 = new DefaultTableModel();
     DefaultTableModel tabla2 = new DefaultTableModel();
     DefaultTableModel tabla3 = new DefaultTableModel();
+   
 
     
     public Modulo_Cliente() {
         initComponents();
         
+        
         String[] encabezados = {"Codigo", "Nombre", "Categoria", "Stock", "Acciones"};
-        String[] carrito = {"Codigo Producto", "Nombre", "Cantidad", "Precio", "Total", "Opciones"};
+        String[] carrito = {"Codigo Producto", "Nombre", "Cantidad", "Precio", "Total", "Opcion1", "Opcion2"};
         String[] historial = {"Codigo", "Fecha de Confirmacion", "Total"};
         
         tabla1.setColumnIdentifiers(encabezados);
@@ -58,6 +60,10 @@ public class Modulo_Cliente extends javax.swing.JFrame {
         
          tabla_productos_disponibles.getColumnModel().getColumn(4).setCellRenderer(new Modelo.Tablareader()); // la primera tabla y muestra el boton en la columna 4
          tabla_carrito_compras.getColumnModel().getColumn(5).setCellRenderer(new Modelo.Tablareader());
+         tabla_carrito_compras.getColumnModel().getColumn(6).setCellRenderer(new Modelo.Tablareader());
+         
+         
+         precio_label.setText("Actualizar el texto");
         
     }
 
@@ -74,6 +80,8 @@ public class Modulo_Cliente extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabla_carrito_compras = new javax.swing.JTable();
+        boton_pedidos = new javax.swing.JButton();
+        precio_label = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tabla_historial_compras = new javax.swing.JTable();
@@ -143,13 +151,29 @@ public class Modulo_Cliente extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tabla_carrito_compras);
 
+        boton_pedidos.setText("Realizar Pedido");
+        boton_pedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_pedidosActionPerformed(evt);
+            }
+        });
+
+        precio_label.setText("jLabel1");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 802, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 802, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(precio_label)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(boton_pedidos)))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -157,7 +181,11 @@ public class Modulo_Cliente extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(boton_pedidos)
+                    .addComponent(precio_label))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("                                Carrito Compra                                ", jPanel2);
@@ -216,46 +244,25 @@ public class Modulo_Cliente extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Vamos a regresar a inicar Sesion 
+        
+        //limpiar el carrito porque no compro nada 
+        Controlador.Controlador_Clientes.limpiarCarritoCerrarSesion();
         new Modulo_autenticacion().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Modulo_Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Modulo_Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Modulo_Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Modulo_Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void boton_pedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_pedidosActionPerformed
+        // aqui voy a obtener todo lo que esta en la tabla actualmente y voy a tomar los datos importantes para hacer el pedidos 
+        Modulo_Vendedor pedidos_mostrar = new Modulo_Vendedor();
+        pedidos_mostrar.visualizarTablaPedidos();
+        pedidos_mostrar.setVisible(true);
+        Controlador.Controlador_pedidos.obtenerPedidoCliente(tabla_carrito_compras);  // aqui ya agregamos los pedidos para que el vendedor loas acpete
+    }//GEN-LAST:event_boton_pedidosActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Modulo_Cliente().setVisible(true);
-            }
-        });
-    }
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton boton_pedidos;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -264,6 +271,7 @@ public class Modulo_Cliente extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel precio_label;
     private javax.swing.JTable tabla_carrito_compras;
     private javax.swing.JTable tabla_historial_compras;
     private javax.swing.JTable tabla_productos_disponibles;

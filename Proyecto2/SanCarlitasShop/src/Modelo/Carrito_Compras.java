@@ -27,6 +27,12 @@ public class Carrito_Compras {
         this.totoal = totoal;
     }
     
+    //constructor para el carrito temporal 
+    
+    public Carrito_Compras(String codigo_producto){
+        this.codigo_producto = codigo_producto;
+    }
+    
  
 
     public String getCodigo_producto() {
@@ -70,7 +76,7 @@ public class Carrito_Compras {
     }
 
     public double getTotoal() {
-        return totoal * precio;
+        return totoal;
     }
 
     public void setTotoal(double totoal) {

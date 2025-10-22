@@ -5,6 +5,7 @@
 package Controlador;
 
 import Modelo.Carrito_Compras;
+import Modelo.Carrito_Temporal;
 import Modelo.Productos;
 import Modelo.Tablareader;
 import com.opencsv.CSVReader;
@@ -13,11 +14,19 @@ import javax.swing.JOptionPane;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 import java.io.FileReader;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 
+
 public class Controlador_Productos {
+    
+    static DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+    static String fechaHoraActual = LocalDateTime.now().format(formato);
+    static String codigo_clientes = " ";
+    public static int monto_total; 
     
     /*------------------ Seccion Productos Crear ------------------------------------------------------*/
     
@@ -27,11 +36,14 @@ public class Controlador_Productos {
     public static int indice_producto = 0; 
     
     public static void crearProductos(Productos producto_nuevo){
-        if(indice_producto < crear_producto.length){
+        if(producto_nuevo != null){
+            if(indice_producto < crear_producto.length){
             // confirmamos el espacio suficiente 
             crear_producto[indice_producto] = producto_nuevo; 
             indice_producto++;
-        }  
+        } 
+        }
+         
     }
     
      /*------------------------------------------------------------------------*/
@@ -40,9 +52,12 @@ public class Controlador_Productos {
     //Obtener el Objeto del producto
     public static Productos objetoProductos(String co){
         for(int i=0; i<indice_producto; i++){
-            if(co.equals(crear_producto[i].getCodigo_producto())){
-                return crear_producto[i];
+            if(crear_producto[i] !=null){
+                 if(co.equals(crear_producto[i].getCodigo_producto())){
+                    return crear_producto[i];
+                 }
             }
+           
         }
         return null;   
     }
@@ -228,6 +243,8 @@ public class Controlador_Productos {
                 int stock  = Integer.parseInt(tabla_productos_disponibles.getValueAt(fila, 3).toString()); //capturo el stock
                 double precio_producto = Controlador_Productos.objetoProductos(codigo).getPrecio_producto(); // aquiconsigo el precio
                 
+
+                
                 double cantidad_usuario = Controlador_Clientes.solicitarCantidadCliente(stock);
                 int cantidad_u = (int) cantidad_usuario;
                 
@@ -238,6 +255,26 @@ public class Controlador_Productos {
                 if(cantidad_usuario > 0){
                     
                     Carrito_Compras nuevo_carrito = new Carrito_Compras(codigo, nombre, categoria, cantidad_u, precio_producto, total_pagar);
+                    
+                    /*-------------------------------CARRITO TEMPORAL --------------------------------------------*/
+                    
+                    //necesito obtener el codigo cliente 
+                    
+                    String codigo_cliente = codigo_clientes; //codigo del cliente y asi sin perdernos mas
+                    String nombre_cliente = Controlador_Clientes.objetoCliente(codigo_cliente).getNombre();
+                    
+                    
+                    
+                    Carrito_Temporal carrito_tem = new Carrito_Temporal(codigo, fechaHoraActual, codigo_cliente, nombre_cliente, total_pagar,cantidad_u, precio_producto, nombre, categoria);
+                    Controlador_Carrito_Temporal.agregar_carrito_temporal(carrito_tem); // con esto ya tenemos el carrito temporal 
+                    
+                 
+                    /*-------------------------------CARRITO TEMPORAL --------------------------------------------*/
+                    
+                    
+                    
+                    
+                    
                     Controlador.Controlador_Clientes.agregarCarrito(nuevo_carrito);
                     
                     JOptionPane.showMessageDialog(null, "Carrito Agregado");
@@ -251,6 +288,21 @@ public class Controlador_Productos {
     });
         
     }
+             
+             
+             //vamos a obtener el codigo del cliente de una manera de accion 
+             
+             public static void codigo_cliente(String codigo_client){
+                 codigo_clientes = codigo_client;
+             }
+             
+             
+             
+    
+ 
+             
+             
+             
              
              
       

@@ -4,9 +4,10 @@
  */
 package Controlador;
 
-import static Controlador.Controlador_Productos.crear_producto;
-import static Controlador.Controlador_Productos.limpiar;
+
+import static Controlador.Controlador_Carrito_Temporal.cargarCarritosTemporalesCliente;
 import Modelo.Carrito_Compras;
+import Modelo.Carrito_Temporal;
 import Modelo.Cliente;
 import Modelo.Productos;
 import com.opencsv.CSVReader;
@@ -24,8 +25,9 @@ public class Controlador_Clientes {
     public static Carrito_Compras[] carrito = new Carrito_Compras[100];
     public static int indice_carrito; 
     public static int indice_clientes =0; 
+
     
- 
+
     //vamos a crear metodos para por los clientes pueden hacer 
     public static void crearClientes(Cliente nuevo_cliente){
         if(indice_clientes < crear_clientes.length){
@@ -149,9 +151,12 @@ public class Controlador_Clientes {
     
     public static Carrito_Compras objetoCarrito(String codigo){
         for(int i=0; i<indice_carrito; i++){
-            if(codigo.equals(carrito[i].getCodigo_producto())){
+            if(carrito[i] != null){
+                if(codigo.equals(carrito[i].getCodigo_producto())){
                 return carrito[i]; //obtenemos el objeto para nuestro carrito 
             }
+            }
+            
         }
         return null;
  
@@ -165,7 +170,7 @@ public class Controlador_Clientes {
         if(carrito != null && carrito.length >0){
             for(Carrito_Compras ca: carrito){
                 if(ca != null){
-                    Object[] fila = {ca.getCodigo_producto(), ca.getNombre_producto(), ca.getCantidad(), ca.getPrecio(), ca.getTotoal(), "Eliminar"};
+                    Object[] fila = {ca.getCodigo_producto(), ca.getNombre_producto(), ca.getCantidad(), ca.getPrecio(), ca.getTotoal(), "Eliminar", "Actualizar"};
                     tabla_carritos.addRow(fila);
                 }
                 
@@ -179,20 +184,24 @@ public class Controlador_Clientes {
     public static void eliminarCarrito(String codigo_carrito){
         
         for(int i=0; i<indice_carrito; i++){
-            if(codigo_carrito.equals(carrito[i].getCodigo_producto())){
-                carrito[i] = null; //eliminado del carrito 
+            if(carrito[i] != null){
+              if(codigo_carrito.equals(carrito[i].getCodigo_producto())){
+                 carrito[i] = null; //eliminado del carrito 
                 
-                //ahora vamos a mover todo para no tener problemas con los null
+                 //ahora vamos a mover todo para no tener problemas con los null
                 
-                for(int j=i; j<indice_carrito-1; j++){
+                  for(int j=i; j<indice_carrito-1; j++){
                     carrito[j] = carrito[j+1]; // corremos todo a la siguiente posicion 
-                }
+                   }
                 
-                carrito[indice_carrito-1] = null; 
-                indice_carrito--;
-                break; //borramos definitivamente el carrito 
+                   carrito[indice_carrito-1] = null; 
+                   indice_carrito--;
+                  break; //borramos definitivamente el carrito 
  
             }
+                
+            }
+            
         }
     }
     
@@ -269,28 +278,35 @@ public class Controlador_Clientes {
               public void mouseClicked(java.awt.event.MouseEvent evt){
                 int columna = tabla.columnAtPoint(evt.getPoint());
                 int fila = tabla.rowAtPoint(evt.getPoint());
-                
-                if(columna == 5){
-                    String codigo = tabla.getValueAt(fila, 0).toString(); // solo necesito el codigo para acceder a todo el documento 
+                // Como necesitmaos dos botones vamos a preguntarle al usuario que dese hacer 
+                   String codigo = tabla.getValueAt(fila, 0).toString(); // solo necesito el codigo para acceder a todo el documento 
+                if(columna == 5){ //eliminar el carrito de la lista 
+
                     //necesiot si elimino regresar al stock para que no se pierda eso 
                     //vamos a obtener la cantidad que el usuario ingreso 
                     
+                    //*---------------------------------------------------------------------------------*/
                     Carrito_Compras carrito_cantidad_recuperar = objetoCarrito(codigo); //accedo a la cantidad y ahora lo vuelvo a sumar como al inicio
                     int cantidad_recuperar = carrito_cantidad_recuperar.getCantidad(); // y obtemos la cantidad 
                     //*---------------------------------------------------------------------------------*/
                     
                     //necesitamos encontrar el stock 
-                    
+                    //*---------------------------------------------------------------------------------*/
                     int stock_recuperar = Controlador_Productos.objetoProductos(codigo).getStock_productos(); // ya tenemos el verdadero stock y ahora le sumamos la cantidad que le restamos 
-                    
+                    //*---------------------------------------------------------------------------------*/
 
                     //ahora lo sumamos 
+                    //*---------------------------------------------------------------------------------*/
                     Productos stock_producto = Controlador_Productos.objetoProductos(codigo); // y ahora se actualizar la parte del stock
                     stock_producto.setStock_productos(stock_recuperar + cantidad_recuperar); //recuperamos el stock
+                    //*---------------------------------------------------------------------------------*/
                     
-
                     //vamos a tratar de eliminar el producto del carrtio  
+                    //*---------------------------------------------------------------------------------*/
                     eliminarCarrito(codigo); // ingreso el codigo y en la funciona va eliminar el carrito
+                    Controlador_Carrito_Temporal.eliminarCarritoTemporal(codigo);
+                    //*---------------------------------------------------------------------------------*/
+                    
                     JOptionPane.showMessageDialog(null, "Carrito Eliminado");
                     
                     
@@ -300,12 +316,91 @@ public class Controlador_Clientes {
                     
                     Controlador.Controlador_Productos.visualizarProductos(tabla_producto);
                 }
+                
+                
+                if(columna == 6){
+                    
+                    //vamos a modificar las cantidades seleccionadas  y validacion de stock 
+                    //debemos traer el stock desde productos 
+                    
+                    Carrito_Compras carrito_actual = objetoCarrito(codigo);
+                    Carrito_Temporal carrito_temporal_actual = Controlador_Carrito_Temporal.objetoCarritoTemporal(codigo);
+                    
+                    int cantidad_vieja = carrito_actual.getCantidad(); 
+                    int stock_actual = Controlador_Productos.objetoProductos(codigo).getStock_productos(); // con esto podemos quitar lo que el usuario quisiera modificar
+                    //necesitamos un stock temporal que guarde lo que habia antes por si el usuario elimina el carrito 
+                    
+                    int stock_temporal = stock_actual + cantidad_vieja;
+                    //pedir un anueva cantidad 
+
+                    double cantidad_nueva = solicitarCantidadCliente(stock_temporal); // usamos el stock temporal para la persistencia de datos 
+
+                    if(cantidad_nueva >0){
+                        
+                        int conversio_can = (int)cantidad_nueva; // esto es lo que debo sumar y restar al mismo tiempo
+                        //entonces actualizamos el stock 
+                        
+                        Productos actualizar_producto = Controlador_Productos.objetoProductos(codigo);
+                        actualizar_producto.setStock_productos(stock_temporal-conversio_can);
+                        
+                        //actualizamos la del carrito 
+                        carrito_actual.setCantidad(conversio_can);
+                        carrito_temporal_actual.setCantidad(conversio_can);
+                        
+                        double nuevo_total = conversio_can * carrito_actual.getPrecio();
+                        Controlador_Carrito_Temporal.objetoCarritoTemporal(codigo).setTotal_pagar(nuevo_total);
+                        
+                        //actualizamos el total del carrito   
+                        carrito_actual.setTotoal(nuevo_total);
+                        visualizacionCarritos(tabla_carito);
+                        Controlador.Controlador_Productos.visualizarProductos(tabla_producto);
+                    }
+          
+ 
+                }
               }
               
           });
           
+          
+          
+          
       }
       
+      
+      
+      //limpiar carrito al momenot de cerrar cesion 
+      
+      public static void limpiarCarritoCerrarSesion(){
+
+          for(int i=0; i<indice_carrito; i++){
+              carrito[i] = null; 
+          }
+          indice_carrito =0; 
+          
+          System.out.println("Carrito limpiado");
+          
+      }
+      
+      
+      
+      public static boolean ObtenerClienteCodigoContraseñas(String codigo, String contraseña){
+    for(int i=0; i<indice_clientes; i++){
+        if(codigo.equals(crear_clientes[i].getCodigo()) && contraseña.equals(crear_clientes[i].getContra())){
+            
+            // ✅ GUARDAR en Controlador_Productos (que SÍ tienes)
+            Controlador_Productos.codigo_cliente(codigo);
+            
+            // ✅ CARGAR carritos de ESTE cliente
+            cargarCarritosTemporalesCliente(codigo);
+            
+            return true;
+        }
+    }
+    return false; 
+}
+      
+   
       
 
       

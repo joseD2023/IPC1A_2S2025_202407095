@@ -5,6 +5,7 @@
 package Vista;
 
 import Controlador.Controlador_Productos;
+import Controlador.Controlador_pedidos;
 import static Controlador.Controlador_pedidos.pedidos_clientes;
 import Modelo.Cliente;
 import Modelo.Pedidos;
@@ -25,12 +26,7 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
     DefaultTableModel diseño_pedidos = new DefaultTableModel(); 
     static int pestaña_actual;
 
-    
-    
-    
-    
-    
-    
+
     
     public Modulo_Vendedor() {
         initComponents(); // inicializar todo 
@@ -54,7 +50,16 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
         limpiar(diseño_pedidos);
         visualizarTablaProducto();
         visualizacionClientes();
-        visualizarTablaPedidos();
+        Controlador_pedidos.visualizarTablaPedidos(diseño_pedidos);
+        Controlador_pedidos.carritoBtonesPedidos(Jtabla_pedido, diseño_pedidos);
+
+        
+        
+        //vamos a visucalizar el boton para que podamos usarlo 
+        
+        Jtabla_pedido.getColumnModel().getColumn(5).setCellRenderer(new Modelo.Tablareader()); //aqui vamos a mostrar la configuracion del boton 
+        
+        
         
     }
     
@@ -96,25 +101,7 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
          }
          
      }
-     
-     
-      public void visualizarTablaPedidos(){
-        
-        limpiar(diseño_pedidos); //limpiamos la tabla cada vez para no encontrar repetidos 
-        
-        if(pedidos_clientes != null && pedidos_clientes.length >0){
-            for(Pedidos p: pedidos_clientes){
-                if(p != null){
-                    Object[] fila = {p.getCodigo_producto(),p.getFecha_generacion(),p.getCodigo_cliente(),p.getNombre_cliente(),p.getTotal_pagar(), "Confirmar"};
-                    diseño_pedidos.addRow(fila);
-                    
-                }
-                
-            }
-            
-        }
-    }
-    
+ 
     
     
     

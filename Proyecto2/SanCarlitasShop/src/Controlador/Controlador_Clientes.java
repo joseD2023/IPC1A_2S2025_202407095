@@ -279,7 +279,7 @@ public class Controlador_Clientes {
                 int columna = tabla.columnAtPoint(evt.getPoint());
                 int fila = tabla.rowAtPoint(evt.getPoint());
                 // Como necesitmaos dos botones vamos a preguntarle al usuario que dese hacer 
-                   String codigo = tabla.getValueAt(fila, 0).toString(); // solo necesito el codigo para acceder a todo el documento 
+                String codigo = tabla.getValueAt(fila, 0).toString(); // solo necesito el codigo para acceder a todo el documento 
                 if(columna == 5){ //eliminar el carrito de la lista 
 
                     //necesiot si elimino regresar al stock para que no se pierda eso 
@@ -388,10 +388,10 @@ public class Controlador_Clientes {
     for(int i=0; i<indice_clientes; i++){
         if(codigo.equals(crear_clientes[i].getCodigo()) && contraseña.equals(crear_clientes[i].getContra())){
             
-            // ✅ GUARDAR en Controlador_Productos (que SÍ tienes)
+            //GUARDAR en Controlador_Productos (que SÍ tienes)
             Controlador_Productos.codigo_cliente(codigo);
             
-            // ✅ CARGAR carritos de ESTE cliente
+            //CARGAR carritos de ESTE cliente
             cargarCarritosTemporalesCliente(codigo);
             
             return true;

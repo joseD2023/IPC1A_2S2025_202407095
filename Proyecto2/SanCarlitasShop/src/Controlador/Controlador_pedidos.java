@@ -4,9 +4,15 @@
  */
 package Controlador;
 
+import static Controlador.Controlador_Clientes.eliminarCarrito;
+import static Controlador.Controlador_Clientes.objetoCarrito;
+import static Controlador.Controlador_Clientes.solicitarCantidadCliente;
+import static Controlador.Controlador_Clientes.visualizacionCarritos;
 import Modelo.Carrito_Compras;
 import Modelo.Carrito_Temporal;
 import Modelo.Pedidos;
+import Modelo.Productos;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -74,29 +80,36 @@ public class Controlador_pedidos {
         return null;    
     }
     
+    
     //necesito agregar al pedido y que este este en cola para ser mandado al otro lado 
+    //BOTON CONFIRMACION 
+    
     
     public static void obtenerPedidoCliente(JTable tabla_pedido){
         
-        tabla_pedido.addMouseListener(new java.awt.event.MouseAdapter(){
-            @Override
-            public  void mouseClicked(java.awt.event.MouseEvent evt){
-                int fila = tabla_pedido.rowAtPoint(evt.getPoint());
+        DefaultTableModel modelo = (DefaultTableModel) tabla_pedido.getModel(); 
+        int filas = modelo.getRowCount(); //obtener lo que tiene el carrito en ese instante en sus filas 
+        
+        for(int i=0; i < filas; i++){
+            String codigo_producto = modelo.getValueAt(i, 0).toString(); //obtenemos el codigo del productos 
+            
+            //lo buscamos en el carrito temporal 
+            
+            Carrito_Temporal obtener_pedidos = Controlador_Carrito_Temporal.objetoCarritoTemporal(codigo_producto);
+            
+            if(obtener_pedidos != null){
+                Pedidos pedido_nuevo = new Pedidos(obtener_pedidos.getCodigo_producto(), obtener_pedidos.getFecha_generacion(), obtener_pedidos.getCodigo_cliente(), obtener_pedidos.getNombre_cliente() ,obtener_pedidos.getTotal_pagar());
                 
-                String codigo_producto = tabla_pedido.getValueAt(fila, 0).toString(); // ya tengo el codigo de la tabla del producto 
+                //ahora agregamos el pedido para el carrito 
                 
-                //puedo acceder a al objeto del carrito temporal 
+                Controlador_pedidos.agregar_pedidos(pedido_nuevo);
                 
-                Carrito_Temporal buscar_producto = Controlador_Carrito_Temporal.objetoCarritoTemporal(codigo_producto);
-               
-                Pedidos confirmar = new Pedidos(buscar_producto.getCodigo_producto(), buscar_producto.getFecha_generacion(), buscar_producto.getCodigo_cliente(), buscar_producto.getNombre_cliente(),buscar_producto.getTotal_pagar());
-                //con esto ya tengo para verficiar para poder confirmar si el vendedor acepta el pedido 
-                
-                agregar_pedidos(confirmar);
-                
+                System.out.println("NOmbre Cliente" + " " + obtener_pedidos.getNombre_cliente() + " " + "Producto:"+ obtener_pedidos.getNombre_producto());
                 
             }
-        });
+        }
+        
+   
                 
   
         
@@ -104,6 +117,9 @@ public class Controlador_pedidos {
         
     }
     
+    
+    
+    //logica para visualizar el pediod en el vendedor debe ser esto 
     
     public static void visualizarTablaPedidos(DefaultTableModel tabla){
         
@@ -121,6 +137,68 @@ public class Controlador_pedidos {
             
         }
     }
+    
+    
+    
+    
+    
+    
+     public static void carritoBtonesPedidos(JTable tabla, DefaultTableModel tabla_carito){
+          
+          tabla.addMouseListener(new java.awt.event.MouseAdapter(){
+              @Override
+              public void mouseClicked(java.awt.event.MouseEvent evt){
+                int columna = tabla.columnAtPoint(evt.getPoint());
+                int fila = tabla.rowAtPoint(evt.getPoint());
+                // Como necesitmaos dos botones vamos a preguntarle al usuario que dese hacer 
+                String codigo = tabla.getValueAt(fila, 0).toString(); // solo necesito el codigo para acceder a todo el documento 
+                if(columna == 5){ 
+                    //esta parte es para confirmar los pedidos y que el vendedor venda ese producto y lo quite del sistema y diga que esta vendido
+                    //aqui deberias de eliminar los pedidos que hizo el cliente y decir que ya lo vendimo s
+                    
+                    
+                    //ahora vamos a eliminar el carrito al momento de decir que si vamos a confirmar 
+                    
+                    eliminar_pedidos(codigo);
+                    Controlador_Carrito_Temporal.eliminarCarritoTemporal(codigo);
+                    Controlador.Controlador_Clientes.eliminarCarrito(codigo);
+                    
+                    visualizarTablaPedidos(tabla_carito);
+                    
+                    JOptionPane.showMessageDialog(null, "Peidod Eleminado");
+      
+                }
+                
+                
+               
+              }
+              
+          });
+          
+          
+          
+          
+      }
+     
+     
+     //si hay productos en el carrito y se quiere hacer un pedido no debe estar vacios 
+     
+     public static boolean carritoLleno(JTable tabla_pedido){
+         DefaultTableModel modelo = (DefaultTableModel) tabla_pedido.getModel(); 
+         int filas = modelo.getRowCount(); //obtener lo que tiene el carrito en ese instante en sus filas 
+         
+         for(int i=0; i<filas; i++){
+             String codigo = modelo.getValueAt(i, 0).toString();
+             
+             if(codigo.isEmpty() || codigo == null){
+                 return true; // tru si esta vacio o es nullo 
+ 
+             }
+         }
+         
+         return false;
+         
+     }
     
 
 

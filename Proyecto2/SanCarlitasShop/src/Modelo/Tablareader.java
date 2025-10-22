@@ -18,7 +18,7 @@ public class Tablareader extends DefaultTableCellRenderer{
             JButton boton = new JButton(value.toString());
             return boton;
         }
-        return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+        return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); 
     }
     
     

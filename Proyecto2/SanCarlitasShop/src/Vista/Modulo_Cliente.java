@@ -7,6 +7,7 @@ package Vista;
 import static Controlador.Controlador_Clientes.carritoBtones;
 import Controlador.Controlador_Productos;
 import static Controlador.Controlador_Productos.mostrarBotones;
+import Controlador.Controlador_pedidos;
 import Modelo.Carrito_Compras;
 import java.awt.BorderLayout;
 import javax.swing.JDialog;
@@ -56,6 +57,7 @@ public class Modulo_Cliente extends javax.swing.JFrame {
         
         mostrarBotones(tabla_productos_disponibles, tabla1, tabla2); //creacion de botones y todo ello
         carritoBtones(tabla_carrito_compras, tabla2, tabla1);
+      
         
         
          tabla_productos_disponibles.getColumnModel().getColumn(4).setCellRenderer(new Modelo.Tablareader()); // la primera tabla y muestra el boton en la columna 4
@@ -252,11 +254,21 @@ public class Modulo_Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void boton_pedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_pedidosActionPerformed
+        
+        //verificamos que si el carrito no este vacio ni tenga null para prevenir agregar nuevos carritos vacios
+        
+        if(Controlador_pedidos.carritoLleno(tabla_carrito_compras)){
+            JOptionPane.showMessageDialog(null, "No se puede Agregar Carritos Vacios");
+            return; 
+        }
+
         // aqui voy a obtener todo lo que esta en la tabla actualmente y voy a tomar los datos importantes para hacer el pedidos 
-        Modulo_Vendedor pedidos_mostrar = new Modulo_Vendedor();
-        pedidos_mostrar.visualizarTablaPedidos();
-        pedidos_mostrar.setVisible(true);
         Controlador.Controlador_pedidos.obtenerPedidoCliente(tabla_carrito_compras);  // aqui ya agregamos los pedidos para que el vendedor loas acpete
+        
+         //necesitaria limpiar el area del carrito para que no modifique el cliente 
+         Controlador.Controlador_Clientes.limpiar(tabla2);
+        
+        JOptionPane.showMessageDialog(null, "Pedido agregado Exitosamente");
     }//GEN-LAST:event_boton_pedidosActionPerformed
 
   

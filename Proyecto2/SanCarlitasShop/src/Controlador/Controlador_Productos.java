@@ -6,6 +6,7 @@ package Controlador;
 
 import Modelo.Carrito_Compras;
 import Modelo.Carrito_Temporal;
+import Modelo.Pedidos;
 import Modelo.Productos;
 import Modelo.Tablareader;
 import com.opencsv.CSVReader;
@@ -267,7 +268,7 @@ public class Controlador_Productos {
                     
                     Carrito_Temporal carrito_tem = new Carrito_Temporal(codigo, fechaHoraActual, codigo_cliente, nombre_cliente, total_pagar,cantidad_u, precio_producto, nombre, categoria);
                     Controlador_Carrito_Temporal.agregar_carrito_temporal(carrito_tem); // con esto ya tenemos el carrito temporal 
-                    
+
                  
                     /*-------------------------------CARRITO TEMPORAL --------------------------------------------*/
                     

@@ -6,25 +6,39 @@ package Controlador;
 
 
 import static Controlador.Controlador_Carrito_Temporal.cargarCarritosTemporalesCliente;
+
 import Modelo.Carrito_Compras;
 import Modelo.Carrito_Temporal;
 import Modelo.Cliente;
+import Modelo.Historial_Compras;
 import Modelo.Productos;
 import com.opencsv.CSVReader;
 import java.io.File;
 import java.io.FileReader;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 
 public class Controlador_Clientes {
+    //*--------------------------------------------------
+    public static LocalDate  fecha_actual = LocalDate.now();
+    public static DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public static String fecha_formateada = fecha_actual.format(formato);
+    
+    
     //aqui vamos a trabajar todo lo relacionado a clientes 
     
     public static Cliente[] crear_clientes = new Cliente[100];
     public static Carrito_Compras[] carrito = new Carrito_Compras[100];
     public static int indice_carrito; 
     public static int indice_clientes =0; 
+    
+
+    /*--------------------------------------------------------------------------------------------------------*/
 
     
 
@@ -34,10 +48,8 @@ public class Controlador_Clientes {
             // como es menor aun puede almacenar clientes 
             crear_clientes[indice_clientes] = nuevo_cliente; 
             indice_clientes++; 
-            
-        }else{
-            JOptionPane.showMessageDialog(null, "Limite de Vendedores llegado a su limite");
-        }  
+ 
+        }
     }
     
     //Acceder a los objetos a traves de una funcion 
@@ -75,7 +87,7 @@ public class Controlador_Clientes {
     
      //obtener las contraseñas del cualquier vendedor 
     
-    public static boolean ObtenerClienteCodigoContraseña(String codigo, String contraseña){
+    public static boolean ObtenerClienteCodigoContraseñaverificacion(String codigo, String contraseña){
         for(int i=0; i<indice_clientes; i++){
             if(codigo.equals(crear_clientes[i].getCodigo()) && contraseña.equals(crear_clientes[i].getContra())){
                 return true;
@@ -269,7 +281,10 @@ public class Controlador_Clientes {
       
       /*----------------------------------------------------------------------------*/
       
-      //mostrar botones para actualizar o eliminar del carrito
+      //MOSTRAR BOTONES PARA ACTUALIZAR O ELIMINAR DEL CARRITO m
+      /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+      /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+      /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
       
       public static void carritoBtones(JTable tabla, DefaultTableModel tabla_carito, DefaultTableModel tabla_producto){
           
@@ -280,7 +295,7 @@ public class Controlador_Clientes {
                 int fila = tabla.rowAtPoint(evt.getPoint());
                 // Como necesitmaos dos botones vamos a preguntarle al usuario que dese hacer 
                 String codigo = tabla.getValueAt(fila, 0).toString(); // solo necesito el codigo para acceder a todo el documento 
-                if(columna == 5){ //eliminar el carrito de la lista 
+                if(columna == 5){ //eliminar el carrito de la lista  ELIMINAR LO QUE ESCOGIO EL USUARIO O ELIMINAR EL CARRITO
 
                     //necesiot si elimino regresar al stock para que no se pierda eso 
                     //vamos a obtener la cantidad que el usuario ingreso 
@@ -319,6 +334,7 @@ public class Controlador_Clientes {
                 
                 
                 if(columna == 6){
+                    //MOFICAR EL RESULTADO DEL USUARIO PROQUE NO LE GUSTO CIERTA CANTIDAD 
                     
                     //vamos a modificar las cantidades seleccionadas  y validacion de stock 
                     //debemos traer el stock desde productos 
@@ -362,13 +378,20 @@ public class Controlador_Clientes {
               
           });
           
+             /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+             /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+             /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+          
           
           
           
       }
       
-      
-      
+      /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+      /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+      /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+          
+      /*CUANDO CERRAMOS CESIONES LIMPIAMOS EL CARRITO ORIGINAL LO QUE HACEMOS ES BORRAR TODO LO QUE CONTENGA EL CARRITO ORIGINAL PERO LA PERMANENCIA DE LOS DATOS ESTA EN EL CARRITO TEMPORAL*/
       //limpiar carrito al momenot de cerrar cesion 
       
       public static void limpiarCarritoCerrarSesion(){
@@ -381,8 +404,75 @@ public class Controlador_Clientes {
           System.out.println("Carrito limpiado");
           
       }
+      /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+      /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+      /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+          
+      
+      //limpiar el carrito completo 
+      public static void limpiarCarritoCompleto(){
+          for(int i=0; i< indice_carrito; i++){
+              carrito[i] = null;
+          }
+          indice_carrito =0;
+      }
+      
+       /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+      /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+      /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+          
       
       
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+      /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+      /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+          
       
       public static boolean ObtenerClienteCodigoContraseñas(String codigo, String contraseña){
     for(int i=0; i<indice_clientes; i++){
@@ -399,6 +489,10 @@ public class Controlador_Clientes {
     }
     return false; 
 }
+      /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+      /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+      /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+          
       
    
       

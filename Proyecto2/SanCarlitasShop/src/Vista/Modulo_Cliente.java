@@ -4,12 +4,15 @@
  */
 package Vista;
 
+import Controlador.Controlador_Clientes;
 import static Controlador.Controlador_Clientes.carritoBtones;
 import Controlador.Controlador_Productos;
 import static Controlador.Controlador_Productos.mostrarBotones;
 import Controlador.Controlador_pedidos;
 import Modelo.Carrito_Compras;
 import java.awt.BorderLayout;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -46,6 +49,7 @@ public class Modulo_Cliente extends javax.swing.JFrame {
         tabla_carrito_compras.setModel(tabla2);
         tabla_productos_disponibles.setModel(tabla1);
         
+   
         //llamamos a la funcion para limpiar las tablas 
         
         Controlador.Controlador_Clientes.limpiar(tabla1);
@@ -54,6 +58,8 @@ public class Modulo_Cliente extends javax.swing.JFrame {
         
         Controlador.Controlador_Productos.visualizarProductos(tabla1);
         Controlador.Controlador_Clientes.visualizacionCarritos(tabla2);
+        Controlador.Controlador_Historial_Compras.visualizadorHistorialCompras(tabla3, Controlador_Productos.codigo_clientes);
+        
         
         mostrarBotones(tabla_productos_disponibles, tabla1, tabla2); //creacion de botones y todo ello
         carritoBtones(tabla_carrito_compras, tabla2, tabla1);
@@ -194,13 +200,13 @@ public class Modulo_Cliente extends javax.swing.JFrame {
 
         tabla_historial_compras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Codigo", "Fecha Confirmacion", "Total"
             }
         ));
         jScrollPane3.setViewportView(tabla_historial_compras);
@@ -254,21 +260,33 @@ public class Modulo_Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void boton_pedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_pedidosActionPerformed
-        
+         System.out.println("Boton pedido acabas de presionar ");
         //verificamos que si el carrito no este vacio ni tenga null para prevenir agregar nuevos carritos vacios
         
         if(Controlador_pedidos.carritoLleno(tabla_carrito_compras)){
             JOptionPane.showMessageDialog(null, "No se puede Agregar Carritos Vacios");
             return; 
         }
+        
+        //obtener el codigo actual 
+        
+        String codigo_atual = Controlador_Productos.codigo_clientes;
+        
+        //pasamos los parametros para obtener pedido
+        String fecha_pedido = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        Controlador.Controlador_pedidos.obtenerPedidoCliente(tabla_carrito_compras, codigo_atual, fecha_pedido);
 
-        // aqui voy a obtener todo lo que esta en la tabla actualmente y voy a tomar los datos importantes para hacer el pedidos 
-        Controlador.Controlador_pedidos.obtenerPedidoCliente(tabla_carrito_compras);  // aqui ya agregamos los pedidos para que el vendedor loas acpete
+        Controlador_Clientes.limpiarCarritoCompleto();
+        Controlador.Controlador_Carrito_Temporal.limpiarCarritosTemporales(codigo_atual);
+        Controlador.Controlador_Clientes.limpiar(tabla2);
         
-         //necesitaria limpiar el area del carrito para que no modifique el cliente 
-         Controlador.Controlador_Clientes.limpiar(tabla2);
+        Controlador.Controlador_Historial_Compras.guardarObjeto();
+        Controlador.Controlador_Historial_Compras.visualizadorHistorialCompras(tabla3, codigo_atual);
         
+ 
+
         JOptionPane.showMessageDialog(null, "Pedido agregado Exitosamente");
+        
     }//GEN-LAST:event_boton_pedidosActionPerformed
 
   

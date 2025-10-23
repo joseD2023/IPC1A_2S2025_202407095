@@ -24,13 +24,16 @@ public class Controlador_Usuarios {
     Opcion 3: Modulo Vendedor*/
     
     public int verificarLogin(String codigo, String contra){
-        
+        System.out.println("Verificacion de Login ");
         if(Controlador_Clientes.ObtenerClienteCodigoContraseñas(codigo, contra)){ // si es true me retorna que se consiguio al dueño del ese codigo y usuario
             Controlador_Productos.codigo_cliente(codigo); //con esto me dan el valor del codigo
+            Controlador_Historial_Compras.obtenerCodigo(codigo);
+            System.out.println("el codigo del cliente es: " + codigo);
             return 1;  
         }
         
         if(vendedor.ObtenerVendedorCodigoContraseña(codigo, contra)){
+            System.out.println("el codigo del vendedor es: " + codigo);
             return 3;
         }
     

@@ -124,6 +124,67 @@ public class Controlador_Carrito_Temporal {
     }
 }
     
+    public static void limpiarCarritosTemporales(String codigo_client){
+        for(int i=0; i<indice_carrito_temporal; i++){
+            if(carrito_temporal[i] != null && carrito_temporal[i].getCodigo_cliente().equals(codigo_client)){
+                carrito_temporal[i] = null; //aqui elimina el carrito temporal del cliente
+                
+                
+                for(int j=i; j<indice_carrito_temporal-1; j++){
+                    carrito_temporal[j] = carrito_temporal[j+1]; 
+                
+            }
+                
+                carrito_temporal[indice_carrito_temporal-1] = null; 
+                indice_carrito_temporal--;
+                
+                break;
+            
+        }
+        
+       
+            
+        }
+        
+        
+        
+        
+        
+    }
+    
+    
+    public static void eliminarCarritosDuplicados(String codi_c){
+        for(int i=0; i<indice_carrito_temporal; i++){
+            if(carrito_temporal[i] != null && carrito_temporal[i].getCodigo_cliente().equals(codi_c)){
+                for(int j=i+1; j<indice_carrito; j++){
+                    if(carrito_temporal[j] != null && carrito_temporal[j].getCodigo_cliente().equals(codi_c) && carrito_temporal[j].getCodigo_producto().equals(carrito_temporal[i].getCodigo_producto())){
+                        carrito_temporal[j] = null;
+                        
+                    }
+                    
+                }
+                
+            }
+        }
+        
+        //debemos reordenar el carrito actual 
+        
+        Carrito_Temporal[] nuevo_sin_duplicados = new Carrito_Temporal[carrito_temporal.length];
+        int indice_nuevo =0; 
+        
+        for(int i=0; i<indice_carrito_temporal; i++){
+            if(carrito_temporal[i] != null){
+                carrito_temporal[indice_nuevo++] = carrito_temporal[i];
+            }
+            
+        }
+        
+        carrito_temporal = nuevo_sin_duplicados;
+        indice_carrito_temporal = indice_nuevo;
+        
+        
+    }
+    
     
     
     

@@ -209,7 +209,7 @@ public class Crear_cliente extends javax.swing.JFrame {
         
          //ahora vamos a verificar si estos clientes existen 
          
-         if(Controlador.Controlador_Clientes.ObtenerClienteCodigoContraseña(codigo, contraseña)){
+         if(Controlador.Controlador_Clientes.validarClientesExistentes(codigo)){
              //si nos da true entonces enviamos un mensaje de que ya existe el cliente 
              JOptionPane.showMessageDialog(null, "El Cliente ya Existe!!");
              return; 

@@ -123,6 +123,7 @@ public class Modulo_autenticacion extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // vamos a obtener las entradas del Usuario 
         
+        
         String codigo = entrada_codigo.getText().trim(); 
         String contraseña = entrada_contra.getText().trim(); 
         
@@ -130,7 +131,7 @@ public class Modulo_autenticacion extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "");
             return;
         }
-        
+
         
         switch (controlador_usuario.verificarLogin(codigo, contraseña)) {
             case 2:

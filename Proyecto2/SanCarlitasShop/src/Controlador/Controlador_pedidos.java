@@ -10,8 +10,11 @@ import static Controlador.Controlador_Clientes.solicitarCantidadCliente;
 import static Controlador.Controlador_Clientes.visualizacionCarritos;
 import Modelo.Carrito_Compras;
 import Modelo.Carrito_Temporal;
+import Modelo.Historial_Compras;
 import Modelo.Pedidos;
 import Modelo.Productos;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -25,6 +28,7 @@ public class Controlador_pedidos {
     //aqui vamos a guardar toda la logica para el controlador pedidos 
     
     public static Pedidos[] pedidos_clientes = new Pedidos[100]; 
+    public static double monto_final; 
     public static int indice_pedidos;
     
     
@@ -34,6 +38,16 @@ public class Controlador_pedidos {
         if(nuevo_pedido == null){
             return; 
         }
+        
+        //vamos a ver si se me duplica los pedidos para ver eso 
+        
+        for(int i=0; i<indice_pedidos; i++){
+            if (pedidos_clientes[i] != null && pedidos_clientes[i].getCodigo_producto().equals(nuevo_pedido.getCodigo_producto()) && pedidos_clientes[i].getCodigo_cliente().equals(nuevo_pedido.getCodigo_cliente())) {
+                System.out.println("pedido duplicado, no se agregó");
+                return;
+             }
+        }
+
         if(indice_pedidos < pedidos_clientes.length){
             //entonces ahora agregamos los nuevos pedidos 
             pedidos_clientes[indice_pedidos] = nuevo_pedido;
@@ -69,6 +83,7 @@ public class Controlador_pedidos {
     }
     
     
+    //aqui lo que queremos es encontrar el objeto de pedidos que contienes todos los atributos ya llenados
     public static Pedidos objetoPedidos(String codigo){
         
         for(int i=0; i<indice_pedidos; i++){
@@ -85,29 +100,64 @@ public class Controlador_pedidos {
     //BOTON CONFIRMACION 
     
     
-    public static void obtenerPedidoCliente(JTable tabla_pedido){
+    public static void obtenerPedidoCliente(JTable tabla_pedidos, String codigo_cliente_actual, String fe){
         
-        DefaultTableModel modelo = (DefaultTableModel) tabla_pedido.getModel(); 
-        int filas = modelo.getRowCount(); //obtener lo que tiene el carrito en ese instante en sus filas 
-        
-        for(int i=0; i < filas; i++){
-            String codigo_producto = modelo.getValueAt(i, 0).toString(); //obtenemos el codigo del productos 
-            
-            //lo buscamos en el carrito temporal 
-            
-            Carrito_Temporal obtener_pedidos = Controlador_Carrito_Temporal.objetoCarritoTemporal(codigo_producto);
-            
-            if(obtener_pedidos != null){
-                Pedidos pedido_nuevo = new Pedidos(obtener_pedidos.getCodigo_producto(), obtener_pedidos.getFecha_generacion(), obtener_pedidos.getCodigo_cliente(), obtener_pedidos.getNombre_cliente() ,obtener_pedidos.getTotal_pagar());
-                
-                //ahora agregamos el pedido para el carrito 
-                
-                Controlador_pedidos.agregar_pedidos(pedido_nuevo);
-                
-                System.out.println("NOmbre Cliente" + " " + obtener_pedidos.getNombre_cliente() + " " + "Producto:"+ obtener_pedidos.getNombre_producto());
-                
+        for (int i = 0; i < tabla_pedidos.getRowCount(); i++) {
+        String codigoProducto = tabla_pedidos.getValueAt(i, 0).toString();
+        String nombreProducto = tabla_pedidos.getValueAt(i, 1).toString();
+        int cantidad = Integer.parseInt(tabla_pedidos.getValueAt(i, 2).toString());
+        double precio = Double.parseDouble(tabla_pedidos.getValueAt(i, 3).toString());
+        double total = cantidad * precio;
+
+        // Verificar duplicado
+        boolean pedidoExistente = false;
+        for (int j = 0; j < indice_pedidos; j++) {
+            if (pedidos_clientes[j] != null) {
+                if (pedidos_clientes[j].getCodigo_cliente().equals(codigo_cliente_actual) &&
+                    pedidos_clientes[j].getCodigo_producto().equals(codigoProducto) && pedidos_clientes[j].getFecha_generacion().equals(fe)) { // 3 condicones para que un duplicado sea valdo 
+                    pedidoExistente = true;
+                    break;
+                }
             }
         }
+
+        if (!pedidoExistente) {
+            // Obtener fecha actual
+            String fecha = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
+            Pedidos nuevoPedido = new Pedidos(
+                codigoProducto,   // codigo_producto
+                fecha,           // fecha_generacion
+                codigo_cliente_actual, // codigo_cliente
+                nombreProducto,  // nombre_cliente (si quieres poner el nombre del cliente real, debes pasarlo)
+                total            // total_pagar
+            );
+            
+            //aqui voy a generar mi constructor de historial para leugo guardarlos 
+            
+            Historial_Compras nuevo_historial = new Historial_Compras(codigo_cliente_actual, fecha, total); //y aqui tengo todo para confirmar 
+            Controlador_Historial_Compras.agregarHistorial(nuevo_historial);
+            
+            System.out.println("*-------------- aqui se agrego al nuevo historial -------------------*");
+
+            if (indice_pedidos < pedidos_clientes.length) {
+                pedidos_clientes[indice_pedidos] = nuevoPedido;
+                indice_pedidos++;
+            } else {
+                System.out.println("No hay espacio para más pedidos.");
+            }
+        } else {
+            System.out.println("Pedido duplicado para el cliente " + codigo_cliente_actual + " y producto " + codigoProducto);
+             //Controlador_Carrito_Temporal.eliminarCarritosDuplicados(codigo_cliente_actual);
+        }
+    }
+            
+        }
+  
+        
+
+        
+        
         
    
                 
@@ -115,7 +165,7 @@ public class Controlador_pedidos {
         
 
         
-    }
+    
     
     
     
@@ -142,6 +192,8 @@ public class Controlador_pedidos {
     
     
     
+    //BOTON DE CONFIRMAR PEDIDOS PARA QUE EL USUARIO TENGA LA CONFIRAMCION DEL PEDIDO DESEADO 
+    
     
      public static void carritoBtonesPedidos(JTable tabla, DefaultTableModel tabla_carito){
           
@@ -156,6 +208,13 @@ public class Controlador_pedidos {
                     //esta parte es para confirmar los pedidos y que el vendedor venda ese producto y lo quite del sistema y diga que esta vendido
                     //aqui deberias de eliminar los pedidos que hizo el cliente y decir que ya lo vendimo s
                     
+                    //vamos a verificar si realmente pertence la confirmacion a dicho codigo 
+                    
+                    System.out.println("Fila a Confirmar" + " " + fila + " " + "Codigo es:" + " " + codigo);
+                    
+                    //aqui yo tengo que agregar la confirmacion para paraagregarlo al historial 
+                    
+                    
                     
                     //ahora vamos a eliminar el carrito al momento de decir que si vamos a confirmar 
                     
@@ -165,7 +224,9 @@ public class Controlador_pedidos {
                     
                     visualizarTablaPedidos(tabla_carito);
                     
-                    JOptionPane.showMessageDialog(null, "Peidod Eleminado");
+                    
+                    
+                    JOptionPane.showMessageDialog(null, "Compra Realizada Existosamente");
       
                 }
                 
@@ -199,6 +260,9 @@ public class Controlador_pedidos {
          return false;
          
      }
+     
+     
+
     
 
 

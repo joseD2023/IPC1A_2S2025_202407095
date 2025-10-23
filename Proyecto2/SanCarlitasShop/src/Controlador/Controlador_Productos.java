@@ -26,7 +26,7 @@ public class Controlador_Productos {
     
     static DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
     static String fechaHoraActual = LocalDateTime.now().format(formato);
-    static String codigo_clientes = " ";
+    public static String codigo_clientes = " ";
     public static int monto_total; 
     
     /*------------------ Seccion Productos Crear ------------------------------------------------------*/
@@ -62,6 +62,9 @@ public class Controlador_Productos {
         }
         return null;   
     }
+    
+    
+    
     
      /*------------------------------------------------------------------------*/
     
@@ -234,6 +237,9 @@ public class Controlador_Productos {
              tabla_productos_disponibles.addMouseListener(new java.awt.event.MouseAdapter() {
              @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
+                //BOTON PARA AGREGAR CARRITO Y ALMACENARLO  METODO
+                
+                
                 int columna = tabla_productos_disponibles.columnAtPoint(evt.getPoint());
                 int fila = tabla_productos_disponibles.rowAtPoint(evt.getPoint());
                 if(columna == 4) {

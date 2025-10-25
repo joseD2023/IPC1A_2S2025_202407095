@@ -15,6 +15,7 @@ public class Productos {
     protected double precio_producto; 
     protected  String atributo_unico;
     protected  int stock_productos; 
+    protected int ventas_acumuladas =0;
     
 
   
@@ -25,20 +26,41 @@ public class Productos {
         this.precio_producto = precio_producto;
         this.atributo_unico = atributo_unico;
         this.stock_productos = stock_productos;
+        this.ventas_acumuladas =0;
     }
     
-    public Productos(String codigo_producto, String nombre_producto, String categoria_producto,String atributo_unico){
+    //para cargar archvos csv para trabajar todo 
+    public Productos(String codigo_producto, String nombre_producto, String categoria_producto,String atributo_unico, String precio_producto){
         this.codigo_producto = codigo_producto;
         this.nombre_producto = nombre_producto;
         this.categoria_producto = categoria_producto;
         this.atributo_unico = atributo_unico;
+        this.precio_producto = Double.parseDouble(precio_producto);
+        this.ventas_acumuladas =0;
     }
     
     //contructor para pedidos 
     public Productos(String codigo_producto, String nombre_producto){
         this.codigo_producto = codigo_producto;
         this.nombre_producto = nombre_producto;
+        this.ventas_acumuladas =0;
     }
+    
+    
+    //metodo para agregar ventas 
+    
+    public void agregarVentas(int venta){
+        this.ventas_acumuladas = venta;
+    }
+
+    public int getVentas_acumuladas() {
+        return ventas_acumuladas;
+    }
+
+    public void setVentas_acumuladas(int ventas_acumuladas) {
+        this.ventas_acumuladas = ventas_acumuladas;
+    }
+    
     
 
     public int getStock_productos() {

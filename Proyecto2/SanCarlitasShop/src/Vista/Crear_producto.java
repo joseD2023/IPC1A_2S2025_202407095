@@ -30,6 +30,7 @@ public class Crear_producto extends javax.swing.JFrame {
         entrada_nombre.setText("");
         entrada_atributo_unico.setText("");
         entrada_precio.setText("");
+        entrada_stock.setText("");
     }
     
     
@@ -85,7 +86,7 @@ public class Crear_producto extends javax.swing.JFrame {
             }
         });
 
-        obtencion_categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tecnología", "Alimento", "General" }));
+        obtencion_categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tecnologia", "Alimento", "General" }));
 
         jButton2.setText("Regresar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -234,7 +235,7 @@ public class Crear_producto extends javax.swing.JFrame {
         }
         
         switch(categoria){
-            case "Tecnología":
+            case "Tecnologia":
                 try{
                 
                 int meses = Integer.parseInt(atributo_unico); 

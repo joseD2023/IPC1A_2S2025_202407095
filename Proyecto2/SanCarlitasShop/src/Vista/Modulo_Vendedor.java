@@ -8,12 +8,14 @@ import Controlador.Controlador_Productos;
 import Controlador.Controlador_pedidos;
 import static Controlador.Controlador_pedidos.pedidos_clientes;
 import Modelo.Cliente;
+import Modelo.EventoBitacora;
 import Modelo.Pedidos;
 import Modelo.Productos;
 import Modelo.Vendedor;
 import java.io.File;
 import java.io.FilenameFilter;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
@@ -419,7 +421,16 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
         
         if(retornar == JFileChooser.APPROVE_OPTION){
             File archivo = stock.getSelectedFile(); 
-            Controlador.Controlador_Productos.cargarCsvStock(archivo);
+            
+            try{
+                Controlador.Controlador_Productos.cargarCsvStock(archivo);
+            
+                
+            }catch(ArrayIndexOutOfBoundsException e){
+                JOptionPane.showMessageDialog(null, "Archivo no tiene las columnas necesarias para CSV");
+                
+            }
+            
             
         }
         
@@ -430,6 +441,8 @@ public class Modulo_Vendedor extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // vamos a cerrar sesion 
+        
+        EventoBitacora.registrarEvento("Vendedor", Controlador.Controlador_Vendedor.Codigo_vendedor, "Logout", "Exitosa", "Sesion Cerrada", "Normal");
         
         new Modulo_autenticacion().setVisible(true);
         this.dispose();

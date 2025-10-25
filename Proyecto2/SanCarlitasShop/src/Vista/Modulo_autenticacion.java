@@ -5,6 +5,7 @@
 package Vista;
 
 import Controlador.Controlador_Usuarios;
+import Modelo.EventoBitacora;
 import javax.swing.JOptionPane;
 
 /**
@@ -37,7 +38,9 @@ public class Modulo_autenticacion extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         entrada_codigo = new javax.swing.JTextField();
-        entrada_contra = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        entrada_contra = new javax.swing.JPasswordField();
+        visibilidad = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Inicio Sesion ");
@@ -59,9 +62,22 @@ public class Modulo_autenticacion extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Cerrar Sesion");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         entrada_contra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 entrada_contraActionPerformed(evt);
+            }
+        });
+
+        visibilidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                visibilidadActionPerformed(evt);
             }
         });
 
@@ -69,20 +85,26 @@ public class Modulo_autenticacion extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(14, 14, 14))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel2))
                 .addGap(50, 50, 50)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1)
-                    .addComponent(entrada_contra, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(entrada_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(entrada_codigo, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(jButton1)))
-                .addContainerGap(160, Short.MAX_VALUE))
+                        .addComponent(jButton1))
+                    .addComponent(entrada_contra))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(visibilidad)
+                .addContainerGap(129, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,13 +115,16 @@ public class Modulo_autenticacion extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(entrada_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(45, 45, 45)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(entrada_contra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
+                    .addComponent(entrada_contra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(visibilidad))
+                .addGap(52, 52, 52)
                 .addComponent(jButton1)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -115,10 +140,6 @@ public class Modulo_autenticacion extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void entrada_contraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrada_contraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_entrada_contraActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // vamos a obtener las entradas del Usuario 
@@ -136,26 +157,57 @@ public class Modulo_autenticacion extends javax.swing.JFrame {
         switch (controlador_usuario.verificarLogin(codigo, contraseña)) {
             case 2:
                 //entramos a la ventana del administrador
+                EventoBitacora.registrarEvento("Administrador", codigo, "Login", "Exitosa", "Inicio Sesion Correct", "Normal");
                 new Modulo_Administrador().setVisible(true);
+               
+                
                 dispose();
                 break;
             case 1:
                 //entramos a la vetana cliente
+                EventoBitacora.registrarEvento("Cliente", codigo, "Login", "Exitosa", "Inicio Sesion Correcto", "Normal");
                 new Modulo_Cliente().setVisible(true);
+                
                 dispose();
                 break;
             case 3:
                 // entramos a la ventana Vendedor
 
                 new Modulo_Vendedor().setVisible(true);
+                EventoBitacora.registrarEvento("Vendedor", codigo, "Login", "Exitosa", "Inicio Sesion Correcto", "Normal");
                 dispose();
                 break;
             default:
+                EventoBitacora.registrarEvento("Acceso Denegado", codigo, "Login", "Fallido", "Fallo en el Inicio de Sesion", "Normal");
                 break;
         }
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+        Controlador.Controlador_sistemas.usuarioLogout();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void entrada_contraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrada_contraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_entrada_contraActionPerformed
+
+    private void visibilidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visibilidadActionPerformed
+        // accion del checbox
+        
+        if(visibilidad.isSelected()){
+            entrada_contra.setEchoChar((char)0);
+            
+        }else{
+            entrada_contra.setEchoChar('*');
+        }
+        
+        
+      
+    }//GEN-LAST:event_visibilidadActionPerformed
 
     
     
@@ -193,11 +245,13 @@ public class Modulo_autenticacion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField entrada_codigo;
-    private javax.swing.JTextField entrada_contra;
+    private javax.swing.JPasswordField entrada_contra;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JCheckBox visibilidad;
     // End of variables declaration//GEN-END:variables
 }

@@ -10,9 +10,11 @@ import static Controlador.Controlador_Clientes.solicitarCantidadCliente;
 import static Controlador.Controlador_Clientes.visualizacionCarritos;
 import Modelo.Carrito_Compras;
 import Modelo.Carrito_Temporal;
+import Modelo.EventoBitacora;
 import Modelo.Historial_Compras;
 import Modelo.Pedidos;
 import Modelo.Productos;
+import Modelo.Vendedor;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
@@ -30,6 +32,7 @@ public class Controlador_pedidos {
     public static Pedidos[] pedidos_clientes = new Pedidos[100]; 
     public static double monto_final; 
     public static int indice_pedidos;
+    public static int contador_pedido=0;
     
     
     //vamos agregar los pedidos que tenemos 
@@ -52,6 +55,8 @@ public class Controlador_pedidos {
             //entonces ahora agregamos los nuevos pedidos 
             pedidos_clientes[indice_pedidos] = nuevo_pedido;
             indice_pedidos++; 
+            
+          
    
         }
    
@@ -102,6 +107,10 @@ public class Controlador_pedidos {
     
     public static void obtenerPedidoCliente(JTable tabla_pedidos, String codigo_cliente_actual, String fe){
         
+        double totalPedido = 0;
+        int cantidadProductos = 0;
+        
+        
         for (int i = 0; i < tabla_pedidos.getRowCount(); i++) {
         String codigoProducto = tabla_pedidos.getValueAt(i, 0).toString();
         String nombreProducto = tabla_pedidos.getValueAt(i, 1).toString();
@@ -129,14 +138,20 @@ public class Controlador_pedidos {
                 codigoProducto,   // codigo_producto
                 fecha,           // fecha_generacion
                 codigo_cliente_actual, // codigo_cliente
-                nombreProducto,  // nombre_cliente (si quieres poner el nombre del cliente real, debes pasarlo)
+                nombreProducto,  // nombre_cliente (si quieremos poner el nombre del cliente real, debes pasarlo)
                 total            // total_pagar
             );
+            
             
             //aqui voy a generar mi constructor de historial para leugo guardarlos 
             
             Historial_Compras nuevo_historial = new Historial_Compras(codigo_cliente_actual, fecha, total); //y aqui tengo todo para confirmar 
             Controlador_Historial_Compras.agregarHistorial(nuevo_historial);
+            
+            totalPedido += total;
+            cantidadProductos += cantidad;
+            Controlador_sistemas.nuevoPedido();
+            EventoBitacora.registrarEvento("Cliente", codigo_cliente_actual, "Realizar Pedido", "Exitosa", "Pedido creado: Total Q" + totalPedido + ", " + cantidadProductos + " productos", "Pedido Hecho");
             
             System.out.println("*-------------- aqui se agrego al nuevo historial -------------------*");
 
@@ -205,6 +220,41 @@ public class Controlador_pedidos {
                 // Como necesitmaos dos botones vamos a preguntarle al usuario que dese hacer 
                 String codigo = tabla.getValueAt(fila, 0).toString(); // solo necesito el codigo para acceder a todo el documento 
                 if(columna == 5){ 
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    Carrito_Temporal tem = Controlador_Carrito_Temporal.objetoCarritoTemporal(codigo);
+if(tem != null){
+    Productos pro = Controlador_Productos.objetoProductos(codigo);
+    if(pro != null){
+        pro.setVentas_acumuladas(pro.getVentas_acumuladas() + tem.getCantidad());
+    }
+}
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+    
                     //esta parte es para confirmar los pedidos y que el vendedor venda ese producto y lo quite del sistema y diga que esta vendido
                     //aqui deberias de eliminar los pedidos que hizo el cliente y decir que ya lo vendimo s
                     
@@ -213,6 +263,22 @@ public class Controlador_pedidos {
                     System.out.println("Fila a Confirmar" + " " + fila + " " + "Codigo es:" + " " + codigo);
                     
                     //aqui yo tengo que agregar la confirmacion para paraagregarlo al historial 
+                    
+                    //ahora vamos a cambiar la cantidad de ventas 
+                    
+                    String codigo_vendedor = Controlador_Vendedor.Codigo_vendedor;
+                    
+                    Vendedor v = Controlador_Vendedor.objetoVendedor(codigo_vendedor);
+                    if(v != null){
+                        contador_pedido++; //para confirmar la venta y cuantas ventas ha hecho
+                        v.setNumero_venta(v.getNumero_venta()+contador_pedido);
+                    }else{
+                        System.out.println("Vendedor con el coigo" + " " + codigo_vendedor);
+                    }
+                    contador_pedido =0; //inicializamos el contador para que no agregue mas
+                    
+                    Controlador_sistemas.pedidoProcesado();
+
                     
                     
                     
@@ -242,7 +308,19 @@ public class Controlador_pedidos {
       }
      
      
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
      //si hay productos en el carrito y se quiere hacer un pedido no debe estar vacios 
+     //solo funciona en HACER PEDIDO DEL JTABLE DE CLIENTES PARA VERIFICAR SI ESTA LLENO 
      
      public static boolean carritoLleno(JTable tabla_pedido){
          DefaultTableModel modelo = (DefaultTableModel) tabla_pedido.getModel(); 

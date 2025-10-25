@@ -6,6 +6,7 @@ package Vista;
 
 import javax.swing.JOptionPane;
 
+
 /**
  *
  * @author Admin
@@ -125,11 +126,18 @@ public class Eliminar_Producto extends javax.swing.JFrame {
             return;  
         }
         
+        
         if(Controlador.Controlador_Productos.validacionCodigo(codigo)){
             //si existe se va eliminar el producto 
+            int confirmacion_eliminacion = JOptionPane.showConfirmDialog(null, "¿Quiere eliminar el Producto?","Confirmacion", JOptionPane.YES_NO_OPTION);
+            if(confirmacion_eliminacion == JOptionPane.YES_OPTION){
+               Controlador.Controlador_Productos.eliminarProducto(codigo);
+               JOptionPane.showMessageDialog(null, "Producto Eliminado Exitosamente!!");
+            }else{
+                JOptionPane.showMessageDialog(null, "Eliminacion Cancelada");
+            }
             
-            Controlador.Controlador_Productos.eliminarProducto(codigo);
-            JOptionPane.showMessageDialog(null, "Producto Eliminado Exitosamente!!");
+            
         }else{
             JOptionPane.showMessageDialog(null, "Producto No Existente ");
         }

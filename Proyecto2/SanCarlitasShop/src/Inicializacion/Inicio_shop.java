@@ -4,6 +4,7 @@
  */
 package Inicializacion;
 
+import Vista.Hilos;
 import Vista.Modulo_Administrador;
 import Vista.Modulo_autenticacion;
 
@@ -16,6 +17,8 @@ public class Inicio_shop {
     public static void main(String[] args){
       
         new Modulo_autenticacion().setVisible(true);
+        // Al iniciar el programa
+        new Hilos().setVisible(true);
         
         
     }

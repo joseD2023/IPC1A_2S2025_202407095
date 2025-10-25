@@ -5,6 +5,7 @@
 package Vista;
 
 import Modelo.Cliente;
+import Modelo.EventoBitacora;
 import javax.swing.JOptionPane;
 
 /**
@@ -43,11 +44,12 @@ public class Crear_cliente extends javax.swing.JFrame {
         entrada_codigo = new javax.swing.JTextField();
         entrada_nombre = new javax.swing.JTextField();
         entrada_cumpleaños = new javax.swing.JTextField();
-        entrada_contraseña = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         combox_genero = new javax.swing.JComboBox<>();
+        entrada_contraseña = new javax.swing.JPasswordField();
+        jCheckBox1 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Crear Cliente");
@@ -69,12 +71,6 @@ public class Crear_cliente extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel6.setText("Contraseña");
-
-        entrada_contraseña.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                entrada_contraseñaActionPerformed(evt);
-            }
-        });
 
         jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jButton1.setText("Crear");
@@ -101,6 +97,12 @@ public class Crear_cliente extends javax.swing.JFrame {
 
         combox_genero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino" }));
 
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -120,16 +122,18 @@ public class Crear_cliente extends javax.swing.JFrame {
                             .addComponent(jLabel6))
                         .addGap(82, 82, 82)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(entrada_contraseña)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(entrada_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton3))
                             .addComponent(entrada_nombre)
                             .addComponent(entrada_cumpleaños)
-                            .addComponent(entrada_contraseña)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(combox_genero, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(94, Short.MAX_VALUE))
+                            .addComponent(combox_genero, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox1)))
+                .addContainerGap(72, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2)
@@ -158,12 +162,14 @@ public class Crear_cliente extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(entrada_cumpleaños, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(entrada_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(entrada_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addGap(3, 3, 3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addGap(18, 18, 18))
         );
@@ -203,6 +209,7 @@ public class Crear_cliente extends javax.swing.JFrame {
         //verificamos que no dejen espacios vacios 
         
         if(codigo.isEmpty() || nombre.isEmpty() || cumple.isEmpty() || contraseña.isEmpty()){
+            EventoBitacora.registrarEvento("Cliente", codigo, "Crear Cliente", "Fallida", "Creacion Cliente Fallida Espacio En blanco ", "Campos Vacios");
             JOptionPane.showMessageDialog(null, "No deje Entrada Vacias!!");
             return;    
         }
@@ -211,11 +218,13 @@ public class Crear_cliente extends javax.swing.JFrame {
          
          if(Controlador.Controlador_Clientes.validarClientesExistentes(codigo)){
              //si nos da true entonces enviamos un mensaje de que ya existe el cliente 
+             EventoBitacora.registrarEvento("Cliente", codigo, "Crear Cliente", "Fallida", "Creacion Cliente Fallida: " + codigo, "Cliente Existente");
              JOptionPane.showMessageDialog(null, "El Cliente ya Existe!!");
              return; 
          }else{
              Cliente cliente_nuevo = new Cliente(codigo, nombre, genero, cumple, contraseña);
              //ahora el nuevo cliente lo agregamos a nuestro vector 
+              EventoBitacora.registrarEvento("Cliente", codigo, "Crear Cliente", "Exitosamente", "Creacion Cliente Exitosamente: " + codigo, "Cliente Nuevo" + nombre);
              
              Controlador.Controlador_Clientes.crearClientes(cliente_nuevo);
              JOptionPane.showMessageDialog(null, "Cliente Creado Existosamente!!");
@@ -256,21 +265,28 @@ public class Crear_cliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void entrada_contraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrada_contraseñaActionPerformed
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_entrada_contraseñaActionPerformed
+        
+        if(jCheckBox1.isSelected()){
+            entrada_contraseña.setEchoChar((char) 0);
+        }else{
+            entrada_contraseña.setEchoChar('*');
+        }
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> combox_genero;
     private javax.swing.JTextField entrada_codigo;
-    private javax.swing.JTextField entrada_contraseña;
+    private javax.swing.JPasswordField entrada_contraseña;
     private javax.swing.JTextField entrada_cumpleaños;
     private javax.swing.JTextField entrada_nombre;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

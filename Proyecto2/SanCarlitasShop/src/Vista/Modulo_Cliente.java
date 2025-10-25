@@ -10,6 +10,8 @@ import Controlador.Controlador_Productos;
 import static Controlador.Controlador_Productos.mostrarBotones;
 import Controlador.Controlador_pedidos;
 import Modelo.Carrito_Compras;
+import Modelo.EventoBitacora;
+import Modelo.Pedidos;
 import java.awt.BorderLayout;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -253,6 +255,8 @@ public class Modulo_Cliente extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Vamos a regresar a inicar Sesion 
         
+        EventoBitacora.registrarEvento("Cliente", Controlador_Productos.codigo_clientes, "Logout", "Exitosa", "Sesion Cerrada", "Normal");
+        
         //limpiar el carrito porque no compro nada 
         Controlador.Controlador_Clientes.limpiarCarritoCerrarSesion();
         new Modulo_autenticacion().setVisible(true);
@@ -282,6 +286,9 @@ public class Modulo_Cliente extends javax.swing.JFrame {
         
         Controlador.Controlador_Historial_Compras.guardarObjeto();
         Controlador.Controlador_Historial_Compras.visualizadorHistorialCompras(tabla3, codigo_atual);
+        
+      
+  
         
  
 

@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import Modelo.EventoBitacora;
 import Modelo.Vendedor;
 import javax.swing.JOptionPane;
 
@@ -36,8 +37,9 @@ public class Actualizar_vendedor extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         entrada_codigo = new javax.swing.JTextField();
         entrada_nombre = new javax.swing.JTextField();
-        entrada_contraseña = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
+        entrada_contraseña = new javax.swing.JPasswordField();
+        jCheckBox1 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Actualizar");
@@ -78,6 +80,12 @@ public class Actualizar_vendedor extends javax.swing.JFrame {
             }
         });
 
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -85,33 +93,33 @@ public class Actualizar_vendedor extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(128, 128, 128)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel2)
-                                            .addComponent(jLabel3))
-                                        .addGap(37, 37, 37)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(entrada_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(entrada_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(entrada_contraseña))))
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton2))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addGap(37, 37, 37)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(entrada_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(entrada_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(128, 128, 128)
-                                .addComponent(jLabel1)))
-                        .addGap(0, 101, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton3)))
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(entrada_contraseña, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2)
+                            .addComponent(jCheckBox1))))
+                .addGap(107, 107, 107))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 400, Short.MAX_VALUE)
+                .addComponent(jButton3)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -131,11 +139,12 @@ public class Actualizar_vendedor extends javax.swing.JFrame {
                 .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(entrada_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                    .addComponent(entrada_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox1))
+                .addGap(35, 35, 35)
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -186,6 +195,7 @@ public class Actualizar_vendedor extends javax.swing.JFrame {
         
         
         if(codigo.isEmpty() || nombre.isEmpty() || contraseña.isEmpty()){
+            EventoBitacora.registrarEvento("Vendedor", codigo, "Actualizar Vendedor", "Fallida", "Actualizar Vendedor Fallida Espacio En blanco ", "Campos Vacios");
             JOptionPane.showMessageDialog(null, "No Deje Espacios en Blanoc");
             return;  
         }
@@ -202,10 +212,14 @@ public class Actualizar_vendedor extends javax.swing.JFrame {
             modifcar_vendedor.setNombre(nombre);
             modifcar_vendedor.setContra(contraseña); // modificamos los datos 
             
+            EventoBitacora.registrarEvento("Vendedor", codigo, "Actualizar Vendedor", "Exitosamente", "Actualizar Vendedor Exitosamente", "Vendedor Actualizado" + nombre);
+            
             JOptionPane.showMessageDialog(null, "Vendedor Modificado Existosamente");
             
         }else{
             JOptionPane.showMessageDialog(null, "Vendedor No existente");
+            EventoBitacora.registrarEvento("Vendedor", codigo, "Actualizar Vendedor", "Fallida", "Actualizar Vendedor Fallida", "Vendedor No Existente" + codigo);
+            
             return;
         }
         
@@ -215,6 +229,18 @@ public class Actualizar_vendedor extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+        
+         if(jCheckBox1.isSelected()){
+            entrada_contraseña.setEchoChar((char)0);
+            
+        }else{
+            entrada_contraseña.setEchoChar('*');
+        }
+        
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -253,11 +279,12 @@ public class Actualizar_vendedor extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField entrada_codigo;
-    private javax.swing.JTextField entrada_contraseña;
+    private javax.swing.JPasswordField entrada_contraseña;
     private javax.swing.JTextField entrada_nombre;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

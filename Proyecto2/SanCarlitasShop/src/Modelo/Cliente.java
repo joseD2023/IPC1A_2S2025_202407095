@@ -8,21 +8,16 @@ package Modelo;
  *
  * @author Admin
  */
-public class Cliente extends Usuario{ // heredan atributos 
+public class Cliente extends Usuario{
+     // heredan atributos 
+    
      // vamos a crear atributos del cliente 
     //atributos fuera de la clase padre 
     //genero 
     //cumpleaños 
     private String genero;
     private String cumple; 
-    
 
-    
-    
-    
-    
-    
-   
    
     public Cliente(String codigo, String nombre, String genero, String Cumpleaños, String contraseña){
         super(codigo,nombre, contraseña);

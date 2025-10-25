@@ -5,6 +5,7 @@
 package Vista;
 
 import Controlador.Controlador_Vendedor;
+import Modelo.EventoBitacora;
 import Modelo.Vendedor;
 import javax.swing.JOptionPane;
 
@@ -185,23 +186,27 @@ public class Crear_vendedor extends javax.swing.JFrame {
         //vamos a valida que no sea null las entradas al momento de crear estos datos 
         
         if(codigo.isEmpty() || nombre.isEmpty() || contraseña.isEmpty()){
+            EventoBitacora.registrarEvento("Vendedor", codigo, "Crear Vendedor", "Fallida", "Creacion Vendedor Fallida Espacio En blanco ", "Campos Vacios");
             JOptionPane.showMessageDialog(null, "No se Admitin Entrada Vacias");
             return;
         }
         
         if(vendedor.validarContrasenaExistente(contraseña)){
             JOptionPane.showMessageDialog(null, "Contraseña Reptida !!");
+            EventoBitacora.registrarEvento("Vendedor", codigo, "Crear Vendedor", "Fallida", "Creacion Vendedor Fallida: " + codigo, "Contraseña Repetida");
             return;
             
         }
         
         if(vendedor.validarVendedorExistente(codigo)){
             JOptionPane.showMessageDialog(null, "Vendedor Existente !!");
+            EventoBitacora.registrarEvento("Vendedor", codigo, "Crear Vendedor", "Fallida", "Creacion Vendedor Fallida: " + codigo, "Vendedor Existente");
             return;
             
         }else{
              Vendedor nuevo_vendedor = new Vendedor(codigo, nombre, seleccion_genero, contraseña);
              vendedor.crearVendedores(nuevo_vendedor);
+             EventoBitacora.registrarEvento("Vendedor", codigo, "Crear Vendedor", "Exitosamente", "Creacion Vendedor Exitosamente: " + codigo, "Vendedor Nuevo" + nombre);
              JOptionPane.showMessageDialog(null, "Vendedor Creado Exitosamente");
             
         }

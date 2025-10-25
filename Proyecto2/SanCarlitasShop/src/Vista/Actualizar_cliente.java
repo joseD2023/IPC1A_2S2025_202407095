@@ -5,12 +5,10 @@
 package Vista;
 
 import Modelo.Cliente;
+import Modelo.EventoBitacora;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Admin
- */
+
 public class Actualizar_cliente extends javax.swing.JFrame {
     
     //necesitamos unam manera de regresar a nuestra pestaña actual 
@@ -41,11 +39,12 @@ public class Actualizar_cliente extends javax.swing.JFrame {
         entrada_codigo = new javax.swing.JTextField();
         entrada_nombre = new javax.swing.JTextField();
         entrada_cumpleaños = new javax.swing.JTextField();
-        entrada_contraseña = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         obtencion_genero = new javax.swing.JComboBox<>();
+        entrada_contraseña = new javax.swing.JPasswordField();
+        jCheckBox1 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Actualizar Cliente");
@@ -93,6 +92,12 @@ public class Actualizar_cliente extends javax.swing.JFrame {
 
         obtencion_genero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino" }));
 
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -105,37 +110,41 @@ public class Actualizar_cliente extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(entrada_cumpleaños, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(38, 38, 38)
+                                        .addComponent(entrada_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel3)
+                                                .addGap(36, 36, 36))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel4)
+                                                .addGap(37, 37, 37)))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(entrada_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                                            .addComponent(obtencion_genero, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton3))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
-                                .addGap(11, 11, 11)
-                                .addComponent(entrada_contraseña))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(entrada_cumpleaños, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(38, 38, 38)
-                                .addComponent(entrada_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(36, 36, 36))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addGap(37, 37, 37)))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(entrada_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                                    .addComponent(obtencion_genero, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(entrada_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCheckBox1))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(159, 159, 159)
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(185, 185, 185)
+                        .addGap(138, 138, 138)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(124, Short.MAX_VALUE))
         );
@@ -164,12 +173,13 @@ public class Actualizar_cliente extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(entrada_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(entrada_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox1))
+                .addGap(26, 26, 26)
                 .addComponent(jButton1)
-                .addGap(12, 12, 12)
+                .addGap(2, 2, 2)
                 .addComponent(jButton2)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -191,10 +201,14 @@ public class Actualizar_cliente extends javax.swing.JFrame {
         regresar.mostrarPestanaActual();
         regresar.visualizacionClientes();
         dispose();
-        
-        
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    
+    
+    
+    public void limpiarCampos(){
+        entrada_codigo.setText("");
+    }
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // buscamos el codigo para ver si existe 
         
@@ -202,11 +216,13 @@ public class Actualizar_cliente extends javax.swing.JFrame {
         
         if(codi.isEmpty()){
             JOptionPane.showMessageDialog(null, "Aun no ha ingresado Un codigo");
+            EventoBitacora.registrarEvento("Cliente", codi, "Buscar Codigo Cliente", "Fallida", "Codigo Cliente Fallida Espacio En blanco ", "Campos Vacios");
             return;
         }
         
         
         if(Controlador.Controlador_Clientes.validarClientesExistentes(codi)){
+            EventoBitacora.registrarEvento("Cliente", codi, "Buscar Codigo Cliente", "Existosamente", "Se Encontro el codigo ", "Codigo" +codi);
             JOptionPane.showMessageDialog(null, "Codigo Existente");
             return; 
         }
@@ -227,6 +243,7 @@ public class Actualizar_cliente extends javax.swing.JFrame {
         String contra = entrada_contraseña.getText().trim();
         
         if(codi.isEmpty() || nombre.isEmpty() || cumple.isEmpty() || contra.isEmpty()){
+            EventoBitacora.registrarEvento("Cliente", codi, "Actualizar Cliente", "Fallida", "Creacion Cliente Fallida Espacio En blanco ", "Campos Vacios");
             JOptionPane.showMessageDialog(null, "No deje espacios en Blanco");
             return;  
         }
@@ -239,12 +256,16 @@ public class Actualizar_cliente extends javax.swing.JFrame {
             client.setGenero(genero);
             client.setCumple(cumple);
             client.setContra(contra);
+            EventoBitacora.registrarEvento("Cliente", codi, "Actualizar Cliente", "Exitosamente", "Actualizacion Cliente Existosamente ", "Cliente Actualizado" + codi);
             JOptionPane.showMessageDialog(null, "Cliente Modificado Exitosamente");
             
         }else{
             JOptionPane.showMessageDialog(null, "Cliente No existente");
+            EventoBitacora.registrarEvento("Cliente", codi, "Actualizar Cliente", "Fallido", "Actualizacion Cliente Fallido ", "Cliente No Actualizado" + codi);
             return;
         }
+        
+        limpiarCampos();
         
         
         
@@ -252,16 +273,28 @@ public class Actualizar_cliente extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+          if(jCheckBox1.isSelected()){
+            entrada_contraseña.setEchoChar((char)0);
+            
+        }else{
+            entrada_contraseña.setEchoChar('*');
+        }
+        
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField entrada_codigo;
-    private javax.swing.JTextField entrada_contraseña;
+    private javax.swing.JPasswordField entrada_contraseña;
     private javax.swing.JTextField entrada_cumpleaños;
     private javax.swing.JTextField entrada_nombre;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

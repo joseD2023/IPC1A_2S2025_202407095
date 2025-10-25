@@ -18,6 +18,7 @@ public class Controlador_Vendedor {
     
     public static Vendedor[] crear_vendedor = new Vendedor[100]; //garantizamos que los vendedores no sean accedido facilmente 
     public static  int indice_vendedor=0; 
+    public static String Codigo_vendedor;
     
     
      //Metodos para crear clientes 
@@ -26,16 +27,14 @@ public class Controlador_Vendedor {
             //si el inidce es menor entonces podemos agregar vendedores nuevos 
             crear_vendedor[indice_vendedor] = vendedor_nuevo; 
             indice_vendedor ++;   
-        }else{
-            JOptionPane.showMessageDialog(null, "Limite de Vendedores llegado a su limite");
-        }
-         
+        }  
     }
     
     public static boolean  crearVendedores1(String codigo, String nombre, String genero, String contraseña){
         if(indice_vendedor<crear_vendedor.length){
             Vendedor nuevo_vendedor = new Vendedor(codigo, nombre, genero, contraseña); 
             crear_vendedor[indice_vendedor] = nuevo_vendedor; 
+            indice_vendedor++;
             return true; 
         }else{
             return false;
@@ -59,6 +58,9 @@ public class Controlador_Vendedor {
         return null;
         
     }
+    
+    
+    //vamos acceder el objeto a traves de su codigo 
     
     //validacion de un vendedor existente 
     
@@ -128,6 +130,7 @@ public class Controlador_Vendedor {
        
        try(CSVReader leer = new CSVReader(new FileReader(arcCsv))){
            String[] variable_aux = null;
+           leer.readNext(); //saltamos a los encabezados
            
            while((variable_aux = leer.readNext()) != null){
                
@@ -157,6 +160,21 @@ public class Controlador_Vendedor {
        
        
    }
+   
+   
+   //necesiamos saber cuantas ventas confirmadas hizo el vendedor 
+   
+   public static void confirmacionVentasVendedor(String codigo_vendedor){
+       
+       
+   }
+   
+   
+   public static void obtenerCodigoVendedor(String c){
+       Codigo_vendedor = c; 
+   }
+   
+   
     
     
     

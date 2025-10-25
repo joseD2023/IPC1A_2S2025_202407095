@@ -4,8 +4,11 @@
  */
 package Vista;
 
+import Controlador.ControladorPDF;
 import Controlador.Controlador_Productos;
 import Controlador.Controlador_Vendedor;
+import Modelo.EventoBitacora;
+import Modelo.Inventarios_PDF;
 import Modelo.Productos;
 import Modelo.Tablareader;
 import Modelo.Vendedor;
@@ -31,6 +34,7 @@ public class Modulo_Administrador extends javax.swing.JFrame {
     DefaultTableModel tabla_admi = new DefaultTableModel(); // TABLA PARA VER LOS Vendedores
     DefaultTableModel tabla_pro = new DefaultTableModel();
     static int pestaña_actual; // obtener pestañas actuales 
+    public static String admi =" ";
   
    
 
@@ -64,6 +68,8 @@ public class Modulo_Administrador extends javax.swing.JFrame {
        
 
     }
+    
+    
     
     public void mostrarBotones(){
          tabla_producto.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -180,6 +186,7 @@ public class Modulo_Administrador extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabbed_vendedores = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        boton_bitacora = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         boton_crear_productos = new javax.swing.JButton();
         boton_actualizar = new javax.swing.JButton();
@@ -189,6 +196,20 @@ public class Modulo_Administrador extends javax.swing.JFrame {
         boton_cargar_csv = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        boton_nasvendidos = new javax.swing.JButton();
+        boton_menosvendidos = new javax.swing.JButton();
+        boton_inventario = new javax.swing.JButton();
+        boton_ventasVendedor = new javax.swing.JButton();
+        boton_clientesActivos = new javax.swing.JButton();
+        boton_reportesfinancieros = new javax.swing.JButton();
+        boton_caducar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Modulo Administrador Usac");
@@ -247,6 +268,13 @@ public class Modulo_Administrador extends javax.swing.JFrame {
             }
         });
 
+        boton_bitacora.setText("Bitacora");
+        boton_bitacora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_bitacoraActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -267,7 +295,9 @@ public class Modulo_Administrador extends javax.swing.JFrame {
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(222, 791, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(boton_bitacora)
+                .addGap(44, 44, 44)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -289,7 +319,9 @@ public class Modulo_Administrador extends javax.swing.JFrame {
                         .addContainerGap(14, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(3, 3, 3)))
-                .addComponent(jButton1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(boton_bitacora))
                 .addContainerGap())
         );
 
@@ -381,15 +413,128 @@ public class Modulo_Administrador extends javax.swing.JFrame {
 
         TabbedPane.addTab("                                Productos                                 ", jPanel3);
 
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel1.setText("Los 5 Productos Mas Vendidos");
+
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel2.setText("Los 5 Productos Menos Vendidos");
+
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel3.setText("Reporte Inventario");
+
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel4.setText("Reportes de Ventas por Vendedor");
+
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel5.setText("Reportes Clientes Activos");
+
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel6.setText("Reportes Financieros");
+
+        jLabel7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel7.setText("Reportes Por Caducar");
+
+        boton_nasvendidos.setText("PDF");
+        boton_nasvendidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_nasvendidosActionPerformed(evt);
+            }
+        });
+
+        boton_menosvendidos.setText("PDF");
+
+        boton_inventario.setText("PDF");
+        boton_inventario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_inventarioActionPerformed(evt);
+            }
+        });
+
+        boton_ventasVendedor.setText("PDF");
+
+        boton_clientesActivos.setText("PDF");
+
+        boton_reportesfinancieros.setText("PDF");
+
+        boton_caducar.setText("PDF");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 896, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(112, 112, 112)
+                .addComponent(boton_nasvendidos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(boton_menosvendidos)
+                .addGap(196, 196, 196)
+                .addComponent(boton_inventario)
+                .addGap(162, 162, 162))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(113, 113, 113)
+                .addComponent(boton_ventasVendedor)
+                .addGap(199, 199, 199)
+                .addComponent(boton_clientesActivos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(boton_reportesfinancieros)
+                .addGap(155, 155, 155))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel1))
+                        .addGap(73, 73, 73)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(jLabel5)))
+                        .addGap(90, 90, 90)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel3)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(359, 359, 359)
+                        .addComponent(jLabel7))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(389, 389, 389)
+                        .addComponent(boton_caducar)))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 438, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(boton_nasvendidos)
+                            .addComponent(boton_menosvendidos)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(boton_inventario)
+                        .addGap(52, 52, 52)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel4))))
+                .addGap(40, 40, 40)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(boton_reportesfinancieros)
+                    .addComponent(boton_ventasVendedor)
+                    .addComponent(boton_clientesActivos))
+                .addGap(52, 52, 52)
+                .addComponent(jLabel7)
+                .addGap(28, 28, 28)
+                .addComponent(boton_caducar)
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         TabbedPane.addTab("                               Reportes                              ", jPanel4);
@@ -481,6 +626,7 @@ public class Modulo_Administrador extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Vamos a regresar al login 
+        EventoBitacora.registrarEvento("Administrador", admi, "Logout", "Exitosa", "Sesion Cerrada", "Normal");
         
         new Modulo_autenticacion().setVisible(true);
         dispose();
@@ -544,6 +690,33 @@ public class Modulo_Administrador extends javax.swing.JFrame {
         
     }//GEN-LAST:event_boton_cargar_csvActionPerformed
 
+    private void boton_inventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_inventarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boton_inventarioActionPerformed
+
+    private void boton_nasvendidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_nasvendidosActionPerformed
+        // PRODUCTOS MAS VENDIDOS (NECITAMOS GENERAR TODOS LOS PROUDCTOS QUE ESTENE 
+        // 1. Obtener productos con ventas
+    Inventarios_PDF[] productos = Controlador_Productos.obtenerProductosMasVendidos();
+       
+        String[] encabezados = {"Nombre del producto", "Cantidad total vendida", "Categoria del producto", "Ingresos generados"};
+        //Controlador_Productos.generarReportesProductosMasVendidos();
+ControladorPDF.generarReportesVentas(productos, encabezados);
+        //Controlador.ControladorPDF.generarReportesVentas(Controlador_Productos.almacenamiento_mas_vendidos, encabezados);
+
+    }//GEN-LAST:event_boton_nasvendidosActionPerformed
+
+    private void boton_bitacoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_bitacoraActionPerformed
+        // TODO add your handling code here:
+        EventoBitacora[] eventos = EventoBitacora.obtenerEventos(); // obtener todos
+    System.out.println("FECHA | USUARIO_TIPO | CODIGO_USUARIO | OPERACION | ESTADO | DESCRIPCION");
+    for (EventoBitacora e : eventos) {
+        if (e != null) { // solo los que están registrados
+            System.out.println(e);
+        }
+    }
+    }//GEN-LAST:event_boton_bitacoraActionPerformed
+
    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -580,15 +753,30 @@ public class Modulo_Administrador extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane TabbedPane;
     private javax.swing.JButton boton_actualizar;
+    private javax.swing.JButton boton_bitacora;
+    private javax.swing.JButton boton_caducar;
     private javax.swing.JButton boton_cargar;
     private javax.swing.JButton boton_cargar_csv;
+    private javax.swing.JButton boton_clientesActivos;
     private javax.swing.JButton boton_crear_productos;
     private javax.swing.JButton boton_crear_vendedor;
     private javax.swing.JButton boton_eliminar_producto;
+    private javax.swing.JButton boton_inventario;
+    private javax.swing.JButton boton_menosvendidos;
+    private javax.swing.JButton boton_nasvendidos;
+    private javax.swing.JButton boton_reportesfinancieros;
+    private javax.swing.JButton boton_ventasVendedor;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

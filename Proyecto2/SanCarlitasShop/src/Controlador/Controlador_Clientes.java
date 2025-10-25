@@ -10,6 +10,7 @@ import static Controlador.Controlador_Carrito_Temporal.cargarCarritosTemporalesC
 import Modelo.Carrito_Compras;
 import Modelo.Carrito_Temporal;
 import Modelo.Cliente;
+import Modelo.EventoBitacora;
 import Modelo.Historial_Compras;
 import Modelo.Productos;
 import com.opencsv.CSVReader;
@@ -128,7 +129,7 @@ public class Controlador_Clientes {
         
         try(CSVReader leer = new CSVReader(new FileReader(archivo))){
             String[] cliente_aux = null; 
-            
+            leer.readNext(); //saltar encabezados
             while((cliente_aux = leer.readNext())!= null){
                 
                 if(!validarClientesExistentes(cliente_aux[0])){
@@ -324,6 +325,8 @@ public class Controlador_Clientes {
                     
                     JOptionPane.showMessageDialog(null, "Carrito Eliminado");
                     
+                    EventoBitacora.registrarEvento("Cliente", codigo, "Eliminar Producto Carrito", "Existosamente", "Producto eliminado del carrito: " + carrito_cantidad_recuperar.getNombre_producto(), "Cantidad Recuperada"+carrito_cantidad_recuperar.getCantidad());
+                    
                     
                     
                     visualizacionCarritos(tabla_carito); // para que lo actualice
@@ -368,6 +371,14 @@ public class Controlador_Clientes {
                         
                         //actualizamos el total del carrito   
                         carrito_actual.setTotoal(nuevo_total);
+                        
+                        
+                        
+                        EventoBitacora.registrarEvento("Cliente", codigo, "Modificar Producto Carrito", "Existosamente", "Producto Modificado del carrito: " + carrito_actual.getNombre_producto(), "Nueva Cantidad"+ " "+conversio_can);
+                        
+                        
+                        
+                        
                         visualizacionCarritos(tabla_carito);
                         Controlador.Controlador_Productos.visualizarProductos(tabla_producto);
                     }

@@ -5,6 +5,7 @@
 package Controlador;
 
 import Modelo.Administrador;
+import Vista.Modulo_Administrador;
 import javax.swing.JOptionPane;
 
 
@@ -24,20 +25,24 @@ public class Controlador_Usuarios {
     Opcion 3: Modulo Vendedor*/
     
     public int verificarLogin(String codigo, String contra){
-        System.out.println("Verificacion de Login ");
+      
         if(Controlador_Clientes.ObtenerClienteCodigoContraseñas(codigo, contra)){ // si es true me retorna que se consiguio al dueño del ese codigo y usuario
             Controlador_Productos.codigo_cliente(codigo); //con esto me dan el valor del codigo
             Controlador_Historial_Compras.obtenerCodigo(codigo);
-            System.out.println("el codigo del cliente es: " + codigo);
+            Controlador_sistemas.usuarioLogin();
+       
             return 1;  
         }
         
         if(vendedor.ObtenerVendedorCodigoContraseña(codigo, contra)){
-            System.out.println("el codigo del vendedor es: " + codigo);
+            Controlador_sistemas.usuarioLogin();
+            Controlador_Vendedor.obtenerCodigoVendedor(codigo);
             return 3;
         }
     
         if(codigo.equals(c.getCodigo()) && contra.equals(c.getContra())){
+            Administrador.obtenerCodigoAdministrado(codigo); //obtenemos el codigo del administrador cada vez que haga sesion
+            Controlador_sistemas.usuarioLogin();
             return 2;
         }else{
             JOptionPane.showMessageDialog(null, "Verifique los Datos");

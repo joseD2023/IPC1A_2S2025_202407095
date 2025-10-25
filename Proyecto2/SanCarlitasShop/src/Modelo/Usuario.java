@@ -4,8 +4,11 @@
  */
 package Modelo;
 
-public class Usuario {
+
+public class Usuario{
     //esta clase nos va ayudar a manejar datos del usuario 
+    
+   
     
     protected String codigo;  //debe ser protected porque si lo coloco privado los hijos no pueden acceder a ellos.
     protected String Contra; 

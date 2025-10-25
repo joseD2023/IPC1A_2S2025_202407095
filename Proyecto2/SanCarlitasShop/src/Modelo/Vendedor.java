@@ -8,7 +8,7 @@ package Modelo;
  *
  * @author Admin
  */
-public class Vendedor extends Usuario{ // Heredan ciertos atributos 
+public class Vendedor extends Usuario{ // Heredan ciertos atributos
     //definir los atributos de los vendedores 
     //como vamos a crear vendedores entonces necesitamos tener un constructor para que estos se puedan crear 
     private String genero;

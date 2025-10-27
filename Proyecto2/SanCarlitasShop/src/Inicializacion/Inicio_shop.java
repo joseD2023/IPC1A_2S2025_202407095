@@ -18,7 +18,7 @@ public class Inicio_shop {
       
         new Modulo_autenticacion().setVisible(true);
         // Al iniciar el programa
-        //new Hilos().setVisible(true);
+        new Hilos().setVisible(true);
         
         
     }

@@ -100,12 +100,12 @@ public class Controlador_sistemas {
     
     private void agregarMensaje(String mensaje) {
         if (areaTexto != null) {
-            // Agregar el mensaje al JTextArea
+          
             areaTexto.append(mensaje + "\n");
-            // Auto-scroll al final
+           
             areaTexto.setCaretPosition(areaTexto.getDocument().getLength());
         }
-        // También imprimir en consola del sistema
+
         System.out.println(mensaje);
     }
     

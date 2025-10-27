@@ -115,8 +115,6 @@ public class Bitacora extends javax.swing.JFrame {
             return;
         }
         
-        System.out.println("FECHA | USUARIO_TIPO | CODIGO_USUARIO | OPERACION | ESTADO | DESCRIPCION");
-        
         for(EventoBitacora B: eventos){
             if(B != null){
                 Area_Bitacora.append(B.toString()+ "\n");
@@ -124,6 +122,14 @@ public class Bitacora extends javax.swing.JFrame {
             }
             
         }
+        
+        Controlador.Controlador_PDF_Inventarios.exportarBitacoraPDF();
+        
+        //tambien la ruta a csv
+        
+        String ruta = "C:\\Users\\Admin\\IdeaProjects\\IPC12S\\src\\main\\java\\IPC1_Actividades_202407095\\Proyecto2\\bitacora.csv";
+        EventoBitacora.exportarCSV(ruta);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

@@ -49,9 +49,9 @@ public class EventoBitacora {
                                        String estado, String descripcion, String prioridad) {
         if(contador < MAX_EVENTOS){
             eventos[contador++] = new EventoBitacora(tipoUsuario, codigoUsuario, operacion, estado, descripcion, prioridad);
-            System.out.println(eventos[contador-1]); // también imprime en consola
+           
         } else {
-            System.out.println("Bitácora llena, no se pueden registrar más eventos.");
+           
         }
     }
 
@@ -79,7 +79,6 @@ public class EventoBitacora {
     // Exportar a CSV
     public static void exportarCSV(String rutaArchivo){
         try(FileWriter csv = new FileWriter(rutaArchivo)){
-            csv.append("FechaHora,TipoUsuario,CodigoUsuario,Operacion,Estado,Descripcion,Prioridad\n");
             for(int i=0; i<contador; i++){
                 EventoBitacora e = eventos[i];
                 csv.append(String.format("%s,%s,%s,%s,%s,%s,%s\n",
@@ -87,17 +86,19 @@ public class EventoBitacora {
                         e.getOperacion(), e.getEstado(), e.getDescripcion(), e.getPrioridad()));
             }
             csv.flush();
-            System.out.println("Bitácora exportada a CSV correctamente");
         } catch(IOException ex){
             ex.printStackTrace();
         }
     }
+    
+    
 
     // Limpiar bitácora
     public static void limpiarBitacora(){
         eventos = new EventoBitacora[MAX_EVENTOS];
         contador = 0;
     }
+    
 
     // Obtener todos los eventos
     public static EventoBitacora[] obtenerEventos(){

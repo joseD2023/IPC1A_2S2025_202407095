@@ -30,7 +30,7 @@ public class Inventarios_PDF {
     //ahora para ventas de vendedor 
     private String codigo_vendedor;
     private String nombre_vendedor;
-    private String cantidad_pedido_confirmados;
+    private int cantidad_pedido_confirmados;
     private double ventas_generadas;
     private String producto_mas_vendido_vendedor;
     
@@ -90,7 +90,7 @@ public class Inventarios_PDF {
     
     /*CONSTRUCTOR PARA REPORTES DE VENTA DE VENDEDORES */
 
-    public Inventarios_PDF(String codigo_vendedor, String nombre_vendedor, String cantidad_pedido_confirmados, double ventas_generadas, String producto_mas_vendido_vendedor) {
+    public Inventarios_PDF(String codigo_vendedor, String nombre_vendedor, int cantidad_pedido_confirmados, double ventas_generadas, String producto_mas_vendido_vendedor) {
         this.codigo_vendedor = codigo_vendedor;
         this.nombre_vendedor = nombre_vendedor;
         this.cantidad_pedido_confirmados = cantidad_pedido_confirmados;
@@ -120,145 +120,6 @@ public class Inventarios_PDF {
         this.valor_monetario_en_riesgo = valor_monetario_en_riesgo;
         this.estado_prioriedad = estado_prioriedad;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 
     public String getNombre_producto() {
@@ -357,11 +218,11 @@ public class Inventarios_PDF {
         this.nombre_vendedor = nombre_vendedor;
     }
 
-    public String getCantidad_pedido_confirmados() {
+    public int getCantidad_pedido_confirmados() {
         return cantidad_pedido_confirmados;
     }
 
-    public void setCantidad_pedido_confirmados(String cantidad_pedido_confirmados) {
+    public void setCantidad_pedido_confirmados(int cantidad_pedido_confirmados) {
         this.cantidad_pedido_confirmados = cantidad_pedido_confirmados;
     }
 

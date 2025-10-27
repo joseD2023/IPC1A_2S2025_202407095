@@ -4,6 +4,7 @@
  */
 package Controlador;
 
+import Modelo.Inventarios_PDF;
 import Modelo.Vendedor;
 import javax.swing.JOptionPane;
 import com.opencsv.CSVReader;
@@ -162,12 +163,109 @@ public class Controlador_Vendedor {
    }
    
    
-   //necesiamos saber cuantas ventas confirmadas hizo el vendedor 
+   /*------------------------------------------------------------------------------------------------------*/
+   public static Inventarios_PDF[] almacenamiento_vendedores = new Inventarios_PDF[1000];
+   public static int indice_almacenamiento_ven=0; 
    
-   public static void confirmacionVentasVendedor(String codigo_vendedor){
+   
+   
+   
+   
+   public static Inventarios_PDF[] ventasPorVendedor(){
+       //vamos a limpiar el almacenamiento cada vez que hacemos el pdf 
+       
+       // ✅ AGREGAR ESTE DEBUG
+    System.out.println("=== DEBUG VENDEDORES PDF ===");
+    System.out.println("Total vendedores en sistema: " + indice_vendedor);
+       
+       for(int i=0 ; i<indice_almacenamiento_ven; i++){
+           almacenamiento_vendedores[i] = null;  
+       }
        
        
+       int indice_contador_vendedor =0; 
+       //solo filtros de vendedores existentes  
+       for(int i=0; i<indice_vendedor; i++){
+           if(crear_vendedor[i] != null ){
+               indice_contador_vendedor++;
+           } 
+       }
+       
+       
+       Inventarios_PDF[] vendedores_pdf = new Inventarios_PDF[indice_contador_vendedor];
+       int indice_nuevo =0; 
+       
+       for(int i=0; i<indice_vendedor; i++){
+           if(crear_vendedor[i] != null){
+               Vendedor v = crear_vendedor[i]; 
+               vendedores_pdf[indice_nuevo] = new Inventarios_PDF(v.getCodigo(), v.getNombre(), v.getNumero_venta(), v.getMontoTotalVentas(), obtenerProductosMasVendidosVendedor(v.getCodigo()));
+               indice_contador_vendedor++;
+               
+              
+               
+           }
+       }
+       
+        System.out.println("Vendedores con ventas > 0: " + indice_contador_vendedor);
+       
+       
+       
+       
+       return vendedores_pdf;
    }
+   
+   
+   // En Controlador_Vendedor
+public static String[] productosVendidos = new String[1000];     // nombre producto
+public static String[] vendedoresProductos = new String[1000];   // codigo vendedor  
+public static int[] cantidadesVendidas = new int[1000];          // cantidad
+public static int indiceVentasDetalle = 0;
+
+
+
+public static String obtenerProductosMasVendidosVendedor(String codigoVendedor) {
+    // Contar productos para este vendedor (igual que productos mas vendidos)
+    String[] productosUnicos = new String[100];
+    int[] totales = new int[100];
+    int indiceUnicos = 0;
+    
+    for(int i = 0; i < indiceVentasDetalle; i++) {
+        if(vendedoresProductos[i] != null && vendedoresProductos[i].equals(codigoVendedor)) {
+            String producto = productosVendidos[i];
+            int cantidad = cantidadesVendidas[i];
+            
+            // Buscar si ya existe el producto
+            boolean encontrado = false;
+            for(int j = 0; j < indiceUnicos; j++) {
+                if(productosUnicos[j] != null && productosUnicos[j].equals(producto)) {
+                    totales[j] += cantidad;
+                    encontrado = true;
+                    break;
+                }
+            }
+            
+            // Si no existe, agregarlo
+            if(!encontrado && indiceUnicos < productosUnicos.length) {
+                productosUnicos[indiceUnicos] = producto;
+                totales[indiceUnicos] = cantidad;
+                indiceUnicos++;
+            }
+        }
+    }
+    
+    // Crear string resultado (top 3 productos)
+    StringBuilder resultado = new StringBuilder();
+    for(int i = 0; i < indiceUnicos && i < 5; i++) {
+        resultado.append(productosUnicos[i]).append(": ").append(totales[i]).append(" unidades\n");
+    }
+    
+    return resultado.length() > 0 ? resultado.toString() : "Sin productos vendidos";
+}
+   
+  
+   
+   
+   
    
    
    public static void obtenerCodigoVendedor(String c){

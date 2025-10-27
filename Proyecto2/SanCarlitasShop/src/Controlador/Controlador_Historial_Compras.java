@@ -86,6 +86,8 @@ public class Controlador_Historial_Compras {
         
     }
     
+    
+    
     public static void obtenerHistorialCompras(JTable tabla, String codigo_historial){
         for(int i=0; i<tabla.getRowCount(); i++){
             //acedemos a todo lo que esta ahi 

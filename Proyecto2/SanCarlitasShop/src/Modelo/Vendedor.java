@@ -14,6 +14,7 @@ public class Vendedor extends Usuario{ // Heredan ciertos atributos
     private String genero;
     private int numero_venta;
     private String confirmacion;
+    private double montoTotalVentas;
     
     //constructor 
     
@@ -21,6 +22,7 @@ public class Vendedor extends Usuario{ // Heredan ciertos atributos
         super(codigo, nombre, contra);
         this.genero = genero;  
         this.numero_venta =0;
+        this.montoTotalVentas = 0.0;
     }
     
     public Vendedor(String codigo, String nombre, String genero, String contra, String confirmacion){ // aqui ya inicializamos nuestro contructos 
@@ -28,6 +30,15 @@ public class Vendedor extends Usuario{ // Heredan ciertos atributos
         this.genero = genero;  
         this.numero_venta =0;
         this.confirmacion = confirmacion; 
+        this.montoTotalVentas = 0.0;
+    }
+
+    public double getMontoTotalVentas() {
+        return montoTotalVentas;
+    }
+
+    public void setMontoTotalVentas(double montoTotalVentas) {
+        this.montoTotalVentas = montoTotalVentas;
     }
 
     public String getConfirmacion() {

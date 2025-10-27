@@ -455,6 +455,11 @@ public class Modulo_Administrador extends javax.swing.JFrame {
         });
 
         boton_menosvendidos.setText("PDF");
+        boton_menosvendidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_menosvendidosActionPerformed(evt);
+            }
+        });
 
         boton_inventario.setText("PDF");
         boton_inventario.addActionListener(new java.awt.event.ActionListener() {
@@ -464,8 +469,18 @@ public class Modulo_Administrador extends javax.swing.JFrame {
         });
 
         boton_ventasVendedor.setText("PDF");
+        boton_ventasVendedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_ventasVendedorActionPerformed(evt);
+            }
+        });
 
         boton_clientesActivos.setText("PDF");
+        boton_clientesActivos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_clientesActivosActionPerformed(evt);
+            }
+        });
 
         boton_reportesfinancieros.setText("PDF");
 
@@ -476,45 +491,51 @@ public class Modulo_Administrador extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(112, 112, 112)
-                .addComponent(boton_nasvendidos)
+                .addGap(94, 94, 94)
+                .addComponent(boton_nasvendidos, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(182, 182, 182)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(boton_menosvendidos, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boton_clientesActivos, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(boton_menosvendidos)
-                .addGap(196, 196, 196)
-                .addComponent(boton_inventario)
-                .addGap(162, 162, 162))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(113, 113, 113)
-                .addComponent(boton_ventasVendedor)
-                .addGap(199, 199, 199)
-                .addComponent(boton_clientesActivos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(boton_reportesfinancieros)
-                .addGap(155, 155, 155))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(boton_reportesfinancieros, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boton_inventario, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel1))
-                        .addGap(73, 73, 73)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(jLabel5)))
                         .addGap(90, 90, 90)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel3)))
+                        .addComponent(boton_ventasVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(359, 359, 359)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(51, 51, 51)
+                                .addComponent(jLabel1))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(41, 41, 41)
+                                .addComponent(jLabel4)))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(54, 54, 54)
+                                .addComponent(jLabel2))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(90, 90, 90)
+                                .addComponent(jLabel5)))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(112, 112, 112)
+                                .addComponent(jLabel3))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(103, 103, 103)
+                                .addComponent(jLabel6))))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(360, 360, 360)
                         .addComponent(jLabel7))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(389, 389, 389)
-                        .addComponent(boton_caducar)))
-                .addContainerGap(127, Short.MAX_VALUE))
+                        .addGap(385, 385, 385)
+                        .addComponent(boton_caducar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -524,30 +545,26 @@ public class Modulo_Administrador extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(boton_nasvendidos)
-                            .addComponent(boton_menosvendidos)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(boton_inventario)
-                        .addGap(52, 52, 52)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel4))))
-                .addGap(40, 40, 40)
+                .addGap(32, 32, 32)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(boton_reportesfinancieros)
-                    .addComponent(boton_ventasVendedor)
-                    .addComponent(boton_clientesActivos))
-                .addGap(52, 52, 52)
+                    .addComponent(boton_nasvendidos, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boton_menosvendidos, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boton_inventario, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel4))
+                .addGap(37, 37, 37)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(boton_ventasVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boton_clientesActivos, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boton_reportesfinancieros, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
                 .addComponent(jLabel7)
-                .addGap(28, 28, 28)
-                .addComponent(boton_caducar)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(boton_caducar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         TabbedPane.addTab("                               Reportes                              ", jPanel4);
@@ -708,14 +725,9 @@ public class Modulo_Administrador extends javax.swing.JFrame {
     }//GEN-LAST:event_boton_inventarioActionPerformed
 
     private void boton_nasvendidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_nasvendidosActionPerformed
-        // PRODUCTOS MAS VENDIDOS (NECITAMOS GENERAR TODOS LOS PROUDCTOS QUE ESTENE 
-        // 1. Obtener productos con ventas
-    Inventarios_PDF[] productos = Controlador_Productos.obtenerProductosMasVendidos();
-       
-        String[] encabezados = {"Nombre del producto", "Cantidad total vendida", "Categoria del producto", "Ingresos generados"};
+  
         //Controlador_Productos.generarReportesProductosMasVendidos();
-ControladorPDF.generarReportesVentas(productos, encabezados);
-        //Controlador.ControladorPDF.generarReportesVentas(Controlador_Productos.almacenamiento_mas_vendidos, encabezados);
+        Controlador.ControladorPDF.generarReportesVentas(Controlador_Productos.obtenerProductosMasVendidos(),"masvendidos", "MassVendidos");
 
     }//GEN-LAST:event_boton_nasvendidosActionPerformed
 
@@ -732,32 +744,40 @@ ControladorPDF.generarReportesVentas(productos, encabezados);
         this.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void boton_menosvendidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_menosvendidosActionPerformed
+        // AHORA PDF PARA EL MENOS VENDIDO 
+        
+        ControladorPDF.generarReportesVentas(Controlador_Productos.obtenerProductosMenosVendidos(),"menosvendidos", "MenosVendidos");
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_boton_menosvendidosActionPerformed
+
+    private void boton_clientesActivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_clientesActivosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boton_clientesActivosActionPerformed
+
+    private void boton_ventasVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_ventasVendedorActionPerformed
+        //ventas por vendedor 
+        // ✅ CORREGIDO: Primero obtener los datos, luego generar PDF
+    Inventarios_PDF[] vendedoresPDF = Controlador_Vendedor.ventasPorVendedor();
+    
+    // Verificar si hay datos
+    if(vendedoresPDF == null || vendedoresPDF.length == 0) {
+        JOptionPane.showMessageDialog(null, "No hay datos de vendedores para generar el reporte");
+        return;
+    }
+    
+    ControladorPDF.generarReportesVentas(vendedoresPDF, "ventasporvendedor", "Ventas_por_Vendedor");
+    }//GEN-LAST:event_boton_ventasVendedorActionPerformed
+
    
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Modulo_Administrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Modulo_Administrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Modulo_Administrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Modulo_Administrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
+   
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Modulo_Administrador().setVisible(true);

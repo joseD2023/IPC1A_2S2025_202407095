@@ -129,7 +129,7 @@ public class Controlador_Productos {
                     Productos producto_sistema = new Productos(vendedor_aux[0], vendedor_aux[1], vendedor_aux[2], vendedor_aux[3], vendedor_aux[4]);
                     
                     System.out.println("Mostrando el precio de cada producto" + vendedor_aux[4]);
-                    System.out.println("sumar para ver si es un numero " + (1+vendedor_aux[4]));
+                    System.out.println("sumar para ver si es un numero " + (1 + vendedor_aux[4]));
                     System.out.println("------------------------------------------------------");
                     
                     
@@ -375,6 +375,20 @@ public class Controlador_Productos {
              }
              
              
+             public static Inventarios_PDF[] verAcumuladasProductos(){
+                 Inventarios_PDF[] n = new Inventarios_PDF[2];
+                 for(Productos p: crear_producto){
+                     if(p!= null){
+                         
+                         
+                     }
+                     
+                 }
+                 
+                 return n;
+             }
+             
+             
              
              
              
@@ -384,26 +398,7 @@ public class Controlador_Productos {
              
              
              //VAMOS A TRABAJA CON LOS CARRTIOS PARA LA GENERACION DE PDF 
-             /*------------------------------------------------------------------------------------------------*/
-             /*------------------------------------------------------------------------------------------------*/
-    
-             /*------------------------------------------------------------------------------------------------*/
-             /*------------------------------------------------------------------------------------------------*/
-             
-             
-             //Metodo para calcular todos los productos con sus ventas
-             /*------------------------------------------------------------------------------------------------*/
-             /*------------------------------------------------------------------------------------------------*/
 
-             /*------------------------------------------------------------------------------------------------*/
-             /*------------------------------------------------------------------------------------------------*/
-             
-             
-             
-             
-             /*aqui vamos a tener todo lo temporal para los pdf y asi no perder los datos */
-             
-             
              //almacenamiento para los pedidos mas vendidos 
              
              public static Inventarios_PDF[] almacenamiento_mas_vendidos = new Inventarios_PDF[1000]; 
@@ -412,77 +407,164 @@ public class Controlador_Productos {
              
              //almacenamiento para los menos vendidos 
              
-             public static Inventarios_PDF[] almacenamineto_menos_vendidos = new Inventarios_PDF[10000]; 
-             public  static int indice_menos_vendidos =0; 
-             
-             
-             
+             public static Inventarios_PDF[] almacenamineto_menos_vendidos = new Inventarios_PDF[10000];
+             public static int indice_menos_vendidos =0;
+
              //almacenamiento para inventarios 
              
              public static Inventarios_PDF[] almacenamiento_inventarios = new Inventarios_PDF[1000];
              public static int indice_inventario=0;
              
-             
-             
-             public static void generarReportesProductosMasVendidos(){
-                 //vamos acceder al carrito (colocando los productos validos en una nuevo es como una copia)
+
+             public static Inventarios_PDF[] obtenerProductosMasVendidos(){
                  
-                 Productos[] copia = new Productos[indice_producto]; //le agreamos la longitud del indice original solo de producto llenos 
-                 int indice_nuevo =0; 
-                 Productos temp;
+                  // Limpiar el array primero
+                      for(int i = 0; i < indice_mas_vendidos; i++) {
+                               almacenamiento_mas_vendidos[i] = null;
+                              }
+                 
+                 //FILTRAR SOLO PRODUCTOS CON VENTAS 
+                 
+                 int contador_ventas =0; 
                  
                  for(int i=0; i<indice_producto; i++){
-                     if(crear_producto[i] != null){
-                         copia[indice_nuevo] = crear_producto[i]; //ahora psamos todo producto a esta copia
-                         indice_nuevo++; 
-                         //ahora
+                     if(crear_producto[i] != null && crear_producto[i].getVentas_acumuladas() >0){
+                         contador_ventas++; //me va a seguri para solo buscar productos con ventas 
+                         
+                     }
+ 
+                 }
+                 
+                 
+                 System.out.println("Producto con ventas" + contador_ventas); //me dice cuantos productos generaron ventas 
+                 
+                 if(contador_ventas ==0){
+                     return new Inventarios_PDF[0];  
+                 }
+                 
+                 
+                 //productos con ventas 
+                 
+                 Inventarios_PDF[] productos_ventas = new Inventarios_PDF[contador_ventas];
+                 int indice_ventas =0; 
+                 
+                 for(int i=0; i<indice_producto; i++){
+                     if(crear_producto[i] != null && crear_producto[i].getVentas_acumuladas() >0){
+                         Productos p = crear_producto[i];
+                         productos_ventas[indice_ventas] = new Inventarios_PDF(p.getNombre_producto(), p.getVentas_acumuladas(), p.getCategoria_producto(), p.getVentas_acumuladas()*p.getPrecio_producto());
+                         indice_ventas++;
+                         
+                         System.out.println("Debug" + p.getNombre_producto()+ " - Ventas: " + p.getVentas_acumuladas() +
+                             " - Ingresos: " +  (p.getVentas_acumuladas()*p.getPrecio_producto()));
+                         
                          
                      }
                      
                  }
                  
-                 
-                 //vamos a ordenar por metodo de burbuja 
-                 
-                 for(int j=0; j<indice_nuevo; j++){
-                     for(int k=j+1; j< indice_nuevo; k++ ){
-                         if(copia[k].getVentas_acumuladas() > copia[j].getVentas_acumuladas()){
-                             temp = copia[j];
-                             copia[j] = copia[k];
-                             copia[k] = temp;
-                             
-                         }  
-                         
-                     }
-                 }
-                 
-                 //tomamos los primero 5 mas vendidos 
-                 Productos[] top5 = new Productos[5];
-                 
-                 for(int i=0; i<5; i++){
-                     if(top5[i] != null){
-                         top5[i] = copia[i];
 
+                 
+                return productos_ventas;
+                 
+             }
+             
+             
+             
+             public static Inventarios_PDF[] obtenerProductosMenosVendidos(){
+                 
+                  // Limpiar el array primero
+                      for(int i = 0; i < indice_menos_vendidos; i++) {
+                               almacenamineto_menos_vendidos[i] = null;
+                              }
+                 
+                 //FILTRAR SOLO PRODUCTOS CON VENTAS 
+                 
+                 int contador_ventas =0; 
+                 
+                 for(int i=0; i<indice_producto; i++){
+                     if(crear_producto[i] != null && crear_producto[i].getVentas_acumuladas() >0){
+                         contador_ventas++; //me va a seguri para solo buscar productos con ventas 
+                         
                      }
+ 
                  }
                  
                  
-                 //convertirmos el inventario a pdf 
+                 System.out.println("Producto con ventas" + contador_ventas); //me dice cuantos productos generaron ventas 
                  
-                 Inventarios_PDF[] pdf = new Inventarios_PDF[5];
-                 //pasar todo el producto al pdf 
+                 if(contador_ventas ==0){
+                     return new Inventarios_PDF[0];  
+                 }
                  
-                 for(int i=0; i<5; i++){
-                     pdf[i] = new Inventarios_PDF(top5[i].getNombre_producto(), top5[i].getVentas_acumuladas(), top5[i].getCategoria_producto(), (top5[i].getVentas_acumuladas()*top5[i].getPrecio_producto()));
+                 
+                 //productos con ventas 
+                 
+                 Inventarios_PDF[] productos_ventas = new Inventarios_PDF[contador_ventas];
+                 int indice_ventas =0; 
+                 
+                 for(int i=0; i<indice_producto; i++){
+                     if(crear_producto[i] != null && crear_producto[i].getStock_productos() >= 0){
+                         Productos p = crear_producto[i];
+                         
+                         System.out.println("Enramos al metodo producto menos vendidos ");
+                         System.out.println("Informacion actual" + p.getNombre_producto() + " "+ "Stock dle producto" + p.getStock_productos());
+                         
+                         
+                         
+                         
+                         
+                         //recomendaciones para el stock 
+                         if(p.getStock_productos() ==0){
+                              System.out.println("Entro al contrusttor ");
+                             
+                              String recomendacion4 = "Stock insuficinete se acabo" + p.getStock_productos() + " " + "Ya no Hay";
+                              productos_ventas[indice_ventas] = new Inventarios_PDF(p.getNombre_producto(), p.getVentas_acumuladas(), p.getStock_productos(), recomendacion4);
+                              indice_ventas++;
+                         }
+                         
+                         if(p.getStock_productos() < 5){
+                             String recomendacion1 = "ADVERTENCIA Cantidad stock poca" + p.getStock_productos() + " " + "aun" + "(menor que 5)";
+                             productos_ventas[indice_ventas] = new Inventarios_PDF(p.getNombre_producto(), p.getVentas_acumuladas(), p.getStock_productos(), recomendacion1);
+                             
+                             System.out.println("Informacion actual" + p.getNombre_producto() + " "+ "Stock dle producto" + p.getStock_productos());
+                             indice_ventas++;
+                             
+                             System.out.println("------------------------------------------------------------------------------------------------------");
+                             System.out.println("------------------------------------------------------------------------------------------------------");
+                             
+                             
+                         }else if(p.getStock_productos()<10){
+                             
+                             
+                             String recomendacion2 = "Stock apunto de Acabarse" + p.getStock_productos() + " " + "aun" + "(menor que 10)";
+                             productos_ventas[indice_ventas] = new Inventarios_PDF(p.getNombre_producto(), p.getVentas_acumuladas(), p.getStock_productos(), recomendacion2);
+                             System.out.println("Informacion actual" + p.getNombre_producto() + " "+ "Stock dle producto" + p.getStock_productos());
+
+                             indice_ventas++;
+                             
+                             
+                         }else if(p.getStock_productos() < 20){
+                             //el stock cuando es menor a 10 podriamos decir recomendacion 
+                             String recomendacion3 = "Stock aun Sufientes Cantidad" + p.getStock_productos() + " " + "aun" + "(menor que 20)";
+                             productos_ventas[indice_ventas] = new Inventarios_PDF(p.getNombre_producto(), p.getVentas_acumuladas(), p.getStock_productos(), recomendacion3);
+     
+                             System.out.println("Informacion actual" + p.getNombre_producto() + " "+ "Stock dle producto" + p.getStock_productos());
+                             indice_ventas++;
+                             
+                         }
+                         
+                         
+                        
+                         
+                         
+                     }
                      
                  }
                  
+
                  
-                 //Definimos las cabeceras 
-                 String[] encabezados = {"Nombre del productos", "cantidad total vendida", "Categoria Producto", "Ingresos Generados"};
-                 ControladorPDF.generarReportesVentas(pdf, encabezados);
+                return productos_ventas;
                  
-       
              }
              
              
@@ -490,53 +572,6 @@ public class Controlador_Productos {
              
              
              
-             
-             
-             
-             
-             
-             
-             public static int calcularVentasProductooos(String codigoProducto) {
-    Productos producto = objetoProductos(codigoProducto);
-    if (producto != null) {
-        return producto.getVentas_acumuladas();
-    }
-    return 0;
-}
-             
-             public static Inventarios_PDF[] obtenerProductosMasVendidos() {
-    int productosValidos = 0;
-    
-    // Contar productos existentes
-    for (int i = 0; i < indice_producto; i++) {
-        if (crear_producto[i] != null) {
-            productosValidos++;
-        }
-    }
-    
-    // Crear array del tamaño exacto
-    Inventarios_PDF[] resultado = new Inventarios_PDF[productosValidos];
-    int index = 0;
-    
-    // Llenar con datos reales
-    for (int i = 0; i < indice_producto; i++) {
-        Productos p = crear_producto[i];
-        if (p != null) {
-            int ventas = p.getVentas_acumuladas();
-            double ingresos = ventas * p.getPrecio_producto();
-            
-            resultado[index] = new Inventarios_PDF(
-                p.getNombre_producto(),
-                ventas,
-                p.getCategoria_producto(), 
-                ingresos
-            );
-            index++;
-        }
-    }
-    
-    return resultado;
-}
              
  
              

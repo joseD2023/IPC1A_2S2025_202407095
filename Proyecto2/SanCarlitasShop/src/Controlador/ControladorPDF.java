@@ -29,20 +29,24 @@ public class ControladorPDF {
     static DateTimeFormatter formatoArchivo = DateTimeFormatter.ofPattern("dd_MM_yyyy_HH_mm_ss");
     //aqui voy a generar los pdfs 
  
-    public static void generarReportesVentas(Inventarios_PDF[] productos, String[] encabezados){
+    public static void generarReportesVentas(Inventarios_PDF[] productos, String metodo, String name_archivo ){
+        
+        if(metodo.equals("masvendidos")){
+            bubblesortMasvendidos(productos);
+            
+        }else if(metodo.equals("menosvendidos")){
+            bubblesortMenosVendidos(productos);   
+        }else if(metodo.equals("ventasporvendedor")){
+           
+         
+            
+            
+        }
 
-        int count = 0;
-        for (Inventarios_PDF p : productos) {
-            if (p != null) count++;
-        }
-        
-        if (count == 0) {
-            JOptionPane.showMessageDialog(null, "No hay datos para generar el PDF");
-            return;
-        }
-        
+        /*--------------------------------------------------------------------------------------*/
         String fecha_hora = LocalDateTime.now().format(formatoArchivo);
-        String nombre_archivo = fecha_hora + "_ProductoMasVendidos.pdf";
+        String nombre_archivo = fecha_hora + name_archivo + ".pdf";
+         /*--------------------------------------------------------------------------------------*/
 
         try{
             PdfWriter escribir_pdf = new PdfWriter("C:\\Users\\Admin\\IdeaProjects\\IPC12S\\src\\main\\java\\IPC1_Actividades_202407095\\Proyecto2\\" + nombre_archivo);
@@ -52,11 +56,21 @@ public class ControladorPDF {
 
             Paragraph titulo = new Paragraph("Reportes Ventas PROYECTO 2 USAC").setTextAlignment(TextAlignment.CENTER).setFontSize(18).setFontColor(new DeviceRgb(255,0,0)).setBold();
             documento.add(titulo);
+            
+            if(metodo.equals("masvendidos")){
+                String[] encabezados = {"Nombre del producto", "Cantidad total vendida", "Categoria del producto", "Ingresos generados"};
+               documento.add(crearTabla(productos,encabezados));
+            }else if(metodo.equals("menosvendidos")){
+                String[] encabezado2 = {"Nombre del producto", "Cantidad total vendida", "Stock Actual Disponible", "Recomendacion de Promocion"};
+                documento.add(crearTabla(productos,encabezado2));
+            }
 
-            documento.add(crearTabla(productos,encabezados));
+            
             documento.close();
             
             JOptionPane.showMessageDialog(null, "PDF generado exitosamente: " + nombre_archivo);
+            
+            
 
         } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(null, "Error al crear archivo: " + e.getMessage());
@@ -76,28 +90,63 @@ public class ControladorPDF {
                 tabla.addHeaderCell(new Cell().add(new Paragraph(encabezado))).setBackgroundColor(ColorConstants.GRAY);
             }
         }
-
-        for(int i=0; i < datos_produtos.length; i++){
-            Inventarios_PDF p = datos_produtos[i]; 
-            
-            if(p != null) {
-                String nombre = p.getNombre_producto() != null ? p.getNombre_producto() : "N/A";
-                String categoria = p.getCategoria_productos() != null ? p.getCategoria_productos() : "N/A";
-                String cantidad = String.valueOf(p.getCantidad_total_vendida());
-                String ingresos = String.valueOf(p.getIngreseos_generados()) + "Q";
+        
+            //vamos atrabajar para el ingreso de los datos para poder visualizarlos en el pdf 
+        
+            for(Inventarios_PDF pdf: datos_produtos){
+               if(pdf != null){ //diferente de null para poder ingresar los datos 
                 
                 
-                tabla.addCell(nombre);
-                tabla.addCell(cantidad);
-                tabla.addCell(categoria);
-                tabla.addCell(ingresos);
-            } else {
-                tabla.addCell("N/A");
-                tabla.addCell("0");
-                tabla.addCell("N/A");
-                tabla.addCell("0Q");
+                String nombre_producto = pdf.getNombre_producto() != null ? pdf.getNombre_producto() : "/NAC";
+                String cantidad_vendida = String.valueOf(pdf.getCantidad_total_vendida());
+                
+                
+                if(encabezados[2].equals("Categoria del producto")){
+                    String ingresos_generados= String.valueOf(pdf.getIngreseos_generados()); 
+                    String categoria = pdf.getCategoria_productos() != null ? pdf.getCategoria_productos() : "/NAC";
+ 
+                    tabla.addCell(nombre_producto);
+                    tabla.addCell(cantidad_vendida);
+                    tabla.addCell(categoria);
+                    tabla.addCell(ingresos_generados);   
+                    
+                    
+                }else if(encabezados[2].equals("Stock Actual Disponible")){
+                    
+                    String stock = Integer.toString(pdf.getStock_actual_disponible());
+                    String recomendacion = pdf.getRecomendaciones_promocion() != null ? pdf.getRecomendaciones_promocion() : "sin recomendacion";
+                    
+                    tabla.addCell(nombre_producto);
+                    tabla.addCell(cantidad_vendida);
+                    tabla.addCell(stock);
+                    tabla.addCell(recomendacion);
+                    
+                    
+                }else if(encabezados[0].equals("Código Vendedor")){
+                    
+                    String codigo_vendedor = pdf.getCodigo_vendedor() != null ? pdf.getCodigo_vendedor(): "NAC";
+                    String nombre_vendedor = pdf.getNombre_vendedor() != null ? pdf.getNombre_vendedor() : "NAC";
+                    String pedidos_confiramdos = String.valueOf( pdf.getCantidad_pedido_confirmados()) != null ? String.valueOf( pdf.getCantidad_pedido_confirmados()) : "0";
+                    String monto_total = String.valueOf(pdf.getVentas_generadas());
+                    String producto_mas_vendido = pdf.getProducto_mas_vendido_vendedor() != null ? pdf.getProducto_mas_vendido_vendedor() : "NAC";
+                    
+                    tabla.addCell(codigo_vendedor);
+                    tabla.addCell(nombre_vendedor);
+                    tabla.addCell(pedidos_confiramdos);
+                    tabla.addCell(monto_total);
+                    tabla.addCell(producto_mas_vendido);
+                    
+                    
+                    
+                }
+                
+                
+               
             }
         }
+        
+        
+
         
         return tabla;
     }
@@ -136,6 +185,7 @@ public class ControladorPDF {
     
     public static void bubblesortMenosVendidos(Inventarios_PDF[] menos_vendidos){
         int tamano = menos_vendidos.length; 
+        System.out.println("METODO ORDENAMIENTO MENOS VENDIDO");
         
         Inventarios_PDF aux_objeto; 
         
@@ -150,6 +200,8 @@ public class ControladorPDF {
                 }
             }
         }
+        
+        System.out.println("finalizacion del metodo del ordenamiento");
     }
 }
     
